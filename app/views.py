@@ -23,13 +23,3 @@ def register(request):
     
     return render(request, 'app/register.html')
 
-
-@login_required
-def dashboard(request):
-
-    """
-    ->
-    :return:
-    """
-    
-    return render(request, 'app/dashboard.html')
