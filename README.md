@@ -1,11 +1,11 @@
 # cadastre.me
 
-Aplicativo para o controle de cadastro de pessoas
+Aplicativo web para o controle online de cadastro de pessoas.
 
 ---------------------------------
 
 # register.me
 
-Application to control people registration
+Web application for online control of people registration.
 
 --------------------------------
