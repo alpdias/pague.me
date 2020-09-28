@@ -1,4 +1,35 @@
+@charset "UTF-8";
+
 /*
 Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
+*/
+
+/* FONTES */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+@font-face {
+    font-family: 'Noto Sans JP', sans-serif;
+    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+}
+
+/* RESETS DO HTML */
+* { 
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* CORES 
+
+#0B2027
+#CFCFCD
+#9A879D
+#40798C
+#048A81
+
 */
