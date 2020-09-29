@@ -1,0 +1,26 @@
+<!--
+Criado em 09/2020
+@Autor: Paulo https://github.com/alpdias
+-->
+
+{% extends 'base.html' %}
+{% block title %}cadastre.me{% endblock %}
+{% block code %}
+<main>
+    <div>
+        <nav>
+            <ul>
+                <li><a href="/">cadastre.me</a> | <a href="/contact">CONTATO</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/register">ENTRAR</a></li>
+                    <li><a href="/register">REGISTRAR</a></li>
+                {% else %}
+                    <li><a href="/accounts/login">ENTRAR</a></li>
+                    <li><a href="">REGISTRAR</a></li>
+                {% endif %}
+                <li><a href="/about">SOBRE</a></li>
+            </ul>
+        </nav>
+    </div>
+</main>
+{% endblock %}
