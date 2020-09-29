@@ -13,6 +13,26 @@ def home(request):
     return render(request, 'app/home.html')
 
 
+def about(request):
+
+    """
+    ->
+    :return:
+    """
+    
+    return render(request, 'app/about.html')
+
+
+def contact(request):
+
+    """
+    ->
+    :return:
+    """
+    
+    return render(request, 'app/contact.html')
+
+
 @login_required
 def register(request):
 
