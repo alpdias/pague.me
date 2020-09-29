@@ -10,8 +10,12 @@ Criado em 09/2020
     <div>
         <nav>
             <ul>
-                <li>cadastre.me</li>
-                <li><a href="">REGISTRAR</a></li>
+                <li><a href="/">cadastre.me</a>
+                {% if user.is_authenticated %}
+                    <li><a href="/register">REGISTRAR</a></li>
+                {% else %}
+                    <li><a href="">REGISTRAR</a></li>
+                {% endif %}
                 <li><a href="/about">SOBRE</a></li>
                 <li><a href="/contact">CONTATO</a></li>
             </ul>
