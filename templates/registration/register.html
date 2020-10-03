@@ -15,27 +15,29 @@ Criado em 09/2020
                 </li>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'records'  %}">ENTRAR</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'records'  %}">REGISTRAR</a>
+                        <a href="{% url 'records' %}">ENTRAR</a>
                     </li>
                 {% else %}
                     <li>
                         <a href="/accounts/login">ENTRAR</a>
                     </li>
-                    <li>
-                        <a href="{% url 'register'  %}">REGISTRAR</a>
-                    </li>
                 {% endif %}
                 <li>
-                    <a href="{% url 'about'  %}">SOBRE</a>
+                    <a href="{% url 'about' %}">SOBRE</a>
                 </li>
                 <li>
-                    <a href="{% url 'contact'  %}">CONTATO</a>
+                    <a href="{% url 'contact' %}">CONTATO</a>
                 </li>
             </ul>
         </nav>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {{ form }}
+            <input type="submit" value="REGISTRAR">
+        </form>
     </div>
 </main>
 {% endblock %}

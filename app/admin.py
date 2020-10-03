@@ -4,4 +4,15 @@ from django.contrib import admin
 
 from .models import app
 
-admin.site.register(app)
+class appAdmin(admin.ModelAdmin):
+
+    """
+    ->
+    :return:
+    """
+
+    list_display = ['nome', 'email', 'telefone', 'status']
+    search_fields = ['nome', 'status']
+
+
+admin.site.register(app, appAdmin)

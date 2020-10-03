@@ -4,15 +4,20 @@ from django.db import models
 
 class app(models.Model):
 
+    """
+    ->
+    :return:
+    """
+
     STATUS = (
         ('ativo', 'ATIVO'),
         ('inativo', 'INATIVO'),
     )
 
-    nome = models.CharField(max_length = 255)
-    email = models.EmailField()
-    telefone = models.CharField(max_length = 14)
-    endereco = models.TextField()
+    nome = models.CharField('Nome', max_length = 255)
+    email = models.EmailField('E-mail')
+    telefone = models.CharField('Telefone', max_length = 14)
+    endereco = models.TextField('Endereço')
     status = models.CharField(
         max_length = 7,
         choices = STATUS
@@ -21,4 +26,22 @@ class app(models.Model):
     atualizado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
+
+        """
+        ->
+        :return:
+        """
+
         return self.nome
+
+
+    class Meta:
+
+        """
+        ->
+        :return:
+        """
+
+        verbose_name = 'CADASTRO'
+        verbose_name_plural = 'CADASTROS'
+        ordering = ['nome'] 

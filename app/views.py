@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 
 # Create your views here.
 
@@ -34,12 +37,24 @@ def contact(request):
 
 
 @login_required
-def register(request):
+def records(request):
 
     """
     ->
     :return:
     """
     
-    return render(request, 'app/register.html')
+    return render(request, 'app/records.html')
+
+class register(generic.CreateView):
+
+    """
+    ->
+    :return:
+    """
+
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/register.html'
+
 
