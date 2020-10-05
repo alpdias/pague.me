@@ -7,7 +7,7 @@ Criado em 09/2020
 {% block title %}cadastre.me{% endblock %}
 {% block code %}
 <main>
-    <div>
+    <div class="nav-bar__principal">
         <nav>
             <ul>
                 <li>
@@ -15,27 +15,30 @@ Criado em 09/2020
                 </li>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'records'  %}">ENTRAR</a>
+                        <a href="{% url 'records'  %}">entrar</a>
                     </li>
                     <li>
-                        <a href="{% url 'records'  %}">REGISTRAR</a>
+                        <a href="{% url 'records'  %}">registrar</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/accounts/login">ENTRAR</a>
+                        <a href="/accounts/login">entrar</a>
                     </li>
                     <li>
-                        <a href="{% url 'register'  %}">REGISTRAR</a>
+                        <a href="{% url 'register'  %}">registrar</a>
                     </li>
                 {% endif %}
                 <li>
-                    <a href="{% url 'about'  %}">SOBRE</a>
+                    <a href="{% url 'about'  %}">sobre</a>
                 </li>
                 <li>
-                    <a href="{% url 'contact'  %}">CONTATO</a>
+                    <a href="{% url 'contact'  %}">contato</a>
                 </li>
             </ul>
         </nav>
     </div>
 </main>
+{% endblock %}
+{% block footer %}
+    <footer class="rodape__base">COPYRIGHT &copy; 2020 | <a href="https://github.com/alpdias" target="blank">PAULO</a></footer>
 {% endblock %}

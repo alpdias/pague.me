@@ -8,15 +8,15 @@ Criado em 09/2020
 {% block code %}
 {% if user.is_authenticated %}
 <main>
-    <div>
+    <div class="nav-bar__principal">
         <nav>
             <ul>
                 <li>
                     <a href="/">cadastre.me</a> | <a href="{% url 'records'  %}">CADASTROS</a>
                 </li>
-                <li>{{ user }}</li>
+                <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
-                    <a href="/accounts/logout">SAIR</a>
+                    <a href="/accounts/logout">sair</a>
                 </li>
             </ul>
         </nav>
@@ -25,3 +25,4 @@ Criado em 09/2020
 {% else %}
 {% endif %}
 {% endblock %}
+{% block footer %}{% endblock %}

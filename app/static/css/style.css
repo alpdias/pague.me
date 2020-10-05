@@ -33,3 +33,80 @@ img {
 #048A81
 
 */
+
+/* GERAL */
+body {
+    background-color: #CFCFCD;
+}
+
+/* TOP MENU */
+.nav-bar__principal {
+    padding: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+}
+
+.nav-bar__principal ul {
+    padding: 0px;
+    text-align: right;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.nav-bar__principal li {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.nav-bar__principal li:first-child {
+    padding-left: 10px;
+    float: left;
+}
+
+.nav-bar__principal a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #9A879D;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.nav-bar__usuario {
+    color: #40798C;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+/* RODAPE */
+.rodape__base {
+    color: #9a879d44;
+    font-weight: bolder;
+    font-size: 12px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+}
+
+.rodape__base a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #9a879d44;
+    font-weight: bolder;
+    font-size: 12px;
+}
+
+/* LOGIN */
+.form__login form{
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* REGISTRO */
+.form__registro form{
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+}

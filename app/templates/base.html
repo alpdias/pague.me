@@ -17,8 +17,10 @@ Criado em 09/2020
     </head>
     <body>
         {% block code %}{% endblock %}
-    <footer>COPYRIGHT &copy; 2020</footer>
-    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+        {% block footer %}
+            <footer class="rodape__base">COPYRIGHT &copy; 2020 | <a href="https://github.com/alpdias" target="blank">PAULO</a></footer>
+        {% endblock %}
+        <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
     </body>
 </html>
