@@ -38,7 +38,14 @@ Criado em 09/2020
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            {{ form }}
+            {% for field in form %}
+                <div>
+                    {{ field.label_tag }}
+                </div>
+                <div>
+                    {{ field }}
+                </div>
+            {% endfor %}
             <input type="submit" value="REGISTRAR">
         </form>
     </div>
