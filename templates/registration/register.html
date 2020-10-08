@@ -44,8 +44,12 @@ Criado em 09/2020
                 </div>
                 <div>
                     {{ field }}
+                    {{ field.errors }}
                 </div>
             {% endfor %}
+            <div>
+                {{ form.non_field_errors }}
+            </div>
             <input type="submit" value="REGISTRAR">
         </form>
     </div>

@@ -46,6 +46,9 @@ Criado em 09/2020
                     {{ field }}
                 </div>
             {% endfor %}
+            <div>
+                {{ form.non_field_errors }}
+            </div>
             <input type="submit" value="ENTRAR">
         </form>
     </div>
