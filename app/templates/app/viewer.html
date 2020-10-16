@@ -22,15 +22,13 @@ Criado em 09/2020
         </nav>
     </div>
     <div>
-        {% for registro in registros %}
-            <ul>
-                <li><a href="/app/{{ registro.id }}">{{ registro.nome }}</a></li>
-                <li>{{ registro.email }}</li>
-                <li>{{ registro.telefone }}</li>
-                <li>{{ registro.status }}</li>
-
-            </ul>
-        {% endfor %}
+        <ul>
+            <li>{{ vizualizar.nome }}</li>
+            <li>{{ vizualizar.email }}</li>
+            <li>{{ vizualizar.telefone }}</li>
+            <li>{{ vizualizar.endereco }}</li>
+            <li>{{ vizualizar.status }}</li>
+        </ul>
     </div>
 </main>
 {% else %}
