@@ -1,5 +1,5 @@
 """
-WSGI config for cadastre project.
+WSGI config for buy project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
