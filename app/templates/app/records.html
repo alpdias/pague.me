@@ -24,7 +24,7 @@ Criado em 09/2020
     <div>
         {% for registro in registros %}
             <ul>
-                <li><a href="/app/{{ registro.id }}">{{ registro.nome }}</a></li>
+                <li><a href="{% url '/app/{{ registro.id }}' %}">{{ registro.nome }}</a></li>
                 <li>{{ registro.email }}</li>
                 <li>{{ registro.telefone }}</li>
                 <li>{{ registro.status }}</li>
