@@ -59,9 +59,9 @@ class estoque(models.Model):
     )
     produto = models.CharField('Produto', max_length = 255)
     tipo = models.CharField('Tipo', max_length = 255)
-    preco = models.FloatField('Preço')
-    custo = models.FloatField('Custo')
-    quantidade = models.IntField('Quantidade')
+    preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
+    custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
+    quantidade = models.IntegerField('Quantidade')
     status = models.CharField(
         max_length = 10,
         choices = STATUS

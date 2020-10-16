@@ -14,7 +14,9 @@ class pessoasAdmin(admin.ModelAdmin):
     list_display = ['nome', 'telefone', 'email', 'status']
     search_fields = ['nome', 'status']
 
-    
+
+admin.site.register(pessoas, pessoasAdmin)
+
 class estoqueAdmin(admin.ModelAdmin):
 
     """
@@ -26,4 +28,4 @@ class estoqueAdmin(admin.ModelAdmin):
     search_fields = ['produto', 'status']
 
 
-admin.site.register(app, pessoasAdmin, estoqueAdmin)
+admin.site.register(estoque, estoqueAdmin)
