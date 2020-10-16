@@ -22,8 +22,8 @@ class estoqueAdmin(admin.ModelAdmin):
     :return:
     """
 
-    list_display = ['tipo', 'produto', 'preco', 'quantidade', 'status']
-    search_fields = ['tipo', 'produto', 'status']
+    list_display = ['produto', 'preco', 'quantidade', 'status']
+    search_fields = ['produto', 'status']
 
 
 admin.site.register(app, pessoasAdmin, estoqueAdmin)

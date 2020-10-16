@@ -1,5 +1,5 @@
 <!--
-Criado em 09/2020
+Criado em 10/2020
 @Autor: Paulo https://github.com/alpdias
 -->
 
@@ -12,7 +12,7 @@ Criado em 09/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a> | <a href="{% url 'records'  %}">CLIENTES</a>
+                    <a href="/">pague.me</a> | <a href="{% url 'products'  %}">PRODUTOS</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -24,15 +24,17 @@ Criado em 09/2020
     <div>
         <table>
             <th>
-                <td>nome</td>
-                <td>telefone</td>
-                <td>e-mail</td>
+                <td>produto</td>
+                <td>preço</td>
+                <td>quantidade</td>
+                <td>status</td>
             </th>
-            {% for registro in registros %}
+            {% for produto in produtos %}
                 <tr>
-                    <td><a href="/people/{{ registro.id }}">{{ registro.nome }}</a></td>
-                    <td>{{ registro.telefone }}</td>
-                    <td>{{ registro.email }}</td>
+                    <td><a href="/stock/{{ produto.id }}">{{ produto.produto }}</a></td>
+                    <td>{{ produto.preco }}</td>
+                    <td>{{ produto.quantidade }}</td>
+                    <td>{{ produto.status }}</td>
                 </tr>
             {% endfor %}
         </table>

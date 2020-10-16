@@ -4,7 +4,7 @@ Criado em 09/2020
 -->
 
 {% extends 'base.html' %}
-{% block title %}buy.me{% endblock %}
+{% block title %}pague.me{% endblock %}
 {% block code %}
 <main>
     <div class="nav-bar__principal">
@@ -12,14 +12,14 @@ Criado em 09/2020
             <ul>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/">buy.me</a> | <a href="{% url 'records' %}">ENTRAR </a>
+                        <a href="/">pague.me</a> | <a href="{% url 'records' %}">ENTRAR </a>
                     </li>
                     <li>
                         <a href="{% url 'records' %}">registrar</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/">buy.me</a> | <a href="/accounts/login">ENTRAR </a>
+                        <a href="/">pague.me</a> | <a href="/accounts/login">ENTRAR </a>
                     </li>
                     <li>
                         <a href="{% url 'register'  %}">registrar</a>

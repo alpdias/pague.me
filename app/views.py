@@ -61,6 +61,45 @@ def records(request):
     return render(request, 'app/records.html', {'registros': registros})
 
 
+@login_required
+def people(request, id):
+
+    """
+    ->
+    :return:
+    """
+
+    pessoas = get_object_or_404(app, pk=id)
+
+    return render(request, 'app/people.html', {'pessoas': pessoas})
+
+
+@login_required
+def products(request):
+
+    """
+    ->
+    :return:
+    """
+    
+    produtos = app.objects.all()
+
+    return render(request, 'app/products.html', {'produtos': produtos})  
+
+
+@login_required
+def stock(request, id):
+
+    """
+    ->
+    :return:
+    """
+
+    estoque = get_object_or_404(app, pk=id)
+
+    return render(request, 'app/stock.html', {'estoque': estoque})
+
+
 class register(generic.CreateView):
 
     """
@@ -71,17 +110,4 @@ class register(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
-
-
-@login_required
-def viewer(request, id):
-
-    """
-    ->
-    :return:
-    """
-
-    vizualizar = get_object_or_404(app, pk=id)
-
-    return render(request, 'app/viewer.html', {'vizualizar': vizualizar})
 

@@ -1,10 +1,10 @@
 <!--
-Criado em 09/2020
+Criado em 10/2020
 @Autor: Paulo https://github.com/alpdias
 -->
 
 {% extends 'base.html' %}
-{% block title %}buy.me{% endblock %}
+{% block title %}pague.me{% endblock %}
 {% block code %}
 {% if user.is_authenticated %}
 <main>
@@ -12,7 +12,7 @@ Criado em 09/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">buy.me</a> | <a href="{% url 'records'  %}">CADASTROS</a>
+                    <a href="/">pague.me</a> | <a href="{% url 'records'  %}">INFO. PRODUTOS</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -23,11 +23,12 @@ Criado em 09/2020
     </div>
     <div>
         <ul>
-            <li>{{ vizualizar.nome }}</li>
-            <li>{{ vizualizar.email }}</li>
-            <li>{{ vizualizar.telefone }}</li>
-            <li>{{ vizualizar.endereco }}</li>
-            <li>{{ vizualizar.status }}</li>
+            <li>{{ estoque.produto }}</li>
+            <li>{{ estoque.tipo }}</li>
+            <li>{{ estoque.preco }}</li>
+            <li>{{ estoque.custo }}</li>
+            <li>{{ estoque.quantidade }}</li>
+            <li>{{ estoque.status }}</li>
         </ul>
     </div>
 </main>

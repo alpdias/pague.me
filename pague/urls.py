@@ -1,4 +1,4 @@
-"""buy URL Configuration
+"""pague URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from app.views import home, about, contact, records, viewer, register
+from app.views import home, about, contact, dashboard, products, stock, records, people, register
 from app import views
 
 urlpatterns = [
@@ -24,8 +24,11 @@ urlpatterns = [
     path('', home, name='home'),
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
+    path('dashboard/', records, name='dashboard'),
+    path('products/', products, name='products'),
+    path('stock/<int:id>', stock, name='stock'),
     path('records/', records, name='records'),
-    path('app/<int:id>', viewer, name='views' ),
+    path('people/<int:id>', people, name='people'),
     path('register/', views.register.as_view(), name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
