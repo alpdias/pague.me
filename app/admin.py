@@ -11,7 +11,7 @@ class pessoasAdmin(admin.ModelAdmin):
     :return:
     """
 
-    list_display = ['nome', 'email', 'telefone', 'status']
+    list_display = ['nome', 'telefone', 'email', 'status']
     search_fields = ['nome', 'status']
 
     
@@ -22,7 +22,7 @@ class estoqueAdmin(admin.ModelAdmin):
     :return:
     """
 
-    list_display = ['tipo', 'produto', 'preco', 'status']
+    list_display = ['tipo', 'produto', 'preco', 'quantidade', 'status']
     search_fields = ['tipo', 'produto', 'status']
 
 
