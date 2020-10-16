@@ -38,6 +38,17 @@ def contact(request):
 
 
 @login_required
+def dashboard(request):
+
+    """
+    ->
+    :return:
+    """
+    
+    return render(request, 'app/dashboard.html')
+
+
+@login_required
 def records(request):
 
     """
