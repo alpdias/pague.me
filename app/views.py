@@ -49,6 +49,17 @@ def dashboard(request):
 
 
 @login_required
+def cart(request):
+
+    """
+    ->
+    :return:
+    """
+
+    return render(request, 'app/cart.html')  
+
+
+@login_required
 def buy(request):
 
     """

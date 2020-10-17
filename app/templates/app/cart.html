@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}">ESTOQUE</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'cart'  %}">COMPRAS</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -38,17 +38,8 @@ Criado em 10/2020
                 <th>produto</th>
                 <th>preço</th>
                 <th>quantidade</th>
-                <th>status</th>
-                <tbody>
-                    {% for produto in produtos %}
-                        <tr>
-                            <td style="word-wrap: break-word;"><a href="/stock/{{ produto.id }}">{{ produto.produto }}</a></td>
-                            <td style="word-wrap: break-word;">{{ produto.preco }}</td>
-                            <td style="word-wrap: break-word;">{{ produto.quantidade }}</td>
-                            <td style="word-wrap: break-word;">{{ produto.status }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
+                <th>total</th>
+                <tbody id="resultado"></tbody>
             </table>
         </div>
     </div>

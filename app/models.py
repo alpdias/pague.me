@@ -59,14 +59,15 @@ class estoque(models.Model):
         ('esgotado', 'ESGOTADO'),
     )
     produto = models.CharField('Produto', max_length = 255)
-    tipo = models.CharField('Tipo', max_length = 255)
     preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('Quantidade')
+    descricao = models.TextField('Descrição')
     status = models.CharField(
         max_length = 10,
         choices = STATUS
     )
+
     criado = models.DateTimeField(auto_now_add=True)
     atualizado = models.DateTimeField(auto_now=True)
 

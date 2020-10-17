@@ -21,19 +21,32 @@ Criado em 09/2020
             </ul>
         </nav>
     </div>
-    <div>
-        <div>
-            <table>
+    <div class="nav-bar__vertical">
+        <nav>
+            <ul class="item-vertical">
+                <li><a href="{% url 'dashboard' %}"><span class="ajuste-menu__vertical"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
+                <li><a href="{% url 'cart' %}"><span class="ajuste-menu__vertical"></span>compras&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
+                <li><a href="{% url 'buy' %}"><span class="ajuste-menu__vertical"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
+                <li><a href="{% url 'products' %}"><span class="ajuste-menu__vertical"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
+                <li><a href="{% url 'records' %}"><span class="ajuste-menu__vertical"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="tabelas">
+        <div class="tabelas-interno">
+            <table style="table-layout: fixed; width: 100%;">
                 <th>nome</th>
                 <th>telefone</th>
                 <th>e-mail</th>
-                {% for registro in registros %}
-                    <tr>
-                        <td><a href="/people/{{ registro.id }}">{{ registro.nome }}</a></td>
-                        <td>{{ registro.telefone }}</td>
-                        <td>{{ registro.email }}</td>
-                    </tr>
-                {% endfor %}
+                <tbody>
+                    {% for registro in registros %}
+                        <tr>
+                            <td style="word-wrap: break-word;"><a href="/people/{{ registro.id }}">{{ registro.nome }}</a></td>
+                            <td style="word-wrap: break-word;">{{ registro.telefone }}</td>
+                            <td style="word-wrap: break-word;">{{ registro.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>

@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}">{{ estoques.produto }}</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}" id="produto">{{ estoques.produto }}</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -21,14 +21,17 @@ Criado em 10/2020
             </ul>
         </nav>
     </div>
-    <div>
-        <ul>
-            <li><span>Tipo:&nbsp;#</span>{{ estoques.tipo }}</li>
-            <li><span>Preço:&nbsp;</span>{{ estoques.preco }}</li>
-            <li><span>Custo:&nbsp;</span>{{ estoques.custo }}</li>
-            <li><span>Quantidade:&nbsp;</span>{{ estoques.quantidade }}</li>
-            <li><span>Status:&nbsp;</span>{{ estoques.status }}</li>
-        </ul>
+    <div class="lista-itens">
+            <div>
+                <ul>
+                    <li><span>Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
+                    <li id="custo"><span>Custo:&nbsp;</span>{{ estoques.custo }}</li>
+                    <li id="qtd"><span>Quantidade:&nbsp;</span>{{ estoques.quantidade }}</li>
+                    <li id="desc"><span>Descrição:&nbsp;</span>{{ estoques.descricao }}</li>
+                    <li id="status"><span>Status:&nbsp;</span>{{ estoques.status }}</li>
+                    <li><button type="submit" id="add" onclick="compras()">adicionar&nbsp;<i class="fas fa-cart-arrow-down"></i></button></li>
+                </ul>
+            </div>
     </div>
 </main>
 {% else %}

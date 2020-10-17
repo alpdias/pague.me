@@ -118,6 +118,7 @@ body {
 
 /* MENU VERTICAL */
 .nav-bar__vertical nav {
+    font-family: 'Noto Sans JP', sans-serif;
     position: fixed;
     display: block;
     height: 100vh;
@@ -150,8 +151,107 @@ body {
     text-decoration-style: none;
     margin-top: 26px;
     border-bottom: 0.5px solid #0000001c;
+    text-align: end;
 }
 
 .ajuste-menu__vertical {
     padding-left: 36px;
+}
+
+/* TABELAS/GERAL */
+.tabelas {
+    font-family: 'Noto Sans JP', sans-serif;
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    padding-left: 156px;
+    padding-right: 26px;
+    padding-top: 26px;
+}
+
+.tabelas td, th {
+    margin: 0px;
+    padding-top: 23px;
+    border-bottom: 0.5px solid #0000001c;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.tabelas a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #000000;
+}
+
+th {
+    color: #40798C;
+}
+
+.tabelas-interno {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+    padding-bottom: 12px;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
+/* LISTAS */
+.lista-itens {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #ffffff;
+    max-width: 600px;
+    display: block;
+    margin: 26px auto 26px auto;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.lista-itens li {
+    display: block;
+    text-decoration: none;
+    text-decoration-style: none;
+    padding: 6px;
+}
+
+.lista-itens span {
+    color: #40798C;
+    font-weight: bolder;
+}
+
+.lista-itens button {
+    background-color: #9A879D;
+    color: #ffffff;
+    box-shadow: 1px 1px 2px #0000001c;
+    font-weight: bolder;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px 8px 10px;
+}
+
+/* DASHBOARD */
+.painel {
+    display: block;
+    padding-left: 116px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.dash-mostrador li {
+    display: inline-block;
+    background-color: #ffffff;
+    padding: 60px;
+    margin-right: 10px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+}
+
+.dash-grafico {
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+    display: block;
+    padding-bottom: 360px;
 }
