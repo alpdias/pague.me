@@ -56,7 +56,7 @@ def records(request):
     :return:
     """
     
-    registros = app.objects.all()
+    registros = pessoas.objects.all()
 
     return render(request, 'app/records.html', {'registros': registros})
 
@@ -69,9 +69,9 @@ def people(request, id):
     :return:
     """
 
-    pessoas = get_object_or_404(app, pk=id)
+    pessoa = get_object_or_404(pessoas, pk=id)
 
-    return render(request, 'app/people.html', {'pessoas': pessoas})
+    return render(request, 'app/people.html', {'pessoa': pessoa})
 
 
 @login_required
@@ -82,7 +82,7 @@ def products(request):
     :return:
     """
     
-    produtos = app.objects.all()
+    produtos = estoque.objects.all()
 
     return render(request, 'app/products.html', {'produtos': produtos})  
 
@@ -95,9 +95,9 @@ def stock(request, id):
     :return:
     """
 
-    estoque = get_object_or_404(app, pk=id)
+    estoques = get_object_or_404(estoque, pk=id)
 
-    return render(request, 'app/stock.html', {'estoque': estoque})
+    return render(request, 'app/stock.html', {'estoques': estoques})
 
 
 class register(generic.CreateView):
