@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a> | <a href="{% url 'products'  %}">PRODUTOS</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}">ESTOQUE</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -22,22 +22,22 @@ Criado em 10/2020
         </nav>
     </div>
     <div>
-        <table>
-            <th>
-                <td>produto</td>
-                <td>preço</td>
-                <td>quantidade</td>
-                <td>status</td>
-            </th>
-            {% for produto in produtos %}
-                <tr>
-                    <td><a href="/stock/{{ produto.id }}">{{ produto.produto }}</a></td>
-                    <td>{{ produto.preco }}</td>
-                    <td>{{ produto.quantidade }}</td>
-                    <td>{{ produto.status }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        <div>
+            <table>
+                <th>produto</th>
+                <th>preço</th>
+                <th>quantidade</th>
+                <th>status</th>
+                {% for produto in produtos %}
+                    <tr>
+                        <td><a href="/stock/{{ produto.id }}">{{ produto.produto }}</a></td>
+                        <td>{{ produto.preco }}</td>
+                        <td>{{ produto.quantidade }}</td>
+                        <td>{{ produto.status }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </main>
 {% else %}

@@ -12,7 +12,7 @@ Criado em 09/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a> | <a href="{% url 'records'  %}">CLIENTES</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'records'  %}">CLIENTES</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -22,20 +22,20 @@ Criado em 09/2020
         </nav>
     </div>
     <div>
-        <table>
-            <th>
-                <td>nome</td>
-                <td>telefone</td>
-                <td>e-mail</td>
-            </th>
-            {% for registro in registros %}
-                <tr>
-                    <td><a href="/people/{{ registro.id }}">{{ registro.nome }}</a></td>
-                    <td>{{ registro.telefone }}</td>
-                    <td>{{ registro.email }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        <div>
+            <table>
+                <th>nome</th>
+                <th>telefone</th>
+                <th>e-mail</th>
+                {% for registro in registros %}
+                    <tr>
+                        <td><a href="/people/{{ registro.id }}">{{ registro.nome }}</a></td>
+                        <td>{{ registro.telefone }}</td>
+                        <td>{{ registro.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </main>
 {% else %}

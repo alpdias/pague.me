@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a> | <a href="{% url 'records'  %}">INFO. PRODUTOS</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}">{{ estoques.produto }}</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -23,12 +23,11 @@ Criado em 10/2020
     </div>
     <div>
         <ul>
-            <li>{{ estoques.produto }}</li>
-            <li>{{ estoques.tipo }}</li>
-            <li>{{ estoques.preco }}</li>
-            <li>{{ estoques.custo }}</li>
-            <li>{{ estoques.quantidade }}</li>
-            <li>{{ estoques.status }}</li>
+            <li><span>Tipo:&nbsp;#</span>{{ estoques.tipo }}</li>
+            <li><span>Preço:&nbsp;</span>{{ estoques.preco }}</li>
+            <li><span>Custo:&nbsp;</span>{{ estoques.custo }}</li>
+            <li><span>Quantidade:&nbsp;</span>{{ estoques.quantidade }}</li>
+            <li><span>Status:&nbsp;</span>{{ estoques.status }}</li>
         </ul>
     </div>
 </main>

@@ -11,7 +11,7 @@ Criado em 09/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a> | <a href="{% url 'contact'  %}">CONTATO</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'contact'  %}">CONTATO</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li>

@@ -77,6 +77,10 @@ body {
     font-size: 20px;
 }
 
+.separador {
+    color: #40798C;
+}
+
 /* RODAPE */
 .rodape__base {
     color: #9a879d44;
@@ -99,15 +103,55 @@ body {
 }
 
 /* LOGIN */
-.form__login form{
+.form__login form {
     display: block;
     max-width: 600px;
     margin: 0 auto;
 }
 
 /* REGISTRO */
-.form__registro form{
+.form__registro form {
     display: block;
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* MENU VERTICAL */
+.nav-bar__vertical nav {
+    position: fixed;
+    display: block;
+    height: 100vh;
+    box-shadow: 1px 1px 2px #0000001c;
+    padding-right: 6px;
+}
+
+.nav-bar__vertical a {
+    color: #9A879D;
+    display: block;
+    text-decoration: none;
+    text-decoration-style: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.nav-bar__vertical i {
+    color: #40798C;
+}
+
+.nav-bar__vertical ul {
+    padding-left: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.item-vertical li {
+    display: block;
+    text-decoration: none;
+    text-decoration-style: none;
+    margin-top: 26px;
+    border-bottom: 0.5px solid #0000001c;
+}
+
+.ajuste-menu__vertical {
+    padding-left: 36px;
 }

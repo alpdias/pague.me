@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'dashboard'  %}">PAINEL</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'buy'  %}">VENDAS</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -30,6 +30,11 @@ Criado em 10/2020
                 <li><a href="{% url 'records' %}"><span class="ajuste-menu__vertical"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
             </ul>
         </nav>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+        </form>
     </div>
 </main>
 {% else %}
