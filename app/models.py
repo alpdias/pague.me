@@ -16,7 +16,8 @@ class pessoas(models.Model):
     nome = models.CharField('Nome', max_length = 255)
     telefone = models.CharField('Telefone', max_length = 14)
     email = models.EmailField('E-mail')
-    endereco = models.TextField('Endereço')
+    endereco = models.CharField('Endereço', max_length = 255)
+    observacao = models.TextField('Observações')
     status = models.CharField(
         max_length = 7,
         choices = STATUS
@@ -54,8 +55,8 @@ class estoque(models.Model):
     """
 
     STATUS = (
-        ('ativo', 'DISPONIVEL'),
-        ('inativo', 'ESGOTADO'),
+        ('disponivel', 'DISPONIVEL'),
+        ('esgotado', 'ESGOTADO'),
     )
     produto = models.CharField('Produto', max_length = 255)
     tipo = models.CharField('Tipo', max_length = 255)

@@ -12,14 +12,14 @@ Criado em 09/2020
             <ul>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/">pague.me</a> | <a href="{% url 'records' %}">ENTRAR </a>
+                        <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'dashboard' %}">ENTRAR </a>
                     </li>
                     <li>
-                        <a href="{% url 'records' %}">registrar</a>
+                        <a href="{% url 'dashboard' %}">registrar</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/">pague.me</a> | <a href="/accounts/login">ENTRAR </a>
+                        <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="/accounts/login">ENTRAR </a>
                     </li>
                     <li>
                         <a href="{% url 'register'  %}">registrar</a>
