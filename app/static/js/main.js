@@ -66,19 +66,69 @@ function adicionar() {
 
 };
 
-function remover() {
+function fecharVenda() {
 
-    if (localStorage.length === 0) {
+    let itens = JSON.parse(localStorage.getItem('carrinho'));
 
-        console.log('Carrinho vazio!')
+    var soma = 0;
+
+    for (let i = 0; i < itens.length; i++) { 
+        
+        let preco = itens[i].valor;
+        let qtd = itens[i].quantidade;
+
+        let total = (parseFloat(preco.replace(',','.')) * parseInt(qtd));
+
+        soma += total;
+
+    };
+
+    let resultadoVenda = {
+        valor: soma,
+    };
+
+    if (localStorage.getItem('resultadoVenda') === null) {
+
+        let resultadoVendas = [];
+        resultadoVendas.push(resultadoVenda);
+
+        localStorage.setItem('resultadoVenda', JSON.stringify(resultadoVendas));
 
     } else {
 
-        localStorage.removeItem('carrinho');
-
-        console.log('Carrinho esvaziado!')
+        let resultadoVendas = JSON.parse(localStorage.getItem('resultadoVenda'));
+        resultadoVendas.push(resultadoVenda);
+        
+        localStorage.setItem('resultadoVenda', JSON.stringify(resultadoVendas));
 
     };
+
+    if (localStorage.length === 0) {} else {
+
+        localStorage.removeItem('carrinho');
+
+    };
+
+    document.querySelector('#resultado-vendas').innerHTML += `\
+        <tr>\
+            <td><a href="/records"><span class="span-titulo-2"><i class="fas fa-user-edit"></i></span></a></td>\
+            <td><span>${soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</span></td>\
+            <td>\
+                <select name="" id="">\
+                    <option value="">dinheiro</option>\
+                    <option value="">debito</option>\
+                    <option value="">credito</option>\
+                </select>\
+            </td>\
+            <td><a href=""><span class="span-titulo-2"><i class="fas fa-search-plus"></i></span></a></td>\
+            <td><a href=""><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>\
+            <td>\
+                <select name="" id="">\
+                    <option value="">aberto</option>\
+                    <option value="">fechado</option>\
+                </select>\
+            </td>\
+        </tr>`;
 
 };
 

@@ -169,6 +169,11 @@ body {
     padding-top: 26px;
 }
 
+.tabelas select {
+    border: none;
+    background-color: #ffffff00;
+}
+
 .tabelas td, th {
     margin: 0px;
     padding-top: 23px;

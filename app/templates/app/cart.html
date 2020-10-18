@@ -7,6 +7,7 @@ Criado em 10/2020
 {% block title %}pague.me{% endblock %}
 {% block code %}
 {% if user.is_authenticated %}
+<span style="display: none;">{% block carregar %}onload="adicionar()"{% endblock %}</span>
 <main>
     <div class="nav-bar__principal">
         <nav>
@@ -44,7 +45,7 @@ Criado em 10/2020
         </div>
     </div>
     <div id="fechar-venda">
-        <button onclick="remover()"><a href="{% url 'buy' %}">fechar&nbsp;<i class="fas fa-share-square"></i></a></button>
+        <button><a href="{% url 'buy' %}">fechar&nbsp;<i class="fas fa-share-square"></i></a></button>
     </div>
 </main>
 {% else %}

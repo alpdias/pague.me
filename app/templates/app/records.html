@@ -38,12 +38,14 @@ Criado em 09/2020
                 <th>nome</th>
                 <th>telefone</th>
                 <th>e-mail</th>
+                <th><span class="span-titulo"><i class="fas fa-user-tag"></i></span></th>
                 <tbody>
                     {% for registro in registros %}
                         <tr>
                             <td style="word-wrap: break-word;"><a href="/people/{{ registro.id }}">{{ registro.nome }}</a></td>
                             <td style="word-wrap: break-word;">{{ registro.telefone }}</td>
                             <td style="word-wrap: break-word;">{{ registro.email }}</td>
+                            <td><span class="span-titulo-2"><i class="fas fa-user-check"></i></span></td>
                         </tr>
                     {% endfor %}
                 </tbody>
