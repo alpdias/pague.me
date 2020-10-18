@@ -216,7 +216,7 @@ th {
     padding: 6px;
 }
 
-.lista-itens span {
+.span-titulo {
     color: #40798C;
     font-weight: bolder;
 }
@@ -229,6 +229,12 @@ th {
     border: none;
     border-radius: 6px;
     padding: 4px 10px 8px 10px;
+}
+
+.lista-itens a {
+    color: #ffffff;
+    text-decoration: none;
+    text-decoration-style: none;
 }
 
 /* DASHBOARD */
@@ -254,4 +260,29 @@ th {
     box-shadow: 1px 1px 2px #0000001c;
     display: block;
     padding-bottom: 360px;
+}
+
+/* PRODUTOS */
+#qtd {
+    max-width: 60px;
+}
+
+/* COMPRAS */
+#fechar-venda button{
+    background-color: #9A879D;
+    color: #ffffff;
+    box-shadow: 1px 1px 2px #0000001c;
+    font-weight: bolder;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px 8px 10px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 26px;
+}
+
+#fechar-venda a {
+    color: #ffffff;
+    text-decoration: none;
+    text-decoration-style: none;
 }

@@ -24,12 +24,13 @@ Criado em 10/2020
     <div class="lista-itens">
             <div>
                 <ul>
-                    <li><span>Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
-                    <li id="custo"><span>Custo:&nbsp;</span>{{ estoques.custo }}</li>
-                    <li id="qtd"><span>Quantidade:&nbsp;</span>{{ estoques.quantidade }}</li>
-                    <li id="desc"><span>Descrição:&nbsp;</span>{{ estoques.descricao }}</li>
-                    <li id="status"><span>Status:&nbsp;</span>{{ estoques.status }}</li>
-                    <li><button type="submit" id="add" onclick="compras()">adicionar&nbsp;<i class="fas fa-cart-arrow-down"></i></button></li>
+                    <li><span class="span-titulo">Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
+                    <li id="custo"><span class="span-titulo">Custo:&nbsp;</span>{{ estoques.custo }}</li>
+                    <li><span class="span-titulo">Quantidade Disponível:&nbsp;</span><span id="dispo">{{ estoques.quantidade }}</span></li>
+                    <li id="desc"><span class="span-titulo">Descrição:&nbsp;</span>{{ estoques.descricao }}</li>
+                    <li id="status"><span class="span-titulo">Status:&nbsp;</span>{{ estoques.status }}</li>
+                    <li><span class="span-titulo">Quantidade:&nbsp;<input type="number" id="qtd"></span></li>
+                    <li><button type="submit" id="add" onclick="compras()"><a href="{% url 'products' %}">adicionar&nbsp;<i class="fas fa-cart-arrow-down"></i></a></button></li>
                 </ul>
             </div>
     </div>

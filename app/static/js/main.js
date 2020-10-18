@@ -7,9 +7,10 @@ function compras() {
 
     let produto = document.querySelector('#produto').textContent;
     let preco = document.querySelector('#preco').textContent;
+    let disponivel = document.querySelector('#dispo').textContent;
     let qtd = document.querySelector('#qtd').value;
 
-    if (qtd == null) {
+    if (parseInt(disponivel) == 0) {
 
         window.alert('Produto esgotado!')
 
@@ -18,7 +19,7 @@ function compras() {
         let compra = {
             nome: produto,
             valor: preco,
-            quantidade: 1,
+            quantidade: qtd,
         };
         
         if (localStorage.getItem('carrinho') === null) {
@@ -80,3 +81,5 @@ function remover() {
     };
 
 };
+
+
