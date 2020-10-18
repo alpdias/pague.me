@@ -286,3 +286,9 @@ th {
     text-decoration: none;
     text-decoration-style: none;
 }
+
+/* VENDAS */
+.span-titulo-2 {
+    color: #9A879D;
+    font-weight: bolder;
+}

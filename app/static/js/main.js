@@ -68,6 +68,8 @@ function adicionar() {
 
 function remover() {
 
+    vendas();
+
     if (localStorage.length === 0) {
 
         console.log('Carrinho vazio!')
@@ -82,4 +84,21 @@ function remover() {
 
 };
 
+function vendas() {
 
+    let itens = JSON.parse(localStorage.getItem('carrinho'));
+
+    let total = 0;
+
+    for (let i = 0; i < itens.length; i++) { 
+        
+        let preco = itens[i].valor;
+        let qtd = itens[i].quantidade;
+
+        let soma = total + (parseFloat(preco.replace(',','.')) * parseInt(qtd))
+
+    };
+
+    console.log(soma);
+
+};
