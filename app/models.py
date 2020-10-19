@@ -120,8 +120,12 @@ class vendas(models.Model):
         choice = PAGAMENTO
     )
         
-    itens = models.IntegerField('Quantidade')
-    comprovante = models.TextField('Descrição')
+    itens = models.IntegerField('Itens')
+    comprovante = models.FileField(
+        upload_to='pdf',
+        verbose_name = 'Comprovante'
+    )
+       
     status = models.CharField(
         max_length = 7,
         choices = STATUS
