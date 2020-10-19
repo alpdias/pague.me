@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import pessoas, estoque
+from .models import pessoas, estoque, vendas
 
 # Create your views here.
 
@@ -66,8 +66,10 @@ def buy(request):
     ->
     :return:
     """
-
-    return render(request, 'app/buy.html')  
+    
+    vendas = vendas.objects.all()
+    
+    return render(request, 'app/buy.html', {'vendas': vendas})  
 
 
 @login_required
