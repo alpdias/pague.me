@@ -46,10 +46,10 @@ Criado em 10/2020
         </div>
     </div>
     <div>
-        <button onclick="">limpar&nbsp;<i class="far fa-trash-alt"></i></button>
+        <button onclick="removerVenda()">limpar&nbsp;<i class="far fa-trash-alt"></i></button>
     </div>
     <div id="fechar-venda">
-        <button onclick="fecharVenda()">fechar&nbsp;<i class="fas fa-share-square"></i></button>
+        <button onclick="">fechar&nbsp;<i class="fas fa-share-square"></i></button>
     </div>
     <div>
         <form method="">
@@ -81,7 +81,7 @@ Criado em 10/2020
             </select>
             <div>
                 <button>voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
-                <button onclick="removerVenda()"><a href="{% url 'buy' %}">registrar&nbsp;<i class="fas fa-cash-register"></i></a></button>
+                <button onclick="fecharVenda()"><a href="{% url 'buy' %}">registrar&nbsp;<i class="fas fa-cash-register"></i></a></button>
             </div>
         </form>
     </div>
