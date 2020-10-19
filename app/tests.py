@@ -33,6 +33,7 @@ recibo = ['------------------------------------------------------------',
 
 formato = 370
 
+#cabecalho
 i = 14
 
 while i > 0:
@@ -40,7 +41,9 @@ while i > 0:
   recibo.pop(0)
   formato = formato - 14
   i = i - 1
+#cabecalho
 
+#totalizador
 i = 5
 
 while i > 0:
@@ -48,7 +51,9 @@ while i > 0:
   recibo.pop(0)
   formato = formato - 14
   i = i - 1
+#totalizador
 
+#rodape
 i = 5
 
 while i > 0:
@@ -56,5 +61,6 @@ while i > 0:
   recibo.pop(0)
   formato = formato - 14
   i = i - 1
+#rodape
 
 pdf.save()
