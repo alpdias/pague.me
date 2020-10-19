@@ -45,7 +45,7 @@ Criado em 09/2020
                             <td style="word-wrap: break-word;"><a href="/people/{{ registro.id }}"><span id="individuo">{{ registro.nome }}</span></a></td>
                             <td style="word-wrap: break-word;">{{ registro.telefone }}</td>
                             <td style="word-wrap: break-word;">{{ registro.email }}</td>
-                            <td><span class="span-titulo-2" id="nomeCliente"><a href="{% url 'buy' %}"><i class="fas fa-plus" onclick="adicionarCliente()"></i></a></span></td>
+                            <td><span class="span-titulo-2" id="nomeCliente"><a href="{% url 'buy' %}"><i class="fas fa-plus"></i></a></span></td>
                         </tr>
                     {% endfor %}
                 </tbody>
