@@ -13,17 +13,16 @@ class pessoas(models.Model):
         ('ativo', 'ATIVO'),
         ('inativo', 'INATIVO'),
     )
-    
     nome = models.CharField('Nome', max_length = 255)
     telefone = models.CharField('Telefone', max_length = 14)
     email = models.EmailField('E-mail')
+    cpf = models.CharField('CPF', max_length = 14)
     endereco = models.CharField('Endereço', max_length = 255)
     observacao = models.TextField('Observações')
     status = models.CharField(
         max_length = 7,
         choices = STATUS
     )
-    
     criado = models.DateTimeField('Criado em', auto_now_add = True)
     atualizado = models.DateTimeField('Atualizado em', auto_now = True)
 
@@ -60,7 +59,6 @@ class estoque(models.Model):
         ('disponivel', 'DISPONIVEL'),
         ('esgotado', 'ESGOTADO'),
     )
-    
     produto = models.CharField('Produto', max_length = 255)
     preco = models.DecimalField('Preço', max_digits = 999, decimal_places = 2)
     custo = models.DecimalField('Custo', max_digits = 999, decimal_places = 2)
@@ -70,7 +68,6 @@ class estoque(models.Model):
         max_length = 10,
         choices = STATUS
     )
-
     criado = models.DateTimeField('Criado em', auto_now_add = True)
     atualizado = models.DateTimeField('Atualizado em', auto_now = True)
 
@@ -102,35 +99,30 @@ class vendas(models.Model):
     ->
     :return:
     """
+    
     PAGAMENTO = (
         ('dinhero', 'DINHEIRO),
         ('debito', 'DEBITO'),
         ('credito', 'CREDITO'),
     )
-    
     STATUS = (
         ('aberto', 'ABERTO'),
         ('fechado', 'FECHADO'),
     )
-        
     cliente = models.CharField('Cliente', max_length = 255)
     valor = models.DecimalField('Valor', max_digits = 999, decimal_places = 2)
     pagamento = models.CharField(
         max_digits = 8, 
         choice = PAGAMENTO
     )
-        
-    itens = models.IntegerField('Itens')
     comprovante = models.FileField(
         upload_to='pdf',
         verbose_name = 'Comprovante'
     )
-       
     status = models.CharField(
         max_length = 7,
         choices = STATUS
     )
-
     criado = models.DateTimeField('Criado em', auto_now_add = True)
     atualizado = models.DateTimeField('Atualizado em', auto_now = True)
 
