@@ -42,13 +42,13 @@ Criado em 10/2020
                 <th>status</th>
                 <th>editar</th>
                 <tbody id="resultado-vendas">
-                    {% for venda in vendas %}
+                    {% for vendido in vendidos %}
                         <tr>
-                            <td><span>{{ venda.cliente }}</span></td>
-                            <td><span>{{ venda.valor }}</span></td>
-                            <td><span>{{ venda.pagamento }}</span></td>
+                            <td><span>{{ vendido.cliente }}</span></td>
+                            <td><span>{{ vendido.valor }}</span></td>
+                            <td><span>{{ vendido.pagamento }}</span></td>
                             <td><a href=""><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>
-                            <td><span>{{ venda.status }}</span></td>
+                            <td><span>{{ vendido.status }}</span></td>
                             <td><a href=""><span class="span-titulo-2"><i class="fas fa-edit"></i></span></a></td>
                         </tr>
                     {% endfor %}
