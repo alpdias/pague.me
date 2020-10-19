@@ -102,7 +102,8 @@ function fecharVenda() {
         localStorage.setItem('resultadoVenda', JSON.stringify(resultadoVendas));
 
     };
-
+    
+    /*
     document.querySelector('#resultado-vendas').innerHTML += `\
         <tr>\
             <td><a href="/records"><span class="span-titulo-2"><i class="fas fa-user-edit"></i></span></a></td>\
@@ -123,6 +124,7 @@ function fecharVenda() {
                 </select>\
             </td>\
         </tr>`;
+    */
 
 };
 
