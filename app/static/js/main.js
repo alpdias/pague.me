@@ -3,7 +3,7 @@ Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
 */
 
-function compras() {
+function adicionar() {
 
     let produto = document.querySelector('#produto').textContent;
     let preco = document.querySelector('#preco').textContent;
@@ -42,7 +42,7 @@ function compras() {
 
 };
 
-function adicionar() {
+function compras() {
 
     let itens = JSON.parse(localStorage.getItem('carrinho'));
     
@@ -164,32 +164,3 @@ function removerVenda() {
 
 };
 
-function adicionarCliente() {
-
-    if (localStorage.getItem('resultadoVenda') != null) {
-
-        let cliente = document.querySelector('#individuo').textContent;
-
-        let individuo = {
-            nome: cliente,
-        };
-        
-        if (localStorage.getItem('cliente') === null) {
-    
-            let pessoa = [];
-            pessoa.push(individuo);
-    
-            localStorage.setItem('cliente', JSON.stringify(pessoa));
-    
-        } else {
-    
-            let pessoa = JSON.parse(localStorage.getItem('cliente'));
-            pessoa.push(individuo);
-            
-            localStorage.setItem('cliente', JSON.stringify(pessoa));
-    
-        };
-
-    } else {};
-
-};
