@@ -43,26 +43,30 @@ function adicionar() {
 };
 
 function compras() {
-
-    let itens = JSON.parse(localStorage.getItem('carrinho'));
     
-    for (let i = 0; i < itens.length; i++) { 
+    if (localStorage.getItem('carrinho') === null) {} else {
+
+        let itens = JSON.parse(localStorage.getItem('carrinho'));
+
+        for (let i = 0; i < itens.length; i++) { 
+
+            let nome =  itens[i].nome;
+            let preco = itens[i].valor;
+            let qtd = itens[i].quantidade;
+
+            let total = (parseFloat(preco.replace(',','.')) * parseInt(qtd))
+
+            document.querySelector('#resultado').innerHTML += `\
+                <tr>\
+                    <td style="word-wrap: break-word;">` + nome + `</td>\
+                    <td style="word-wrap: break-word;">` + preco + `</td>\
+                    <td style="word-wrap: break-word;">` + parseInt(qtd) + `</td>\
+                    <td style="word-wrap: break-word;">` + total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</td>\
+                    <td style="word-wrap: break-word;"><span onclick=""><i class="fas fa-minus-circle"></i><span></td>\
+                </tr>`;
+
+        };
         
-        let nome =  itens[i].nome;
-        let preco = itens[i].valor;
-        let qtd = itens[i].quantidade;
-
-        let total = (parseFloat(preco.replace(',','.')) * parseInt(qtd))
-
-        document.querySelector('#resultado').innerHTML += `\
-            <tr>\
-                <td style="word-wrap: break-word;">` + nome + `</td>\
-                <td style="word-wrap: break-word;">` + preco + `</td>\
-                <td style="word-wrap: break-word;">` + parseInt(qtd) + `</td>\
-                <td style="word-wrap: break-word;">` + total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</td>\
-                <td style="word-wrap: break-word;"><span onclick=""><i class="fas fa-minus-circle"></i><span></td>\
-            </tr>`;
-
     };
 
 };
@@ -160,6 +164,20 @@ function removerVenda() {
 
         localStorage.removeItem('cliente');
 
+    };
+
+};
+
+function confirmarVenda() {
+    
+    if (document.querySelector('#confirmacao').style.display == 'block') {
+        
+        document.querySelector('#confirmacao').style.display = 'none';
+        
+    } else {
+    
+        document.querySelector('#confirmacao').style.display = 'block';
+    
     };
 
 };
