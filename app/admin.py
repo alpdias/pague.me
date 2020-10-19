@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import pessoas, estoque
+from .models import pessoas, estoque, vendas
 
 class pessoasAdmin(admin.ModelAdmin):
 
@@ -14,7 +14,7 @@ class pessoasAdmin(admin.ModelAdmin):
     list_display = ['nome', 'telefone', 'email', 'status']
     search_fields = ['nome', 'status']
 
-
+    
 admin.site.register(pessoas, pessoasAdmin)
 
 class estoqueAdmin(admin.ModelAdmin):
@@ -29,3 +29,16 @@ class estoqueAdmin(admin.ModelAdmin):
 
 
 admin.site.register(estoque, estoqueAdmin)
+
+class vendasAdmin(admin.ModelAdmin):
+
+    """
+    ->
+    :return:
+    """
+
+    list_display = ['cliente', 'valor', 'pagamento', 'status', 'criado']
+    search_fields = ['valor', 'status', 'criado']
+
+
+admin.site.register(vendas, vendasAdmin)
