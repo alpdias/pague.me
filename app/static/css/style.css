@@ -272,7 +272,7 @@ th {
     max-width: 60px;
 }
 
-/* COMPRAS */
+/* CARRINHO */
 #fechar-venda button{
     background-color: #9A879D;
     color: #ffffff;
@@ -296,4 +296,10 @@ th {
 .span-titulo-2 {
     color: #9A879D;
     font-weight: bolder;
+}
+
+.span-titulo-2 a {
+    color: #9A879D;
+    text-decoration: none;
+    text-decoration-style: none;
 }

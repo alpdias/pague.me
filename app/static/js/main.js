@@ -56,7 +56,7 @@ function adicionar() {
 
         document.querySelector('#resultado').innerHTML += `\
             <tr>\
-                <td style="word-wrap: break-word;"><a href="">` + nome + `</a></td>\
+                <td style="word-wrap: break-word;">` + nome + `</td>\
                 <td style="word-wrap: break-word;">` + preco + `</td>\
                 <td style="word-wrap: break-word;">` + parseInt(qtd) + `</td>\
                 <td style="word-wrap: break-word;">` + total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</td>\
@@ -94,18 +94,12 @@ function fecharVenda() {
 
         localStorage.setItem('resultadoVenda', JSON.stringify(resultadoVendas));
 
-    } else {
+    } else if (localStorage.getItem('resultadoVenda') != null) {} else {
 
         let resultadoVendas = JSON.parse(localStorage.getItem('resultadoVenda'));
         resultadoVendas.push(resultadoVenda);
         
         localStorage.setItem('resultadoVenda', JSON.stringify(resultadoVendas));
-
-    };
-
-    if (localStorage.length === 0) {} else {
-
-        localStorage.removeItem('carrinho');
 
     };
 
@@ -150,5 +144,49 @@ function vendas() {
     };
 
     document.querySelector('#soma').innerHTML = `${soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+
+};
+
+function removerVenda() {
+
+    if (localStorage.length === 0) {} else {
+
+        localStorage.removeItem('carrinho');
+
+        localStorage.removeItem('resultadoVenda');
+
+        localStorage.removeItem('cliente');
+
+    };
+
+};
+
+function adicionarCliente() {
+
+    if (localStorage.getItem('resultadoVenda') != null) {
+
+        let cliente = document.querySelector('#individuo').textContent;
+
+        let individuo = {
+            nome: cliente,
+        };
+        
+        if (localStorage.getItem('cliente') === null) {
+    
+            let pessoa = [];
+            pessoa.push(individuo);
+    
+            localStorage.setItem('cliente', JSON.stringify(pessoa));
+    
+        } else {
+    
+            let pessoa = JSON.parse(localStorage.getItem('cliente'));
+            pessoa.push(individuo);
+            
+            localStorage.setItem('cliente', JSON.stringify(pessoa));
+    
+        };
+
+    } else {};
 
 };

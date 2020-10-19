@@ -26,8 +26,8 @@ Criado em 10/2020
         <nav>
             <ul class="item-vertical">
                 <li><a href="{% url 'dashboard' %}"><span class="ajuste-menu__vertical"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
-                <li><a href="{% url 'cart' %}"><span class="ajuste-menu__vertical"></span>compras&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
                 <li><a href="{% url 'buy' %}"><span class="ajuste-menu__vertical"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
+                <li><a href="{% url 'cart' %}"><span class="ajuste-menu__vertical"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
                 <li><a href="{% url 'products' %}"><span class="ajuste-menu__vertical"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
                 <li><a href="{% url 'records' %}"><span class="ajuste-menu__vertical"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
             </ul>
@@ -45,6 +45,9 @@ Criado em 10/2020
                 <tbody id="resultado-vendas"></tbody>
             </table>
         </div>
+    </div>
+    <div id="fechar-venda">
+        <button onclick="removerVenda()"><a href="{% url 'buy' %}">fechar&nbsp;<i class="fas fa-share-square"></i></a></button>
     </div>
 </main>
 {% else %}
