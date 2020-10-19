@@ -4,7 +4,13 @@
 
 from reportlab.pdfgen import canvas
 
-pdf = canvas.Canvas('recibo.pdf', pagesize=(256, 400))
+item = ['item 00', 'item 01', 'item 02', 'item 03', 'item 04', 'item 05']
+quantidade = ['02', '01', '05', '08', '11', '15']
+valor = [16, 50, 25, 90, 10, 2]
+
+qtd = len(item)
+
+pdf = canvas.Canvas('recibo.pdf', pagesize=(256, (400 + (qtd * 14))))
 
 recibo = ['------------------------------------------------------------',
 'EMPRESA ABC LTDA',
@@ -20,7 +26,8 @@ recibo = ['------------------------------------------------------------',
 '',
 'ITEM | QTD | VALOR R$',
 '',
-'TOTAL ITENS:',
+'',
+f'TOTAL ITENS: {qtd}',
 'TOTAL:',
 'PAGAMENTO:',
 'TROCO:',
@@ -31,7 +38,7 @@ recibo = ['------------------------------------------------------------',
 '',
 '------------------------------------------------------------']
 
-formato = 370
+formato = (380 + (qtd * 14))
 
 #cabecalho
 i = 14
@@ -43,8 +50,20 @@ while i > 0:
   i = i - 1
 #cabecalho
 
+#itens
+i = qtd
+
+while i > 0:
+  pdf.drawString(16, (formato - 14), f'{item[0]}  |  {quantidade[0]}  |  {valor[0]}')
+  item.pop(0)
+  quantidade.pop(0)
+  valor.pop(0)
+  formato = formato - 14
+  i = i - 1
+#itens
+
 #totalizador
-i = 5
+i = 6
 
 while i > 0:
   pdf.drawString(16, (formato - 14), recibo[0])
