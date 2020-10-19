@@ -47,6 +47,40 @@ Criado em 10/2020
     <div id="fechar-venda">
         <button onclick="removerVenda()"><a href="{% url 'buy' %}">fechar&nbsp;<i class="fas fa-share-square"></i></a></button>
     </div>
+    <div>
+        <form method="">
+            {% csrf_token %}
+            <label>cliente</label>
+            <select name="" id="">
+                {% for registro in registros %}
+                    <option value="">{{ registro.nome }}</option>
+                {% endfor %}
+            </select>
+            <label>pagamento</label>
+            <select name="" id="">
+                <option value="">dinheiro</option>
+                <option value="">debito</option>
+                <option value="">credito</option>
+            </select>
+            <label>desconto</label>
+            <input type="number">
+            <div>
+                <label>recebido</label>
+                <input type="number">
+                <label>troco</label>
+                <input type="number">
+            </div>
+            <label>status</label>
+            <select name="" id="">
+                <option value="">aberto</option>
+                <option value="">fechado</option>
+            </select>
+            <div>
+                <button>voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
+                <button onclick="removerVenda()"><a href="{% url 'buy' %}">registrar&nbsp;<i class="fas fa-cash-register"></i></a></button>
+            </div>
+        </form>
+    </div>
 </main>
 {% else %}
 {% endif %}
