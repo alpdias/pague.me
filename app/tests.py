@@ -2,39 +2,59 @@
 
 # Create your tests here.
 
-listaItens = []
-totalItens = 0
-totalValor = 0
-formaPagamento = 'DINHEIRO'
-valorPagamento = 0
-valorTroco = 0
+from reportlab.pdfgen import canvas
 
-layout01 = '-'
-layout02 = ' '
+pdf = canvas.Canvas('recibo.pdf', pagesize=(256, 400))
 
-recibo = f'\
-\n{layout01 * 40}\
-\nEMPRESA ABC LTDA\
-\nRUA NADA, 1000\
-\nSAO PAULO - SP\
-\n\
-\nCNPJ 00.000.000/0000-00\
-\n{layout01 * 40}\
-\nEXTRATO N. 0001\
-\nRECIBO DE COMPRA E VENDA\
-\n{layout01 * 40}\
-\n\
-\n{listaItens}\
-\n\
-\nTOTAL ITENS:{layout02 * 19}{totalItens}\
-\nTOTAL:{layout02 * 25}{totalValor}\
-\nPAGAMENTO:{layout02}{formaPagamento}{layout02 * 12}{valorPagamento}\
-\nTROCO:{layout02 * 25}{valorTroco}\
-\n\
-\n{layout01 * 40}\
-\n\
-\nVOLTE SEMPRE !!\
-\n\
-\n{layout01 * 40}'
+recibo = ['------------------------------------------------------------',
+'EMPRESA ABC LTDA',
+'RUA NADA, 1000',
+'SAO PAULO - SP',
+'------------------------------------------------------------',
+'CNPJ 00.000.000/0000-00',
+'------------------------------------------------------------',
+'EXTRATO N. 0001',
+'RECIBO DE COMPRA E VENDA',
+'00/00/0000',
+'------------------------------------------------------------',
+'',
+'ITEM | QTD | VALOR R$',
+'',
+'TOTAL ITENS:',
+'TOTAL:',
+'PAGAMENTO:',
+'TROCO:',
+'',
+'------------------------------------------------------------',
+'',
+'VOLTE SEMPRE !!',
+'',
+'------------------------------------------------------------']
 
-print(recibo)
+formato = 370
+
+i = 14
+
+while i > 0:
+  pdf.drawCentredString(128, (formato - 14), recibo[0])
+  recibo.pop(0)
+  formato = formato - 14
+  i = i - 1
+
+i = 5
+
+while i > 0:
+  pdf.drawString(16, (formato - 14), recibo[0])
+  recibo.pop(0)
+  formato = formato - 14
+  i = i - 1
+
+i = 5
+
+while i > 0:
+  pdf.drawCentredString(128, (formato - 14), recibo[0])
+  recibo.pop(0)
+  formato = formato - 14
+  i = i - 1
+
+pdf.save()
