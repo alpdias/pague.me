@@ -49,6 +49,19 @@ def dashboard(request):
 
 
 @login_required
+def buy(request):
+
+    """
+    ->
+    :return:
+    """
+    
+    vendido = vendas.objects.all()
+    
+    return render(request, 'app/buy.html', {'vendido': vendido})  
+
+
+@login_required
 def cart(request):
 
     """
@@ -57,19 +70,6 @@ def cart(request):
     """
 
     return render(request, 'app/cart.html')  
-
-
-@login_required
-def buy(request):
-
-    """
-    ->
-    :return:
-    """
-    
-    vendas = vendas.objects.all()
-    
-    return render(request, 'app/buy.html', {'vendas': vendas})  
 
 
 @login_required
@@ -83,19 +83,6 @@ def records(request):
     registros = pessoas.objects.all()
 
     return render(request, 'app/records.html', {'registros': registros})
-
-
-@login_required
-def people(request, id):
-
-    """
-    ->
-    :return:
-    """
-
-    pessoa = get_object_or_404(pessoas, pk=id)
-
-    return render(request, 'app/people.html', {'pessoa': pessoa})
 
 
 @login_required
@@ -122,6 +109,19 @@ def stock(request, id):
     estoques = get_object_or_404(estoque, pk=id)
 
     return render(request, 'app/stock.html', {'estoques': estoques})
+
+
+@login_required
+def people(request, id):
+
+    """
+    ->
+    :return:
+    """
+
+    pessoa = get_object_or_404(pessoas, pk=id)
+
+    return render(request, 'app/people.html', {'pessoa': pessoa})
 
 
 class register(generic.CreateView):
