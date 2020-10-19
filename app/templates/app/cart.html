@@ -45,13 +45,11 @@ Criado em 10/2020
             </table>
         </div>
     </div>
-    <div>
-        <button onclick="removerVenda()">limpar&nbsp;<i class="far fa-trash-alt"></i></button>
+    <div class="botoes-carrinho">
+        <button onclick="removerVenda()" class="botoes-carrinho">limpar&nbsp;<i class="far fa-trash-alt"></i></button>
+        <button onclick="confirmarVenda()" class="botoes-carrinho">fechar&nbsp;<i class="fas fa-share-square"></i></button>
     </div>
-    <div id="fechar-venda">
-        <button onclick="">fechar&nbsp;<i class="fas fa-share-square"></i></button>
-    </div>
-    <div>
+    <div id="confirmacao" style="display: none;">
         <form method="">
             {% csrf_token %}
             <label for="">cliente</label>
@@ -74,14 +72,16 @@ Criado em 10/2020
                 <label for="">troco</label>
                 <input type="number">
             </div>
+            <label for="">total</label>
+            <input type="number">
             <label for="">status</label>
             <select name="" id="">
                 <option value="">aberto</option>
                 <option value="">fechado</option>
             </select>
             <div>
-                <button onclick="">voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
-                <button onclick="fecharVenda()"><a href="{% url 'buy' %}">registrar&nbsp;<i class="fas fa-cash-register"></i></a></button>
+                <button onclick="confirmarVenda()" class="botoes-carrinho">voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
+                <button onclick="fecharVenda(), confirmarVenda()" class="botoes-carrinho"><a href="{% url 'buy' %}">registrar&nbsp;<i class="fas fa-cash-register"></i></a></button>
             </div>
         </form>
     </div>
