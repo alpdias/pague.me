@@ -39,10 +39,19 @@ Criado em 10/2020
                 <th>cliente</th>
                 <th>valor</th>
                 <th>pagamento</th>
-                <th>itens</th>
                 <th>comprovante</th>
                 <th>status</th>
-                <tbody id="resultado-vendas"></tbody>
+                <tbody id="resultado-vendas">
+                    {% for venda in vendas %}
+                        <tr>
+                            <td><a href="{% url 'records' %}"><span class="span-titulo-2"><i class="fas fa-user-edit"></i></span></a></td>
+                            <td><span>{{}}</span></td>
+                            <td><span>{{}}</span></td>
+                            <td><a href=""><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>
+                            <td><span>{{}}</span></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>
