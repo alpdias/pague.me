@@ -13,6 +13,7 @@ class pessoas(models.Model):
         ('ativo', 'ATIVO'),
         ('inativo', 'INATIVO'),
     )
+    
     nome = models.CharField('Nome', max_length = 255)
     telefone = models.CharField('Telefone', max_length = 14)
     email = models.EmailField('E-mail')
@@ -22,8 +23,9 @@ class pessoas(models.Model):
         max_length = 7,
         choices = STATUS
     )
-    criado = models.DateTimeField(auto_now_add=True)
-    atualizado = models.DateTimeField(auto_now=True)
+    
+    criado = models.DateTimeField(auto_now_add = True)
+    atualizado = models.DateTimeField(auto_now = True)
 
     def __str__(self):
 
@@ -58,9 +60,10 @@ class estoque(models.Model):
         ('disponivel', 'DISPONIVEL'),
         ('esgotado', 'ESGOTADO'),
     )
+    
     produto = models.CharField('Produto', max_length = 255)
-    preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
-    custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
+    preco = models.DecimalField('Preço', max_digits = 999, decimal_places = 2)
+    custo = models.DecimalField('Custo', max_digits = 999, decimal_places = 2)
     quantidade = models.IntegerField('Quantidade')
     descricao = models.TextField('Descrição')
     status = models.CharField(
@@ -68,8 +71,8 @@ class estoque(models.Model):
         choices = STATUS
     )
 
-    criado = models.DateTimeField(auto_now_add=True)
-    atualizado = models.DateTimeField(auto_now=True)
+    criado = models.DateTimeField(auto_now_add = True)
+    atualizado = models.DateTimeField(auto_now = True)
 
     def __str__(self):
 
@@ -91,4 +94,59 @@ class estoque(models.Model):
         verbose_name = 'PRODUTO'
         verbose_name_plural = 'PRODUTOS'
         ordering = ['produto'] 
+ 
+
+class vendas(models.Model):
+
+    """
+    ->
+    :return:
+    """
+    PAGAMENTO = (
+        ('dinhero', 'DINHEIRO),
+        ('debito', 'DEBITO'),
+        ('credito', 'CREDITO'),
+    )
+    
+    STATUS = (
+        ('aberto', 'ABERTO'),
+        ('fechado', 'FECHADO'),
+    )
         
+    cliente = models.CharField('Cliente', max_length = 255)
+    valor = models.DecimalField('Valor', max_digits = 999, decimal_places = 2)
+    pagamento = models.CharField(
+        max_digits = 8, 
+        choice = PAGAMENTO
+    )
+        
+    itens = models.IntegerField('Quantidade')
+    comprovante = models.TextField('Descrição')
+    status = models.CharField(
+        max_length = 7,
+        choices = STATUS
+    )
+
+    criado = models.DateTimeField(auto_now_add = True)
+    atualizado = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+
+        """
+        ->
+        :return:
+        """
+
+        return self.criado
+
+
+    class Meta:
+
+        """
+        ->
+        :return:
+        """
+
+        verbose_name = 'VENDA'
+        verbose_name_plural = 'VENDAS'
+        ordering = ['criado'] 
