@@ -7,7 +7,7 @@ Criado em 10/2020
 {% block title %}pague.me{% endblock %}
 {% block code %}
 {% if user.is_authenticated %}
-<span style="display: none;">{% block carregar %}onload="adicionar()"{% endblock %}</span>
+<span style="display: none;">{% block carregar %}onload="compras()"{% endblock %}</span>
 <main>
     <div class="nav-bar__principal">
         <nav>
@@ -80,7 +80,7 @@ Criado em 10/2020
                 <option value="">fechado</option>
             </select>
             <div>
-                <button>voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
+                <button onclick="">voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
                 <button onclick="fecharVenda()"><a href="{% url 'buy' %}">registrar&nbsp;<i class="fas fa-cash-register"></i></a></button>
             </div>
         </form>
