@@ -273,7 +273,7 @@ th {
 }
 
 /* CARRINHO */
-#fechar-venda button{
+.botoes-carrinho button{
     background-color: #9A879D;
     color: #ffffff;
     box-shadow: 1px 1px 2px #0000001c;
@@ -286,7 +286,7 @@ th {
     margin-top: 26px;
 }
 
-#fechar-venda a {
+.botoes-carrinho a {
     color: #ffffff;
     text-decoration: none;
     text-decoration-style: none;
