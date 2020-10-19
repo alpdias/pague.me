@@ -60,6 +60,7 @@ function adicionar() {
                 <td style="word-wrap: break-word;">` + preco + `</td>\
                 <td style="word-wrap: break-word;">` + parseInt(qtd) + `</td>\
                 <td style="word-wrap: break-word;">` + total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</td>\
+                <td style="word-wrap: break-word;"><span onclick=""><i class="fas fa-minus-circle"></i><span></td>\
             </tr>`;
 
     };

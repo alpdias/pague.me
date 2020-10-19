@@ -40,9 +40,13 @@ Criado em 10/2020
                 <th>preço</th>
                 <th>quantidade</th>
                 <th><span id="soma" class="span-titulo-2" onclick="vendas()">total</span></th>
+                <th>remover</th>
                 <tbody id="resultado"></tbody>
             </table>
         </div>
+    </div>
+    <div>
+        <button onclick="">limpar&nbsp;<i class="far fa-trash-alt"></i></button>
     </div>
     <div id="fechar-venda">
         <button onclick="fecharVenda()">fechar&nbsp;<i class="fas fa-share-square"></i></button>
@@ -50,27 +54,27 @@ Criado em 10/2020
     <div>
         <form method="">
             {% csrf_token %}
-            <label>cliente</label>
+            <label for="">cliente</label>
             <select name="" id="">
                 {% for registro in registros %}
                     <option value="">{{ registro.nome }}</option>
                 {% endfor %}
             </select>
-            <label>pagamento</label>
+            <label for="">pagamento</label>
             <select name="" id="">
                 <option value="">dinheiro</option>
                 <option value="">debito</option>
                 <option value="">credito</option>
             </select>
-            <label>desconto</label>
+            <label for="">desconto</label>
             <input type="number">
             <div>
-                <label>recebido</label>
+                <label for="">recebido</label>
                 <input type="number">
-                <label>troco</label>
+                <label for="">troco</label>
                 <input type="number">
             </div>
-            <label>status</label>
+            <label for="">status</label>
             <select name="" id="">
                 <option value="">aberto</option>
                 <option value="">fechado</option>
