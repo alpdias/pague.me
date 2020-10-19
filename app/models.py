@@ -24,8 +24,8 @@ class pessoas(models.Model):
         choices = STATUS
     )
     
-    criado = models.DateTimeField(auto_now_add = True)
-    atualizado = models.DateTimeField(auto_now = True)
+    criado = models.DateTimeField('Criado em', auto_now_add = True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now = True)
 
     def __str__(self):
 
@@ -71,8 +71,8 @@ class estoque(models.Model):
         choices = STATUS
     )
 
-    criado = models.DateTimeField(auto_now_add = True)
-    atualizado = models.DateTimeField(auto_now = True)
+    criado = models.DateTimeField('Criado em', auto_now_add = True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now = True)
 
     def __str__(self):
 
@@ -131,8 +131,8 @@ class vendas(models.Model):
         choices = STATUS
     )
 
-    criado = models.DateTimeField(auto_now_add = True)
-    atualizado = models.DateTimeField(auto_now = True)
+    criado = models.DateTimeField('Criado em', auto_now_add = True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now = True)
 
     def __str__(self):
 
