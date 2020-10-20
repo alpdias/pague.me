@@ -5,7 +5,7 @@ Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
 '''
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -81,6 +81,11 @@ def cart(request):
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         vendaStatus = request.POST.get(['statusVenda-form'][0])
+        
+        f = vendas(cliente = nomeCliente, valor = valorTotal, pagamento = tipoPgto, status = vendaStatus)
+        f.save()
+        
+        return redirect('app/buy.html')
     
     else:
         pass
