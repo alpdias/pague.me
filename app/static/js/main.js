@@ -62,7 +62,7 @@ function compras() {
                     <td style="word-wrap: break-word;">` + preco + `</td>\
                     <td style="word-wrap: break-word;">` + parseInt(qtd) + `</td>\
                     <td style="word-wrap: break-word;">` + total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</td>\
-                    <td style="word-wrap: break-word;"><span onclick="" class="span-titulo-2"><i class="fas fa-minus-circle"></i><span></td>\
+                    <td style="word-wrap: break-word;"><a href="/cart"><span onclick="removerItem(\'' + nome + '\')" class="span-titulo-2"><i class="fas fa-minus-circle"></i><span></a></td>\
                 </tr>`;
 
         };
@@ -130,6 +130,8 @@ function fecharVenda() {
             </td>\
         </tr>`;
     */
+    
+    confirmarVenda();
 
 };
 
@@ -168,6 +170,22 @@ function removerVenda() {
 
 };
 
+function removerItem(nome) {
+    
+    let itens = JSON.parse(localStorage.getItem('carrinho'));
+    
+    for (let i = 0; i < itens.length; i++) {
+        
+        if (itens[i].nome === nome) {
+            itens.splice(i, 1);
+        };
+        
+        localStorage.setItem('carrinho', JSON.stringify(itens));
+        
+    };
+    
+};
+
 function confirmarVenda() {
     
     if (document.querySelector('#confirmacao').style.display == 'none') {
@@ -181,4 +199,27 @@ function confirmarVenda() {
     };
 
 };
+
+function tipoPagamento() {
+    
+    let tipoSelecao = document.querySelector('#tipoPagamento-form');
+    let tipoSelecionado = tipoSelecao.options[tipoSelecao.selectedIndex].value;
+    
+    if (tipoSelecionado == 'dinheiro') {
+        
+        document.querySelector('#tipoDependencia').style.display = 'block';
+        
+    } else {
+    
+        document.querySelector('#tipoDependencia').style.display = 'none';
+    
+    };
+};
+
+
+tipoPagamento-form
+valorRecebido
+valorDesconto
+valorTroco
+valorTotal-form
 
