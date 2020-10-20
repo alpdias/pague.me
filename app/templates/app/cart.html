@@ -17,17 +17,17 @@ Criado em 10/2020
                     <div><input type="text" name="nomeCliente-form"></div>
                     <div class="selecao-confirmacao">
                         <label for="tipoPagamento">pagamento</label>
-                        <select name="tipoPagamento-form" id="tipoPagamento-form">
+                        <select name="tipoPagamento-form" id="tipoPagamento-form" onchange="tipoPagamento()">
                             <option value="debito">debito</option>
                             <option value="credito">credito</option>
                             <option value="dinheiro">dinheiro</option>
                         </select>
                     </div>
                     <div class="texto-confirmacao"><label for="valorDesconto">desconto&nbsp;&nbsp;$</label></div>
-                    <div><input type="number" id="valorDesconto"></div>
+                    <div><input type="number" id="valorDesconto" onchange="calculo()"></div>
                     <div style="display: none;" id="tipoDependencia">
                         <div class="texto-confirmacao"><label for="valorRecebido">recebido&nbsp;&nbsp;$</label></div>
-                        <div><input type="number" id="valorRecebido"></div>
+                        <div><input type="number" id="valorRecebido" onchange="calculo()"></div>
                         <div class="texto-confirmacao"><label for="valorTroco">troco&nbsp;&nbsp;$</label></div>
                         <div><input type="number" id="valorTroco"></div>
                     </div>
