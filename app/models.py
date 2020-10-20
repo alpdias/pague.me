@@ -106,10 +106,11 @@ class vendas(models.Model):
     )
     cliente = models.CharField('Cliente', max_length = 255)
     valor = models.DecimalField('Valor', max_digits = 999, decimal_places = 2)
-    pagamento = models.CharField('Pagamento', max_digits = 8)
+    pagamento = models.CharField('Pagamento', max_length = 8)
     comprovante = models.FileField(
         upload_to='pdf', 
-        verbose_name = 'Comprovante'
+        verbose_name = 'Comprovante',
+        blank=True
     )
     status = models.CharField(
         max_length = 7, 

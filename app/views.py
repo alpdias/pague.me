@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+
+'''
+Criado em 09/2020
+@Autor: Paulo https://github.com/alpdias
+'''
+
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -47,7 +54,6 @@ def dashboard(request):
     
     return render(request, 'app/dashboard.html')
 
-
 @login_required
 def buy(request):
 
@@ -57,7 +63,7 @@ def buy(request):
     """
     
     vendido = vendas.objects.all()
-    
+
     return render(request, 'app/buy.html', {'vendido': vendido})  
 
 
@@ -68,6 +74,16 @@ def cart(request):
     ->
     :return:
     """
+
+    if request.method == 'POST':
+
+        nomeCliente = request.POST.get('nomeCliente-form')
+        valorTotal = request.POST.get('valorTotal-form')
+        tipoPgto = request.POST.get(['tipoPagamento-form'][0])
+        vendaStatus = request.POST.get(['statusVenda-form'][0])
+    
+    else:
+        pass
 
     return render(request, 'app/cart.html')  
 
@@ -134,4 +150,92 @@ class register(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+
+
+def pdf(itesVenda, quantidadeItens, valorItens, totalVenda, pagamentoTipo, valorTroco):
+
+    from reportlab.pdfgen import canvas
+
+    item = itesVenda
+    quantidade = quantidadeItens
+    valor = valorItens
+
+    qtd = len(item)
+    total = totalVenda
+    pagamento = pagamentoTipo
+    troco = valorTroco
+
+    pdf = canvas.Canvas('recibo.pdf', pagesize=(256, (400 + (qtd * 14))))
+
+    recibo = ['------------------------------------------------------------',
+    'EMPRESA ABC LTDA',
+    'RUA NADA, 1000',
+    'SAO PAULO - SP',
+    '------------------------------------------------------------',
+    'CNPJ 00.000.000/0000-00',
+    '------------------------------------------------------------',
+    'EXTRATO N. 0001',
+    'RECIBO DE COMPRA E VENDA',
+    '00/00/0000',
+    '------------------------------------------------------------',
+    '',
+    'ITEM | QTD | VALOR R$',
+    '',
+    '',
+    f'TOTAL ITENS: {qtd}',
+    f'TOTAL: {total}',
+    f'PAGAMENTO: {pagamento}',
+    f'TROCO: {troco}',
+    '',
+    '------------------------------------------------------------',
+    '',
+    'VOLTE SEMPRE !!',
+    '',
+    '------------------------------------------------------------']
+
+    formato = (380 + (qtd * 14))
+
+    #cabecalho
+    i = 14
+
+    while i > 0:
+        pdf.drawCentredString(128, (formato - 14), recibo[0])
+        recibo.pop(0)
+        formato = formato - 14
+        i = i - 1
+    #cabecalho
+
+    #itens
+    i = qtd
+
+    while i > 0:
+        pdf.drawString(16, (formato - 14), f'{item[0]}  |  {quantidade[0]}  |  {valor[0]}')
+        item.pop(0)
+        quantidade.pop(0)
+        valor.pop(0)
+        formato = formato - 14
+        i = i - 1
+    #itens
+
+    #totalizador
+    i = 6
+
+    while i > 0:
+        pdf.drawString(16, (formato - 14), recibo[0])
+        recibo.pop(0)
+        formato = formato - 14
+        i = i - 1
+    #totalizador
+
+    #rodape
+    i = 5
+
+    while i > 0:
+        pdf.drawCentredString(128, (formato - 14), recibo[0])
+        recibo.pop(0)
+        formato = formato - 14
+        i = i - 1
+    #rodape
+
+    pdf.save()
 

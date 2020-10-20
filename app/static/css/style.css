@@ -292,6 +292,125 @@ th {
     text-decoration-style: none;
 }
 
+.dupla-botoes {
+    display: block;
+    text-align: center;
+    padding-top: 16px;
+}
+
+.dupla-botoes button {
+    background-color: #9A879D;
+    color: #ffffff;
+    box-shadow: 1px 1px 2px #0000001c;
+    font-weight: bolder;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px 8px 10px;
+    margin-left: 8px;
+}
+
+.dupla-botoes a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #ffffff;
+}
+
+#confirmacao {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+#confirmacao-dentro {
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.527)
+}
+
+#confirmacao-interno {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 20px;
+}
+
+#confirmacao-formatacao {
+    display: block;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    color: #40798C;
+    padding: 26px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+}
+
+.texto-confirmacao {
+    font-weight: bolder;
+    margin: 0 auto;
+    text-align: left;
+    width: 80%;
+    padding-top: 6px;
+}
+
+.selecao-confirmacao {
+    margin: 0 auto;
+    text-align: left;
+    width: 80%;
+}
+
+.selecao-confirmacao label {
+    font-weight: bolder;
+}
+
+#confirmacao-formatacao input{
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000008c;
+}
+
+#confirmacao-formatacao select{
+    background-color: #ffffff;
+    padding: 3px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000008c;
+    margin-bottom: 4px;
+}
+
+#confirmacao-botoes a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #ffffff;
+    font-weight: bolder;
+    background-color: #9A879D;
+}
+
+#confirmacao-botoes button {
+    color: #ffffff;
+    font-weight: bolder;
+    background-color: #9A879D;
+    margin-top: 10px;
+    margin-left: 4px;
+    padding: 6px 10px 6px 10px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000008c;
+    font-size: 18px;
+}
+
 /* VENDAS */
 .span-titulo-2 {
     color: #9A879D;
