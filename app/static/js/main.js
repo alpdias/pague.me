@@ -222,7 +222,7 @@ function calculo() {
     
     let total = vendas();
     
-    document.querySelector('#valorTotal-form').value = `${total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+    document.querySelector('#valorTotal-form').value = `${total}`;
     
     let desconto = document.querySelector('#valorDesconto').value;
     let recebido = document.querySelector('#valorRecebido').value;
@@ -232,7 +232,7 @@ function calculo() {
     
         let totalDescontado = (total - desconto)
         
-        document.querySelector('#valorTotal-form').value = `${totalDescontado.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+        document.querySelector('#valorTotal-form').value = `${totalDescontado}`;
         
     } else {};
     
@@ -242,13 +242,13 @@ function calculo() {
     
             let totalTroco = ((total - desconto) - recebido)
             
-            document.querySelector('#valorTroco').value = `${totalTroco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+            document.querySelector('#valorTroco').value = `${totalTroco}`;
             
         } else {
             
             let totalTroco = (total - recebido)
             
-            document.querySelector('#valorTroco').value = `${totalTroco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+            document.querySelector('#valorTroco').value = `${totalTroco}`;
             
         };
 
