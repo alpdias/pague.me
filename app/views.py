@@ -160,6 +160,7 @@ class register(generic.CreateView):
 def pdf(itesVenda, quantidadeItens, valorItens, totalVenda, pagamentoTipo, valorTroco):
 
     from reportlab.pdfgen import canvas
+    from pathlib import Path
 
     item = itesVenda
     quantidade = quantidadeItens
@@ -169,8 +170,11 @@ def pdf(itesVenda, quantidadeItens, valorItens, totalVenda, pagamentoTipo, valor
     total = totalVenda
     pagamento = pagamentoTipo
     troco = valorTroco
+    
+    caminho = Path('static/archive/')
+    salvarEm = f'{caminho}/' + 'recibo.pdf'
 
-    pdf = canvas.Canvas('recibo.pdf', pagesize=(256, (400 + (qtd * 14))))
+    pdf = canvas.Canvas(salvarEm, pagesize=(256, (400 + (qtd * 14))))
 
     recibo = ['------------------------------------------------------------',
     'EMPRESA ABC LTDA',
@@ -241,6 +245,7 @@ def pdf(itesVenda, quantidadeItens, valorItens, totalVenda, pagamentoTipo, valor
         formato = formato - 14
         i = i - 1
     #rodape
-
+    
+    pdf.showPage()
     pdf.save()
 
