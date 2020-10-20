@@ -81,9 +81,13 @@ def cart(request):
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         vendaStatus = request.POST.get(['statusVenda-form'][0])
-        
+        valorTroco = request.POST.get([])
+        listaVenda = request.POST.get([])
+       
         f = vendas(cliente = nomeCliente, valor = valorTotal, pagamento = tipoPgto, status = vendaStatus)
         f.save()
+        
+        pdf(listaVenda, valorTotal, tipoPgto, valorTroco)
         
         return redirect('app/buy.html')
     
@@ -157,14 +161,16 @@ class register(generic.CreateView):
     template_name = 'registration/register.html'
 
 
-def pdf(itesVenda, quantidadeItens, valorItens, totalVenda, pagamentoTipo, valorTroco):
+def pdf(listaVenda, totalVenda, pagamentoTipo, valorTroco):
 
     from reportlab.pdfgen import canvas
     from pathlib import Path
 
-    item = itesVenda
-    quantidade = quantidadeItens
-    valor = valorItens
+    listaVenda = listaVenda
+    
+    item = []
+    quantidade = []
+    valor = []
 
     qtd = len(item)
     total = totalVenda
