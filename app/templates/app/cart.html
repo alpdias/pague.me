@@ -16,26 +16,26 @@ Criado em 10/2020
                     <div class="texto-confirmacao"><label for="">cliente</label></div>
                     <div><input type="text" name="nomeCliente-form"></div>
                     <div class="selecao-confirmacao">
-                        <label for="">pagamento</label>
-                        <select name="tipoPagamento-form" id="">
+                        <label for="tipoPagamento">pagamento</label>
+                        <select name="tipoPagamento-form" id="tipoPagamento-form">
                             <option value="debito">debito</option>
                             <option value="credito">credito</option>
                             <option value="dinheiro">dinheiro</option>
                         </select>
                     </div>
-                    <div class="texto-confirmacao"><label for="">desconto&nbsp;&nbsp;%</label></div>
-                    <div><input type="number"></div>
-                    <div style="display: none;">
-                        <div class="texto-confirmacao"><label for="">recebido&nbsp;&nbsp;$</label></div>
-                        <div><input type="number"></div>
-                        <div class="texto-confirmacao"><label for="">troco&nbsp;&nbsp;$</label></div>
-                        <div><input type="number"></div>
+                    <div class="texto-confirmacao"><label for="valorDesconto">desconto&nbsp;&nbsp;$</label></div>
+                    <div><input type="number" id="valorDesconto"></div>
+                    <div style="display: none;" id="tipoDependencia">
+                        <div class="texto-confirmacao"><label for="valorRecebido">recebido&nbsp;&nbsp;$</label></div>
+                        <div><input type="number" id="valorRecebido"></div>
+                        <div class="texto-confirmacao"><label for="valorTroco">troco&nbsp;&nbsp;$</label></div>
+                        <div><input type="number" id="valorTroco"></div>
                     </div>
-                    <div class="texto-confirmacao"><label for="">total&nbsp;&nbsp;=</label></div>
-                    <div><input type="number" name="valorTotal-form"></div>
+                    <div class="texto-confirmacao"><label for="valorTotal">total&nbsp;&nbsp;=</label></div>
+                    <div><input type="number" name="valorTotal-form" id="valorTotal-form"></div>
                     <div class="selecao-confirmacao">
                         <label for="">status</label>
-                        <select name="statusVenda-form" id="">
+                        <select name="statusVenda-form" id="statusVenda-form">
                             <option value="aberto">aberto</option>
                             <option value="fechado">fechado</option>
                         </select>
