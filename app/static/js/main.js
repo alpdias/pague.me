@@ -131,6 +131,10 @@ function fecharVenda() {
         </tr>`;
     */
     
+    let recibo = JSON.parse(localStorage.getItem('carrinho'));
+    
+    console.log(recibo);
+    
     confirmarVenda();
 
 };
