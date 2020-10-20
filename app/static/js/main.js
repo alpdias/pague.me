@@ -153,6 +153,8 @@ function vendas() {
     };
 
     document.querySelector('#soma').innerHTML = `${soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+    
+    return soma
 
 };
 
@@ -216,10 +218,42 @@ function tipoPagamento() {
     };
 };
 
+function calculo() {
+    
+    let total = vendas();
+    
+    document.querySelector('#valorTotal-form').value = `${total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+    
+    let desconto = document.querySelector('#valorDesconto').value;
+    let recebido = document.querySelector('#valorRecebido').value;
+    let troco = document.querySelector('#valorTroco').value;
+    
+    if (desconto != null) {
+    
+        let totalDescontado = (total - desconto)
+        
+        document.querySelector('#valorTotal-form').value = `${totalDescontado.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+        
+    } else {};
+    
+    if (recebido != null) {
+        
+        if (desconto != null) {
+    
+            let totalTroco = ((total - desconto) - recebido)
+            
+            document.querySelector('#valorTroco').value = `${totalTroco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+            
+        } else {
+            
+            let totalTroco = (total - recebido)
+            
+            document.querySelector('#valorTroco').value = `${totalTroco.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+            
+        };
 
-tipoPagamento-form
-valorRecebido
-valorDesconto
-valorTroco
-valorTotal-form
+    } else {};
+
+};
+
 
