@@ -12,6 +12,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from .models import pessoas, estoque, vendas
 from pathlib import Path
+from datetime import datetime
 
 # Create your views here.
 
@@ -95,15 +96,19 @@ def cart(request):
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         valorTroco = request.POST.get('valorTroco-form')
-        #listaVenda = request.POST.get(['']) 
+        listaVenda = []
+        
+        agora = (str(datetime.now())).replace(' ', '').replace(':','.')
+        
+        nomeRecibo = f'recibo{agora}.pdf'
 
         caminho = Path('static/archive/')
-        salvoEm = f'{caminho}/' + 'recibo.pdf'
+        salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm)
         f.save()
         
-        #pdf(listaVenda, valorTotal, tipoPgto, valorTroco)
+        pdf(nomeRecibo, listaVenda, valorTotal, tipoPgto, valorTroco)
         
         return redirect('/buy')
     
@@ -177,7 +182,7 @@ class register(generic.CreateView):
     template_name = 'registration/register.html'
 
 
-def pdf(listaVenda, totalVenda, pagamentoTipo, valorTroco):
+def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
 
     listaVenda = listaVenda
     
@@ -191,7 +196,7 @@ def pdf(listaVenda, totalVenda, pagamentoTipo, valorTroco):
     troco = valorTroco
     
     caminho = Path('static/archive/')
-    salvarEm = f'{caminho}/' + 'recibo.pdf'
+    salvarEm = f'{caminho}/' + f'{nomeRecibo}'
 
     pdf = canvas.Canvas(salvarEm, pagesize=(256, (400 + (qtd * 14))))
 
@@ -265,6 +270,5 @@ def pdf(listaVenda, totalVenda, pagamentoTipo, valorTroco):
         i = i - 1
     #rodape
     
-    pdf.showPage()
     pdf.save()
 
