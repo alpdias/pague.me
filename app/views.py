@@ -13,6 +13,7 @@ from django.views import generic
 from .models import pessoas, estoque, vendas
 from pathlib import Path
 from datetime import datetime
+#from reportlab.pdfgen import canvas
 
 # Create your views here.
 
@@ -112,7 +113,7 @@ def cart(request):
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
         
-        pdf(nomeRecibo, listaVenda, valorTotal, tipoPgto, valorTroco)
+        #pdf(nomeRecibo, listaVenda, valorTotal, tipoPgto, valorTroco)
         
         return redirect('/buy')
     
@@ -187,9 +188,6 @@ class register(generic.CreateView):
 
 
 def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
-
-
-    from reportlab.pdfgen import canvas
 
     listaVenda = listaVenda
     
