@@ -97,6 +97,10 @@ def cart(request):
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         valorTroco = request.POST.get('valorTroco-form')
+        
+        listaTeste = request.POST.get('carrinho')
+        print(listaTeste)
+        
         listaVenda = []
         
         agora = (str(datetime.now())).replace(' ', '').replace(':','.')
