@@ -11,7 +11,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import pessoas, estoque, vendas
-from reportlab.pdfgen import canvas
 from pathlib import Path
 from datetime import datetime
 
@@ -188,6 +187,9 @@ class register(generic.CreateView):
 
 
 def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
+
+
+    from reportlab.pdfgen import canvas
 
     listaVenda = listaVenda
     

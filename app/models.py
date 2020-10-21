@@ -90,7 +90,7 @@ class estoque(models.Model):
 
         verbose_name = 'PRODUTO'
         verbose_name_plural = 'PRODUTOS'
-        ordering = ['produto', '-quantidade'] 
+        ordering = ['produto'] 
  
 
 class vendas(models.Model):
