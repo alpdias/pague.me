@@ -108,7 +108,7 @@ class vendas(models.Model):
     valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
     pagamento = models.CharField('Pagamento', max_length=8)
     comprovante = models.FileField(
-        upload_to = 'pdf', 
+        upload_to = 'static/archve/', 
         verbose_name = 'Comprovante',
         blank=True
     )

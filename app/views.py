@@ -94,10 +94,13 @@ def cart(request):
         nomeCliente = request.POST.get(['nomeCliente-form'][0])
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
-        valorTroco = request.POST.get(['valorTroco-form'])
+        valorTroco = request.POST.get('valorTroco-form')
         #listaVenda = request.POST.get(['']) 
+
+        caminho = Path('static/archive/')
+        salvoEm = f'{caminho}/' + 'recibo.pdf'
        
-        f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto)
+        f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm)
         f.save()
         
         #pdf(listaVenda, valorTotal, tipoPgto, valorTroco)
