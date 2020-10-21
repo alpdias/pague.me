@@ -62,7 +62,7 @@ function compras() {
                     <td style="word-wrap: break-word;">` + preco + `</td>\
                     <td style="word-wrap: break-word;">` + parseInt(qtd) + `</td>\
                     <td style="word-wrap: break-word;">` + total.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + `</td>\
-                    <td style="word-wrap: break-word;"><a href="/cart"><span onclick="removerItem(\'' + nome + '\')" class="span-titulo-2"><i class="fas fa-minus-circle"></i><span></a></td>\
+                    <td style="word-wrap: break-word;"><a href="/cart"><span onclick="removerItem(\'` + nome + `\')" class="span-titulo-2"><i class="fas fa-minus-circle"></i><span></a></td>\
                 </tr>`;
 
         };
@@ -206,6 +206,8 @@ function confirmarVenda() {
 
 };
 
+/*
+
 function tipoPagamento() {
     
     let tipoSelecao = document.querySelector('#tipoPagamento-form');
@@ -259,5 +261,5 @@ function calculo() {
     } else {};
 
 };
-
+*/
 

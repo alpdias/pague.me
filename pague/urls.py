@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from app.views import home, about, contact, dashboard, cart, buy, products, stock, records, people, register
+from app.views import home, about, contact, dashboard, cart, buy, sales, products, stock, records, people, register
 from app import views
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('cart/', cart, name='cart'),
     path('buy/', buy, name='buy'),
+    path('sales/<int:id>', sales, name='sales'),
     path('products/', products, name='products'),
     path('stock/<int:id>', stock, name='stock'),
     path('records/', records, name='records'),

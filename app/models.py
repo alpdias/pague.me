@@ -13,18 +13,18 @@ class pessoas(models.Model):
         ('ativo', 'ATIVO'), 
         ('inativo', 'INATIVO'),
     )
-    nome = models.CharField('Nome', max_length = 255)
-    telefone = models.CharField('Telefone', max_length = 14)
-    email = models.EmailField('E-mail')
-    cpf = models.CharField('CPF', max_length = 14)
-    endereco = models.CharField('Endereço', max_length = 255)
-    observacao = models.TextField('Observações')
+    nome = models.CharField('Nome', max_length=255)
+    telefone = models.CharField('Telefone', max_length=14, blank=True)
+    email = models.EmailField('E-mail', blank=True)
+    cpf = models.CharField('CPF', max_length=14, blank=True)
+    endereco = models.CharField('Endereço', max_length=255, blank=True)
+    observacao = models.TextField('Observações', blank=True)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS
     )
-    criado = models.DateTimeField('Criado em', auto_now_add = True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now = True)
+    criado = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
     def __str__(self):
 
@@ -59,17 +59,17 @@ class estoque(models.Model):
         ('disponivel', 'DISPONIVEL'), 
         ('esgotado', 'ESGOTADO'),
     )
-    produto = models.CharField('Produto', max_length = 255)
-    preco = models.DecimalField('Preço', max_digits = 999, decimal_places = 2)
-    custo = models.DecimalField('Custo', max_digits = 999, decimal_places = 2)
+    produto = models.CharField('Produto', max_length=255)
+    preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
+    custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('Quantidade')
-    descricao = models.TextField('Descrição')
+    descricao = models.TextField('Descrição', blank=True)
     status = models.CharField(
         max_length = 10, 
         choices = STATUS
     )
-    criado = models.DateTimeField('Criado em', auto_now_add = True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now = True)
+    criado = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
     def __str__(self):
 
@@ -104,20 +104,21 @@ class vendas(models.Model):
         ('aberto', 'ABERTO'),
         ('fechado', 'FECHADO'),
     )
-    cliente = models.CharField('Cliente', max_length = 255)
-    valor = models.DecimalField('Valor', max_digits = 999, decimal_places = 2)
-    pagamento = models.CharField('Pagamento', max_length = 8)
+    cliente = models.CharField('Cliente', max_length=255, blank=True)
+    valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
+    pagamento = models.CharField('Pagamento', max_length=8)
     comprovante = models.FileField(
-        upload_to='pdf', 
+        upload_to = 'pdf', 
         verbose_name = 'Comprovante',
         blank=True
     )
     status = models.CharField(
         max_length = 7, 
-        choices = STATUS
+        choices = STATUS,
+        default='aberto'
     )
-    criado = models.DateTimeField('Criado em', auto_now_add = True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now = True)
+    criado = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
     def __str__(self):
 
@@ -126,7 +127,7 @@ class vendas(models.Model):
         :return:
         """
 
-        return self.criado
+        return str(self.criado) if self.criado else ''
 
 
     class Meta:
@@ -138,4 +139,4 @@ class vendas(models.Model):
 
         verbose_name = 'VENDA'
         verbose_name_plural = 'VENDAS'
-        ordering = ['criado'] 
+        ordering = ['-criado'] 

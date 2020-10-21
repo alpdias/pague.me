@@ -13,38 +13,33 @@ Criado em 10/2020
             <div id="confirmacao-formatacao">
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="texto-confirmacao"><label for="">cliente</label></div>
-                    <div><input type="text" name="nomeCliente-form"></div>
+                    <div class="texto-confirmacao"><label for="nomeCliente-form">cliente</label></div>
+                    <div><input type="text" name="nomeCliente-form" id="nomeCliente-form"></div>
                     <div class="selecao-confirmacao">
-                        <label for="tipoPagamento">pagamento</label>
-                        <select name="tipoPagamento-form" id="tipoPagamento-form" onchange="tipoPagamento()">
+                        <label for="tipoPagamento-form">pagamento</label>
+                        <select name="tipoPagamento-form" id="tipoPagamento-form">
                             <option value="debito">debito</option>
                             <option value="credito">credito</option>
                             <option value="dinheiro">dinheiro</option>
                         </select>
                     </div>
-                    <div class="texto-confirmacao"><label for="valorDesconto">desconto&nbsp;&nbsp;$</label></div>
-                    <div><input type="number" id="valorDesconto" onchange="calculo()"></div>
-                    <div style="display: none;" id="tipoDependencia">
-                        <div class="texto-confirmacao"><label for="valorRecebido">recebido&nbsp;&nbsp;$</label></div>
-                        <div><input type="number" id="valorRecebido" onchange="calculo()"></div>
-                        <div class="texto-confirmacao"><label for="valorTroco">troco&nbsp;&nbsp;$</label></div>
-                        <div><input type="number" id="valorTroco"></div>
+                    <div class="texto-confirmacao"><label for="valorDesconto-form">desconto&nbsp;&nbsp;$</label></div>
+                    <div><input type="number" name="valorDesconto-form" id="valorDesconto-form"></div>
+                    <div style="display: none;">
+                        <div class="texto-confirmacao"><label for="valorRecebido-form">recebido&nbsp;&nbsp;$</label></div>
+                        <div><input type="number" name="valorRecebido-form" id="valorRecebido-form"></div>
+                        <div class="texto-confirmacao"><label for="valorTroco-form">troco&nbsp;&nbsp;$</label></div>
+                        <div><input type="number" name="valorTroco-form" id="valorTroco-form"></div>
                     </div>
-                    <div class="texto-confirmacao"><label for="valorTotal">total&nbsp;&nbsp;=</label></div>
+                    <div class="texto-confirmacao"><label for="valorTotal-form">total&nbsp;&nbsp;=</label></div>
                     <div><input type="number" name="valorTotal-form" id="valorTotal-form"></div>
-                    <div class="selecao-confirmacao">
-                        <label for="">status</label>
-                        <select name="statusVenda-form" id="statusVenda-form">
-                            <option value="aberto">aberto</option>
-                            <option value="fechado">fechado</option>
-                        </select>
-                    </div>
                     <div id="confirmacao-botoes">
-                        <button onclick="confirmarVenda()">voltar&nbsp;<i class="fas fa-undo-alt"></i></button>
-                        <button onclick="fecharVenda()" type="submit">registrar&nbsp;<i class="fas fa-cash-register"></i></button>
+                        <button onclick="fecharVenda(), confirmarVenda()" type="submit">registrar&nbsp;<i class="fas fa-cash-register"></i></button>
                     </div>
                 </form>
+            </div>
+            <div id="voltar-botao">
+                <button onclick="confirmarVenda()"><i class="fas fa-undo-alt"></i></button>
             </div>
         </div>
     </div>

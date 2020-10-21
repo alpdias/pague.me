@@ -119,6 +119,7 @@ body {
 /* MENU VERTICAL */
 .nav-bar__vertical nav {
     font-family: 'Noto Sans JP', sans-serif;
+    font-size: 18px;
     position: fixed;
     display: block;
     height: 100vh;
@@ -164,7 +165,7 @@ body {
     display: block;
     max-width: 100%;
     text-align: center;
-    padding-left: 156px;
+    padding-left: 172px;
     padding-right: 26px;
     padding-top: 26px;
 }
@@ -409,6 +410,22 @@ th {
     border-radius: 6px;
     box-shadow: 1px 1px 2px #0000008c;
     font-size: 18px;
+}
+
+#voltar-botao button {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #9A879D;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-left: 4px;
+    padding: 6px 10px 6px 10px;
+    border: none;
+    background-color: #ffffff00;
+}
+
+#soma {
+    cursor: pointer;
 }
 
 /* VENDAS */

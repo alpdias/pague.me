@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import pessoas, estoque, vendas
+from pathlib import Path
 
 # Create your views here.
 
@@ -62,9 +63,22 @@ def buy(request):
     :return:
     """
     
-    vendido = vendas.objects.all()
+    venda = vendas.objects.all()
 
-    return render(request, 'app/buy.html', {'vendido': vendido})  
+    return render(request, 'app/buy.html', {'venda': venda})  
+
+
+@login_required
+def sales(request, id):
+
+    """
+    ->
+    :return:
+    """
+    
+    venda = get_object_or_404(vendas, pk=id)
+
+    return render(request, 'app/sales.html', {'venda': venda})  
 
 
 @login_required
@@ -77,19 +91,18 @@ def cart(request):
 
     if request.method == 'POST':
 
-        nomeCliente = request.POST.get('nomeCliente-form')
+        nomeCliente = request.POST.get(['nomeCliente-form'][0])
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
-        vendaStatus = request.POST.get(['statusVenda-form'][0])
-        valorTroco = request.POST.get([])
-        listaVenda = request.POST.get([])
+        valorTroco = request.POST.get(['valorTroco-form'])
+        #listaVenda = request.POST.get(['']) 
        
-        f = vendas(cliente = nomeCliente, valor = valorTotal, pagamento = tipoPgto, status = vendaStatus)
+        f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto)
         f.save()
         
-        pdf(listaVenda, valorTotal, tipoPgto, valorTroco)
+        #pdf(listaVenda, valorTotal, tipoPgto, valorTroco)
         
-        return redirect('app/buy.html')
+        return redirect('/buy')
     
     else:
         pass
@@ -162,9 +175,6 @@ class register(generic.CreateView):
 
 
 def pdf(listaVenda, totalVenda, pagamentoTipo, valorTroco):
-
-    from reportlab.pdfgen import canvas
-    from pathlib import Path
 
     listaVenda = listaVenda
     
