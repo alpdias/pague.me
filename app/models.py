@@ -90,7 +90,7 @@ class estoque(models.Model):
 
         verbose_name = 'PRODUTO'
         verbose_name_plural = 'PRODUTOS'
-        ordering = ['produto'] 
+        ordering = ['produto', '-quantidade'] 
  
 
 class vendas(models.Model):
@@ -112,6 +112,7 @@ class vendas(models.Model):
         verbose_name = 'Comprovante',
         blank=True
     )
+    recibo = models.CharField('Cliente', max_length=255, blank=True)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS,
