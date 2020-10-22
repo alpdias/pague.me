@@ -13,7 +13,7 @@ from django.views import generic
 from .models import pessoas, estoque, vendas
 from pathlib import Path
 from datetime import datetime
-#from reportlab.pdfgen import canvas
+from reportlab.pdfgen import canvas
 
 # Create your views here.
 
@@ -97,23 +97,18 @@ def cart(request):
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         valorTroco = request.POST.get('valorTroco-form')
-        
-        listaTeste = request.POST.get('carrinho')
-        print(listaTeste)
-        
         listaVenda = []
         
-        agora = (str(datetime.now())).replace(' ', '').replace(':','.')
-        
+        agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
 
-        caminho = Path('static/archive/')
+        caminho = Path('static/archive')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
         
-        #pdf(nomeRecibo, listaVenda, valorTotal, tipoPgto, valorTroco)
+        pdf(nomeRecibo, listaVenda, valorTotal, tipoPgto, valorTroco)
         
         return redirect('/buy')
     
@@ -200,7 +195,7 @@ def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
     pagamento = pagamentoTipo
     troco = valorTroco
     
-    caminho = Path('static/archive/')
+    caminho = Path('app/static/archive')
     salvarEm = f'{caminho}/' + f'{nomeRecibo}'
 
     pdf = canvas.Canvas(salvarEm, pagesize=(256, (400 + (qtd * 14))))

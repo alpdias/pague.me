@@ -112,7 +112,7 @@ class vendas(models.Model):
         verbose_name = 'Comprovante',
         blank=True
     )
-    recibo = models.CharField('Cliente', max_length=255, blank=True)
+    recibo = models.CharField('Recibo', max_length=255, blank=True)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS,
