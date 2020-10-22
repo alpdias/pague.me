@@ -191,100 +191,98 @@ class register(generic.CreateView):
     template_name = 'registration/register.html'
 
 
-def pdf(nomeRecibo, listaVenda, valorDesconto, totalVenda, pagamentoTipo, valorTroco):
+def pdf(nome, vendas, desconto, total, pagamento, troco):
        
-    item = listaVenda[0]
-    quantidade = listaVenda[2]
-    valor = listaVenda[1]
+    itens = vendas[0]
+    qtd = vendas[2]
+    valor = vendas[1]
 
-    qtd = len(item)
-    
-    qtdTotal = 0
+    quantidade = len(itens)
+    totalItens = 0
     
     for i in qtd:
-        qtdTotal = qtdTotal + i
-        
-    total = totalVenda
-    pagamento = pagamentoTipo.upper()
-    troco = valorTroco
-    desconto = valorDesconto
-    
-    caminho = Path('app/static/archive')
-    salvarEm = f'{caminho}/' + f'{nomeRecibo}'
+        totalItens = quantidade + i
 
-    pdf = canvas.Canvas(salvarEm, pagesize=(256, (400 + (qtd * 14))))
+    estilo = getSampleStyleSheet()
+    centro = estilo['Normal']
+    centro.alignment = 1
 
-    recibo = ['------------------------------------------------------------',
+    recibo = []
+
+    cabecalho = ['-----------------------------------------------------------------------',
     'EMPRESA ABC LTDA',
     'RUA NADA, 1000',
     'SAO PAULO - SP',
-    '------------------------------------------------------------',
+    '-----------------------------------------------------------------------',
     'CNPJ 00.000.000/0000-00',
-    '------------------------------------------------------------',
+    '-----------------------------------------------------------------------',
     'EXTRATO N. 0001',
     'RECIBO DE COMPRA E VENDA',
     '00/00/0000',
-    '------------------------------------------------------------',
-    '',
+    '-----------------------------------------------------------------------',
     'ITEM | QTD | VALOR R$',
-    '',
-    '',
-    f'TOTAL ITENS:{qtdTotal}',
+    '-----------------------------------------------------------------------',
+    '&nbsp;']
+
+    conteudo = []
+
+    i = len(itens)
+    while i > 0:
+        conteudo.append(f'{itens[0]}&nbsp;&nbsp;({qtd[0]})&nbsp;&nbsp;{valor[0]}')
+        itens.pop(0)
+        qtd.pop(0)
+        valor.pop(0)
+        i = i - 1
+
+    corpo = ['&nbsp;',
+    f'TOTAL ITENS:{totalItens}',
     f'DESCONTO:{desconto}',
     f'TOTAL:{total}',
     f'PAGAMENTO:{pagamento}',
     f'TROCO:{troco}',
-    '',
-    '------------------------------------------------------------',
-    '',
+    '&nbsp;']
+
+    rodape = ['------------------------------------------------------------',
     'VOLTE SEMPRE !!',
-    '',
     '------------------------------------------------------------']
 
-    formato = (380 + (qtd * 14))
+    # cabecalho
+    i = len(cabecalho)
+        while i > 0:
+            recibo.append(Paragraph(cabecalho[0], centro))
+            cabecalho.pop(0)
+            i = i - 1
+    # cabecalho
 
-    #cabecalho
-    i = 14
-
+    # conteudo
+    i = len(conteudo)
     while i > 0:
-        pdf.drawCentredString(128, (formato - 14), recibo[0])
-        recibo.pop(0)
-        formato = formato - 14
+        recibo.append(Paragraph(conteudo[0]))
+        conteudo.pop(0)
         i = i - 1
-    #cabecalho
+    #conteudo
 
-    #itens
-    i = qtd
-
+    # corpo
+    i = len(corpo)
     while i > 0:
-        pdf.drawString(16, (formato - 14), f'{item[0]}  |  {quantidade[0]}  |  {valor[0]}')
-        item.pop(0)
-        quantidade.pop(0)
-        valor.pop(0)
-        formato = formato - 14
+        recibo.append(Paragraph(corpo[0]))
+        corpo.pop(0)
         i = i - 1
-    #itens
+    # corpo
 
-    #totalizador
-    i = 6
-
+    # rodape
+    i = len(rodape)
     while i > 0:
-        pdf.drawString(16, (formato - 14), recibo[0])
-        recibo.pop(0)
-        formato = formato - 14
-        i = i - 1
-    #totalizador
-
-    #rodape
-    i = 5
-
-    while i > 0:
-        pdf.drawCentredString(128, (formato - 14), recibo[0])
-        recibo.pop(0)
-        formato = formato - 14
+        recibo.append(Paragraph(rodape[0], centro))
+        rodape.pop(0)
         i = i - 1
     #rodape
     
-    pdf.save()
+    caminho = Path('app/static/archive')
+    salvarEm = f'{caminho}/' + f'{nome}'
 
+    pdf = SimpleDocTemplate(salvarEm, pagesize=(256, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
 
+    pdf.build(recibo)
+
+    
