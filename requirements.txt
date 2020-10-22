@@ -1,4 +1,4 @@
 Django>=3.0,<4.0
 psycopg2-binary>=2.8
-reportlab==3.5.34
-Pillow==7.0.0
+reportlab==3.5.53
+Pillow==8.0.0
