@@ -93,12 +93,20 @@ def cart(request):
 
     if request.method == 'POST':
 
-        nomeCliente = request.POST.get(['nomeCliente-form'][0])
+        nomeCliente = request.POST.get('nomeCliente-form')
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         valorTroco = request.POST.get('valorTroco-form')
-        listaVenda = []
+        listaItens = request.POST.get('item-local').split(',')
+        listaValores = request.POST.get('valor-local').split(',')
+        listaQuantidades = request.POST.get('qtd-local').split(',')
+
+        listaRecibo = []
         
+        listaRecibo.append(listaItens)
+        listaRecibo.append(listaValores)
+        listaRecibo.append(listaQuantidades)
+
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
 
@@ -108,7 +116,7 @@ def cart(request):
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
         
-        pdf(nomeRecibo, listaVenda, valorTotal, tipoPgto, valorTroco)
+        pdf(nomeRecibo, listaRecibo, valorTotal, tipoPgto, valorTroco)
         
         return redirect('/buy')
     
@@ -183,16 +191,15 @@ class register(generic.CreateView):
 
 
 def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
-
-    listaVenda = listaVenda
     
-    item = []
-    quantidade = []
-    valor = []
+    
+    item = listaVenda[0]
+    quantidade = listaVenda[2]
+    valor = listaVenda[1]
 
     qtd = len(item)
     total = totalVenda
-    pagamento = pagamentoTipo
+    pagamento = pagamentoTipo.upper()
     troco = valorTroco
     
     caminho = Path('app/static/archive')
@@ -271,4 +278,5 @@ def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
     #rodape
     
     pdf.save()
+
 

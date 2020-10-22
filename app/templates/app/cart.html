@@ -34,7 +34,12 @@ Criado em 10/2020
                     <div class="texto-confirmacao"><label for="valorTotal-form">total&nbsp;&nbsp;=</label></div>
                     <div><input type="number" name="valorTotal-form" id="valorTotal-form"></div>
                     <div id="confirmacao-botoes">
-                        <button onclick="fecharVenda(), confirmarVenda()" type="submit">registrar&nbsp;<i class="fas fa-cash-register"></i></button>
+                        <button onclick="fecharVenda()" type="submit">registrar&nbsp;<i class="fas fa-cash-register"></i></button>
+                    </div>
+                    <div id="carrinho-lista" style="display: none;">
+                        <input type="text" name="item-local" id="item-local" style="display: none;">
+                        <input type="text" name="valor-local" id="valor-local" style="display: none;">
+                        <input type="text" name="qtd-local" id="qtd-local" style="display: none;">
                     </div>
                 </form>
             </div>

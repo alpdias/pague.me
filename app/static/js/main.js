@@ -73,6 +73,8 @@ function compras() {
 
 function fecharVenda() {
 
+    confirmarVenda();
+
     let itens = JSON.parse(localStorage.getItem('carrinho'));
 
     var soma = 0;
@@ -130,12 +132,6 @@ function fecharVenda() {
             </td>\
         </tr>`;
     */
-    
-    let recibo = JSON.parse(localStorage.getItem('carrinho'));
-    
-    console.log(recibo);
-    
-    confirmarVenda();
 
 };
 
@@ -193,6 +189,8 @@ function removerItem(nome) {
 };
 
 function confirmarVenda() {
+
+    criarLista();
     
     if (document.querySelector('#confirmacao').style.display == 'none') {
         
@@ -203,6 +201,32 @@ function confirmarVenda() {
         document.querySelector('#confirmacao').style.display = 'none';
     
     };
+
+};
+
+function criarLista() {
+
+    let recibo = JSON.parse(localStorage.getItem('carrinho'));
+
+    let item = [];
+    let valor = [];
+    let qtd = [];
+
+    for (let i = 0; i < recibo.length; i++) { 
+        
+        item.push(recibo[i].nome);
+        valor.push((recibo[i].valor).replace(',','.'));
+        qtd.push(recibo[i].quantidade);
+
+    };
+
+    document.querySelector('#item-local').value = `${item}`;
+    document.querySelector('#valor-local').value = `${valor}`;
+    document.querySelector('#qtd-local').value = `${qtd}`;
+
+    console.log(item)
+    console.log(valor)
+    console.log(qtd)
 
 };
 
