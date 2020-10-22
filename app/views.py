@@ -96,6 +96,7 @@ def cart(request):
         nomeCliente = request.POST.get('nomeCliente-form')
         valorTotal = request.POST.get('valorTotal-form')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
+        valorDesconto = request.POST.get('valorDesconto-form')
         valorTroco = request.POST.get('valorTroco-form')
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
@@ -116,7 +117,7 @@ def cart(request):
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
         
-        pdf(nomeRecibo, listaRecibo, valorTotal, tipoPgto, valorTroco)
+        pdf(nomeRecibo, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
         
         return redirect('/buy')
     
@@ -190,17 +191,23 @@ class register(generic.CreateView):
     template_name = 'registration/register.html'
 
 
-def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
-    
-    
+def pdf(nomeRecibo, listaVenda, valorDesconto, totalVenda, pagamentoTipo, valorTroco):
+       
     item = listaVenda[0]
     quantidade = listaVenda[2]
     valor = listaVenda[1]
 
     qtd = len(item)
+    
+    qtdTotal = 0
+    
+    for i in qtd:
+        qtdTotal = qtdTotal + i
+        
     total = totalVenda
     pagamento = pagamentoTipo.upper()
     troco = valorTroco
+    desconto = valorDesconto
     
     caminho = Path('app/static/archive')
     salvarEm = f'{caminho}/' + f'{nomeRecibo}'
@@ -222,10 +229,11 @@ def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
     'ITEM | QTD | VALOR R$',
     '',
     '',
-    f'TOTAL ITENS: {qtd}',
-    f'TOTAL: {total}',
-    f'PAGAMENTO: {pagamento}',
-    f'TROCO: {troco}',
+    f'TOTAL ITENS:{qtdTotal}',
+    f'DESCONTO:{desconto}',
+    f'TOTAL:{total}',
+    f'PAGAMENTO:{pagamento}',
+    f'TROCO:{troco}',
     '',
     '------------------------------------------------------------',
     '',
