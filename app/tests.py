@@ -22,7 +22,9 @@ def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
 
     pdf = SimpleDocTemplate(salvarEm, pagesize=(256, (400 + (qtd * 14))), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
 
-    styles = getSampleStyleSheet()
+    estilo = getSampleStyleSheet()
+    alinhamento = estilo['Normal']
+    alinhamento.alignment = 1
 
     recibo = []
 
@@ -34,7 +36,7 @@ def pdf(nomeRecibo, listaVenda, totalVenda, pagamentoTipo, valorTroco):
     
     i = 16
     while i > 0:
-      recibo.append(Paragraph(conteudo[0], styles["Normal"]))
+      recibo.append(Paragraph(conteudo[0], alinhamento))
       conteudo.pop(0)
       i = i - 1
 
