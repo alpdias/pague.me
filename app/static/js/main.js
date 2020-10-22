@@ -133,6 +133,8 @@ function fecharVenda() {
         </tr>`;
     */
 
+    removerVenda();
+
 };
 
 function vendas() {
