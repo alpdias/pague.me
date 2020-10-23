@@ -17,7 +17,7 @@ Criado em 10/2020
                     <div><input type="text" name="nomeCliente-form" id="nomeCliente-form"></div>
                     <div class="selecao-confirmacao">
                         <label for="tipoPagamento-form">pagamento</label>
-                        <select name="tipoPagamento-form" id="tipoPagamento-form">
+                        <select name="tipoPagamento-form" id="tipoPagamento-form" onclick="tipoPagamento()">
                             <option value="debito">debito</option>
                             <option value="credito">credito</option>
                             <option value="dinheiro">dinheiro</option>
@@ -25,7 +25,7 @@ Criado em 10/2020
                     </div>
                     <div class="texto-confirmacao"><label for="valorDesconto-form">desconto&nbsp;&nbsp;$</label></div>
                     <div><input type="number" name="valorDesconto-form" id="valorDesconto-form"></div>
-                    <div style="display: none;">
+                    <div style="display: none;" id="tipoDependencia">
                         <div class="texto-confirmacao"><label for="valorRecebido-form">recebido&nbsp;&nbsp;$</label></div>
                         <div><input type="number" name="valorRecebido-form" id="valorRecebido-form"></div>
                         <div class="texto-confirmacao"><label for="valorTroco-form">troco&nbsp;&nbsp;$</label></div>
