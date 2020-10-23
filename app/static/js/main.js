@@ -228,12 +228,12 @@ function criarLista() {
 
 };
 
-/*
-
 function tipoPagamento() {
     
     let tipoSelecao = document.querySelector('#tipoPagamento-form');
     let tipoSelecionado = tipoSelecao.options[tipoSelecao.selectedIndex].value;
+    
+    console.log(tipoSelecionado);
     
     if (tipoSelecionado == 'dinheiro') {
         
@@ -246,6 +246,7 @@ function tipoPagamento() {
     };
 };
 
+/*
 function calculo() {
     
     let total = vendas();
