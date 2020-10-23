@@ -86,6 +86,17 @@ def sales(request, id):
     return render(request, 'app/sales.html', {'venda': venda})  
 
 
+def novoUsuario(nome):
+    
+    """
+    ->
+    :return:
+    """
+
+    dir = f'app/static/archive/{nome}'       
+    os.mkdir(dir)
+    
+
 @login_required
 def cart(request):
 
@@ -117,6 +128,12 @@ def cart(request):
         usuario = request.user
 
         caminho = Path(f'static/archive/{usuario}')
+
+        if os.path.isdir(caminho):
+            pass
+        else:
+            novoUsuario(usuario)
+
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
@@ -183,17 +200,6 @@ def people(request, id):
 
     return render(request, 'app/people.html', {'pessoa': pessoa})
 
-
-def novoUsuario(nome):
-    
-     """
-    ->
-    :return:
-    """
-        
-    dir = f'app/static/archive/{nome}'       
-    os.mkdir(dir)
-    
     
 class register(generic.CreateView):
 
@@ -203,11 +209,6 @@ class register(generic.CreateView):
     """
 
     form_class = UserCreationForm
-    
-    nome = request.user
-    
-    novoUsuario(nome)
-    
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
