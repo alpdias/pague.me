@@ -13,6 +13,7 @@ from django.views import generic
 from .models import pessoas, estoque, vendas
 from pathlib import Path
 from datetime import datetime
+import locale
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -190,9 +191,26 @@ class register(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+    
+def tratamento(numero=0):
+    
+    """
+    -> Funcao para tratar o numero de acordo com o padrao do local
+    :param numero: Numero para ser formatado
+    :return: Numero formatado
+    """
+
+    locale.setlocale(locale.LC_MONETARY, "pt-BR") 
+    
+    return locale.currency(numero, grouping=True)
 
 
 def pdf(nome, vendas, desconto, total, pagamento, troco):
+    
+    """
+    ->
+    :return:
+    """
        
     itens = vendas[0]
     qtd = vendas[2]
@@ -229,18 +247,18 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
 
     i = len(itens)
     while i > 0:
-        conteudo.append(f'{itens[0]}&nbsp;&nbsp;({qtd[0]})&nbsp;&nbsp;{valor[0]}')
+        conteudo.append(f'&nbsp;{itens[0]}&nbsp;&nbsp;&nbsp;({qtd[0]})&nbsp;&nbsp;&nbsp;{tratamento(float(valor[0]))}')
         itens.pop(0)
         qtd.pop(0)
         valor.pop(0)
         i = i - 1
 
     corpo = ['&nbsp;',
-    f'TOTAL ITENS:{totalItens}',
-    f'DESCONTO:{desconto}',
-    f'TOTAL:{total}',
-    f'PAGAMENTO:{pagamento}',
-    f'TROCO:{troco}',
+    f'TOTAL ITENS:&nbsp;&nbsp;{totalItens}',
+    f'DESCONTO:&nbsp;&nbsp;{tratamento(desconto)}',
+    f'TOTAL:&nbsp;&nbsp;{tratamento(total)}',
+    f'PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
+    f'TROCO:&nbsp;&nbsp;{tratamento(troco)}',
     '&nbsp;']
 
     rodape = ['-----------------------------------------------------------------------',
