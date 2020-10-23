@@ -13,7 +13,8 @@ from django.views import generic
 from .models import pessoas, estoque, vendas
 from pathlib import Path
 from datetime import datetime
-from reportlab.pdfgen import canvas
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 
 # Create your views here.
 
@@ -201,7 +202,7 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
     totalItens = 0
     
     for i in qtd:
-        totalItens = quantidade + i
+        totalItens = totalItens + int(i)
 
     estilo = getSampleStyleSheet()
     centro = estilo['Normal']
@@ -242,16 +243,16 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
     f'TROCO:{troco}',
     '&nbsp;']
 
-    rodape = ['------------------------------------------------------------',
+    rodape = ['-----------------------------------------------------------------------',
     'VOLTE SEMPRE !!',
-    '------------------------------------------------------------']
+    '-----------------------------------------------------------------------']
 
     # cabecalho
     i = len(cabecalho)
-        while i > 0:
-            recibo.append(Paragraph(cabecalho[0], centro))
-            cabecalho.pop(0)
-            i = i - 1
+    while i > 0:
+        recibo.append(Paragraph(cabecalho[0], centro))
+        cabecalho.pop(0)
+        i = i - 1
     # cabecalho
 
     # conteudo

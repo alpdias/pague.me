@@ -226,10 +226,6 @@ function criarLista() {
     document.querySelector('#valor-local').value = `${valor}`;
     document.querySelector('#qtd-local').value = `${qtd}`;
 
-    console.log(item)
-    console.log(valor)
-    console.log(qtd)
-
 };
 
 /*
