@@ -14,6 +14,7 @@ from .models import pessoas, estoque, vendas
 from pathlib import Path
 from datetime import datetime
 import locale
+import os
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -112,8 +113,10 @@ def cart(request):
 
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
+        
+        usuario = request.user
 
-        caminho = Path('static/archive')
+        caminho = Path(f'static/archive/{usuario}')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
@@ -181,6 +184,17 @@ def people(request, id):
     return render(request, 'app/people.html', {'pessoa': pessoa})
 
 
+def novoUsuario(nome):
+    
+     """
+    ->
+    :return:
+    """
+        
+    dir = f'app/static/archive/{nome}'       
+    os.mkdir(dir)
+    
+    
 class register(generic.CreateView):
 
     """
@@ -189,8 +203,14 @@ class register(generic.CreateView):
     """
 
     form_class = UserCreationForm
+    
+    nome = request.user
+    
+    novoUsuario(nome)
+    
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+
     
 def tratamento(numero=0):
     
