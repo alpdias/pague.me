@@ -1,3 +1,11 @@
+  
+# -*- coding: utf-8 -*-
+
+'''
+Criado em 09/2020
+@Autor: Paulo https://github.com/alpdias
+'''
+
 """pague URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
