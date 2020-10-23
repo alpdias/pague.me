@@ -228,19 +228,19 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
 
     recibo = []
 
-    cabecalho = ['-----------------------------------------------------------------------',
+    cabecalho = ['--------------------------------------------------------------',
     'EMPRESA ABC LTDA',
     'RUA NADA, 1000',
     'SAO PAULO - SP',
-    '-----------------------------------------------------------------------',
+    '--------------------------------------------------------------',
     'CNPJ 00.000.000/0000-00',
-    '-----------------------------------------------------------------------',
+    '--------------------------------------------------------------',
     'EXTRATO N. 0001',
     'RECIBO DE COMPRA E VENDA',
     '00/00/0000',
-    '-----------------------------------------------------------------------',
+    '--------------------------------------------------------------',
     'ITEM | QTD | VALOR R$',
-    '-----------------------------------------------------------------------',
+    '--------------------------------------------------------------',
     '&nbsp;']
 
     conteudo = []
@@ -261,9 +261,9 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
     f'TROCO:&nbsp;&nbsp;{tratamento(troco)}',
     '&nbsp;']
 
-    rodape = ['-----------------------------------------------------------------------',
+    rodape = ['--------------------------------------------------------------',
     'VOLTE SEMPRE !!',
-    '-----------------------------------------------------------------------']
+    '--------------------------------------------------------------']
 
     # cabecalho
     i = len(cabecalho)
@@ -300,7 +300,7 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
     caminho = Path('app/static/archive')
     salvarEm = f'{caminho}/' + f'{nome}'
 
-    pdf = SimpleDocTemplate(salvarEm, pagesize=(256, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
+    pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
 
     pdf.build(recibo)
 
