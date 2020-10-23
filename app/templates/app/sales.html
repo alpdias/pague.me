@@ -2,3 +2,27 @@
 Criado em 10/2020
 @Autor: Paulo https://github.com/alpdias
 -->
+
+{% extends 'base.html' %}
+{% block title %}pague.me{% endblock %}
+{% block code %}
+{% if user.is_authenticated %}
+<main>
+    <div class="nav-bar__principal">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span>
+                </li>
+                <li class="nav-bar__usuario">{{ user }}</li>
+                <li>
+                    <a href="/accounts/logout">sair</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+{% else %}
+{% endif %}
+{% endblock %}
+{% block footer %}{% endblock %}
