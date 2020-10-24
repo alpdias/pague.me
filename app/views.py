@@ -127,19 +127,18 @@ def cart(request):
         
         usuario = request.user
 
-        caminho = Path(f'static/archive/{usuario}')
-
-        if os.path.isdir(caminho):
+        if os.path.isdir(f'app/static/archive/{usuario}'):
             pass
         else:
             novoUsuario(usuario)
-
+        
+        caminho = Path(f'static/archive/{usuario}')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
         
-        pdf(nomeRecibo, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
+        pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
         
         return redirect('/buy')
     
@@ -221,12 +220,12 @@ def tratamento(numero=0):
     :return: Numero formatado
     """
 
-    locale.setlocale(locale.LC_MONETARY, "pt-BR") 
+    locale.setlocale(locale.LC_MONETARY, "pt_BR.UTF-8") 
     
     return locale.currency(numero, grouping=True)
 
 
-def pdf(nome, vendas, desconto, total, pagamento, troco):
+def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     
     """
     ->
@@ -276,10 +275,10 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
 
     corpo = ['&nbsp;',
     f'TOTAL ITENS:&nbsp;&nbsp;{totalItens}',
-    f'DESCONTO:&nbsp;&nbsp;{tratamento(desconto)}',
-    f'TOTAL:&nbsp;&nbsp;{tratamento(total)}',
+    f'DESCONTO:&nbsp;&nbsp;{tratamento(float(desconto))}',
+    f'TOTAL:&nbsp;&nbsp;{tratamento(float(total))}',
     f'PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
-    f'TROCO:&nbsp;&nbsp;{tratamento(troco)}',
+    f'TROCO:&nbsp;&nbsp;{tratamento(float(troco))}',
     '&nbsp;']
 
     rodape = ['--------------------------------------------------------------',
@@ -318,7 +317,7 @@ def pdf(nome, vendas, desconto, total, pagamento, troco):
         i = i - 1
     #rodape
     
-    caminho = Path('app/static/archive')
+    caminho = Path(f'app/static/archive/{usuario}')
     salvarEm = f'{caminho}/' + f'{nome}'
 
     pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)

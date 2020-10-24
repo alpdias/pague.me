@@ -48,7 +48,7 @@ Criado em 10/2020
                             <td><span>{{ vendas.cliente }}</span></td>
                             <td><span>{{ vendas.valor }}</span></td>
                             <td><span>{{ vendas.pagamento }}</span></td>
-                            <td><a href="/static/archive/{{ vendas.recibo }}" target="_blank"><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>
+                            <td><a href="/static/archive/{{ user }}/{{ vendas.recibo }}" target="_blank"><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>
                             <td><span>{{ vendas.status }}</span></td>
                             <td><a href="/sales/{{ vendas.id }}"><span class="span-titulo-2"><i class="fas fa-edit"></i></span></a></td>
                         </tr>
