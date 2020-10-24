@@ -155,8 +155,6 @@ function vendas() {
     };
 
     document.querySelector('#soma').innerHTML = `${soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
-    
-    return soma
 
 };
 
@@ -204,9 +202,22 @@ function confirmarVenda() {
     
     };
 
-    let total = vendas();
+    let itens = JSON.parse(localStorage.getItem('carrinho'));
+
+    var soma = 0;
+
+    for (let i = 0; i < itens.length; i++) { 
+        
+        let preco = itens[i].valor;
+        let qtd = itens[i].quantidade;
+
+        let total = (parseFloat(preco.replace(',','.')) * parseInt(qtd));
+
+        soma += total;
+
+    };
     
-    document.querySelector('#valorTotal-form').value = `${total}`;
+    document.querySelector('#valorTotal-form').value = `${soma}`;
 
 };
 

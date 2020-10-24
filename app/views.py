@@ -60,6 +60,7 @@ def dashboard(request):
     
     return render(request, 'app/dashboard.html')
 
+
 @login_required
 def buy(request):
 
@@ -86,6 +87,30 @@ def sales(request, id):
     return render(request, 'app/sales.html', {'venda': venda})  
 
 
+def opEstoque(listaItens, listaQuantidades):
+    
+    """
+    ->
+    :return:
+    """
+
+    i = len(listaItens)
+
+    while i > 0:
+
+        nomeProduto = listaItens[0]
+        qtd = int(listaQuantidades[0])
+
+        operacao = estoque.objects.get(produto=nomeProduto)
+        operacao.quantidade -= qtd
+        operacao.save()
+
+        listaItens.pop(0)
+        listaQuantidades.pop(0)
+
+        i = i - 1
+
+
 def novoUsuario(nome):
     
     """
@@ -95,7 +120,7 @@ def novoUsuario(nome):
 
     dir = f'app/static/archive/{nome}'       
     os.mkdir(dir)
-    
+  
 
 @login_required
 def cart(request):
@@ -122,6 +147,14 @@ def cart(request):
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
 
+        opEstoque(listaItens, listaQuantidades)
+
+        if tipoPgto != 'dinhero':
+            valorTroco = 0
+
+        if valorDesconto == '':
+            valorDesconto = 0
+
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
         
@@ -137,9 +170,6 @@ def cart(request):
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
-
-        if tipoPgto != 'dinhero':
-            valorTroco = 0
         
         pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
         
@@ -214,7 +244,7 @@ class register(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 
-    
+
 def tratamento(numero=0):
     
     """
