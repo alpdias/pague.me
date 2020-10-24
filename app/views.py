@@ -137,6 +137,9 @@ def cart(request):
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
         f.save()
+
+        if tipoPgto != 'dinhero':
+            valorTroco = 0
         
         pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
         

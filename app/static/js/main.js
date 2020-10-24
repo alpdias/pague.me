@@ -204,6 +204,10 @@ function confirmarVenda() {
     
     };
 
+    let total = vendas();
+    
+    document.querySelector('#valorTotal-form').value = `${total}`;
+
 };
 
 function criarLista() {
@@ -246,17 +250,23 @@ function tipoPagamento() {
     };
 };
 
-/*
+
 function calculo() {
     
+     /*
     let total = vendas();
     
     document.querySelector('#valorTotal-form').value = `${total}`;
     
-    let desconto = document.querySelector('#valorDesconto').value;
-    let recebido = document.querySelector('#valorRecebido').value;
-    let troco = document.querySelector('#valorTroco').value;
-    
+    let desconto = document.querySelector('#valorDesconto-form').value;
+    let recebido = document.querySelector('#valorRecebido-form').value;
+    let troco = document.querySelector('#valorTroco-form').value;
+
+    console.log(desconto);
+    console.log(recebido);
+    console.log(troco);
+
+   
     if (desconto != null) {
     
         let totalDescontado = (total - desconto)
@@ -282,7 +292,8 @@ function calculo() {
         };
 
     } else {};
+    */
 
 };
-*/
+
 
