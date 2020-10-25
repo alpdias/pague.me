@@ -87,26 +87,26 @@ def sales(request, id):
     return render(request, 'app/sales.html', {'venda': venda})  
 
 
-def opEstoque(listaItens, listaQuantidades):
+def opEstoque(itens, quantidades):
     
     """
     ->
     :return:
     """
 
-    i = len(listaItens)
+    i = len(itens)
 
     while i > 0:
 
-        nomeProduto = listaItens[0]
-        qtd = int(listaQuantidades[0])
+        nomeProduto = itens[0]
+        qtd = int(quantidades[0])
 
         operacao = estoque.objects.get(produto=nomeProduto)
         operacao.quantidade -= qtd
         operacao.save()
 
-        listaItens.pop(0)
-        listaQuantidades.pop(0)
+        itens.pop(0)
+        quantidades.pop(0)
 
         i = i - 1
 
@@ -141,19 +141,28 @@ def cart(request):
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
 
+        removeItens = listaItens
+        removeQtd = listaQuantidades
+
+        opEstoque(removeItens, removeQtd)
+
+        listaItens = request.POST.get('item-local').split(',')
+        listaValores = request.POST.get('valor-local').split(',')
+        listaQuantidades = request.POST.get('qtd-local').split(',')
+
         listaRecibo = []
         
         listaRecibo.append(listaItens)
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
 
-        opEstoque(listaItens, listaQuantidades)
+        print(listaRecibo)
 
         if tipoPgto != 'dinhero':
-            valorTroco = 0
+            valorTroco = '0'
 
         if valorDesconto == '':
-            valorDesconto = 0
+            valorDesconto = '0'
 
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
@@ -169,10 +178,11 @@ def cart(request):
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
-        f.save()
-        
+
         pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
-        
+
+        f.save()
+
         return redirect('/buy')
     
     else:
@@ -305,6 +315,10 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
         qtd.pop(0)
         valor.pop(0)
         i = i - 1
+    
+    desconto = desconto.replace(',','.')
+    total = total.replace(',','.')
+    troco = troco.replace(',','.')
 
     corpo = ['&nbsp;',
     f'TOTAL ITENS:&nbsp;&nbsp;{totalItens}',
