@@ -12,6 +12,6 @@ class estoqueForm(forms.ModelForm):
   
   class Meta:
     model = estoque
-    fields = ('produto', 'preco', 'quantidade', 'descricao', 'fornecedor', 'status')
+    fields = ('produto', 'preco', 'custo', 'quantidade', 'descricao', 'fornecedor', 'status')
     
   
