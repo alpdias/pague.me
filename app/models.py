@@ -152,3 +152,49 @@ class vendas(models.Model):
         verbose_name = 'VENDA'
         verbose_name_plural = 'VENDAS'
         ordering = ['-criado'] 
+        
+        
+class empresas(models.Model):
+
+    """
+    ->
+    :return:
+    """
+    
+     STATUS = (
+        ('ativo', 'ATIVO'), 
+        ('inativo', 'INATIVO'),
+    )
+    empresa = models.CharField('Empresa', max_length=255)
+    cnpj = models.CharField('CNPJ', max_length=18)
+    endereco = models.CharField('Endereço', max_length=255)
+    observacao = models.TextField('Observações', blank=True)
+    frase = models.CharField('Rodapé', max_length=255)
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    status = models.CharField(
+        max_length = 7, 
+        choices = STATUS
+    )
+    criado = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
+
+    def __str__(self):
+
+        """
+        ->
+        :return:
+        """
+
+        return self.empresa
+
+
+    class Meta:
+
+        """
+        ->
+        :return:
+        """
+
+        verbose_name = 'EMPRESA'
+        verbose_name_plural = 'EMPRESAS'
+        ordering = ['empresa'] 
