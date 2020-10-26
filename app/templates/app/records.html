@@ -21,6 +21,9 @@ Criado em 09/2020
             </ul>
         </nav>
     </div>
+    <div>
+        <a href="{% url 'newc' %}"><i class="fas fa-user-plus"></i></a>
+    </div>
     <div class="nav-bar__vertical">
         <nav>
             <ul class="item-vertical">
@@ -49,6 +52,21 @@ Criado em 09/2020
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="paginacao">
+        <span>
+            {% if registros.has_previous %}
+                <a href="?page={{ registros.preivous_page_number }}"><i class="fas fa-angle-left"></i></a>
+            {% endif %}
+            {% if registros.paginator.num_pages %}
+            <span>
+                {{ registros.number }} de {{ registros.paginator.num_pages }}
+            </span>
+            {% endif %}
+            {% if registros.has_next %}
+            <a href="?page={{ registros.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+            {% endif %}
+        </span>
     </div>
 </main>
 {% else %}
