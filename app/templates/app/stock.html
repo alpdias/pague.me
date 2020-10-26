@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}" id="produto">{{ estoques.produto }}</a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}><i class="fas fa-undo"></i></a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -24,6 +24,7 @@ Criado em 10/2020
     <div class="lista-itens">
             <div>
                 <ul>
+                    <li><span class="span-titulo">Produto:&nbsp;</span><span id="produto">{{ estoques.produto }}</span></li>
                     <li><span class="span-titulo">Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
                     <li id="custo"><span class="span-titulo">Custo:&nbsp;</span>{{ estoques.custo }}</li>
                     <li><span class="span-titulo">Quantidade Disponível:&nbsp;</span><span id="dispo">{{ estoques.quantidade }}</span></li>
