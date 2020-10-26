@@ -23,7 +23,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from app.views import home, about, contact, dashboard, cart, buy, sales, products, newp, stock, records, people, newc, register
+from app.views import home, about, contact, dashboard, cart, buy, sales, products, newp, stock, records, people, newc, #register
 from app import views
 
 urlpatterns = [
@@ -41,6 +41,6 @@ urlpatterns = [
     path('records/', records, name='records'),
     path('people/<int:id>', people, name='people'),
     path('newc/', newc, name='newc'),
-    path('register/', views.register.as_view(), name='register'),
+    #path('register/', views.register.as_view(), name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
