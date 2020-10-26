@@ -78,7 +78,7 @@ class estoque(models.Model):
         max_length = 10, 
         choices = STATUS
     )
-    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="title")
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
