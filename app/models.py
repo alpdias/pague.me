@@ -168,6 +168,7 @@ class empresas(models.Model):
     empresa = models.CharField('Empresa', max_length=255)
     cnpj = models.CharField('CNPJ', max_length=18)
     endereco = models.CharField('Endereço', max_length=255)
+    cidadeEstado = models.CharField('Cidade/Estado', max_length=255)
     observacao = models.TextField('Observações', blank=True)
     frase = models.CharField('Rodapé', max_length=255)
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
