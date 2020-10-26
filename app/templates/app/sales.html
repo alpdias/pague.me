@@ -21,6 +21,13 @@ Criado em 10/2020
             </ul>
         </nav>
     </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">salvar</button> 
+        </form>
+    </div>  
 </main>
 {% else %}
 {% endif %}
