@@ -1,4 +1,3 @@
-  
 # -*- coding: utf-8 -*-
 
 '''
@@ -33,7 +32,7 @@ class estoqueAdmin(admin.ModelAdmin):
     """
 
     list_display = ['produto', 'preco', 'quantidade', 'status']
-    search_fields = ['produto', 'status']
+    search_fields = ['produto', 'fornecedor', 'status']
 
 
 admin.site.register(estoque, estoqueAdmin)
