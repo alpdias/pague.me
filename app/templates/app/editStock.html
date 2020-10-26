@@ -1,0 +1,36 @@
+  
+<!--
+Criado em 10/2020
+@Autor: Paulo https://github.com/alpdias
+-->
+
+{% extends 'base.html' %}
+{% block title %}pague.me{% endblock %}
+{% block code %}
+{% if user.is_authenticated %}
+<main>
+    <div class="nav-bar__principal">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}><i class="fas fa-undo"></i></a>
+                </li>
+                <li class="nav-bar__usuario">{{ user }}</li>
+                <li>
+                    <a href="/accounts/logout">sair</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">salvar</button> 
+        </form>
+    </div>       
+</main>
+{% else %}
+{% endif %}
+{% endblock %}
+{% block footer %}{% endblock %}
