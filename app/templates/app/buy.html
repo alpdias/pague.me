@@ -62,9 +62,11 @@ Criado em 10/2020
             {% if venda.has_previous %}
                 <a href="?page={{ venda.preivous_page_number }}"><i class="fas fa-angle-left"></i></a>
             {% endif %}
+            {% if venda.paginator.num_pages %}
             <span>
                 {{ venda.number }} de {{ venda.paginator.num_pages }}
             </span>
+            {% endif %}
             {% if venda.has_next %}
             <a href="?page={{ venda.next_page_number }}"><i class="fas fa-angle-right"></i></a>
             {% endif %}
