@@ -198,7 +198,10 @@ def records(request):
     :return:
     """
     
-    registros = pessoas.objects.all().filter(usuario=request.user)
+    listaRegistros = pessoas.objects.all().filter(usuario=request.user)
+    paginas = Paginator(listaRegistros, 8)
+    pagina = request.GET.get('page')
+    registros = paginas.get_page(pagina)
 
     return render(request, 'app/records.html', {'registros': registros})
 
@@ -217,7 +220,10 @@ def products(request):
         produtos = estoque.objects.filter(produto__icontains=pesquisa, usuario=request.user)
 
     else:
-        produtos = estoque.objects.all().filter(usuario=request.user)
+        listaProdutos = estoque.objects.all().filter(usuario=request.user)
+        paginas = Paginator(listaProdutos, 8)
+        pagina = request.GET.get('page')
+        produtos = paginas.get_page(pagina)
 
     return render(request, 'app/products.html', {'produtos': produtos})  
 
