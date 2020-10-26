@@ -1,5 +1,5 @@
 from django import forms
-from .models import pessoas, estoque
+from .models import pessoas, estoque, vendas
 
 class pessoasForm(forms.ModelForm):
   
@@ -14,4 +14,10 @@ class estoqueForm(forms.ModelForm):
     model = estoque
     fields = ('produto', 'preco', 'custo', 'quantidade', 'descricao', 'fornecedor', 'status')
     
+    
+class vendasForm(forms.ModelForm):
   
+  class Meta:
+    model = vendas
+    fields = ('cliente', 'valor', 'pagamento', 'comprovante', 'recibo', 'status')  
+    
