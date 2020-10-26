@@ -185,7 +185,7 @@ def cart(request):
         caminho = Path(f'static/archive/{usuario}')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
        
-        f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo)
+        f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo, usuario=usuario)
 
         pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
 
