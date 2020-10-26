@@ -5,19 +5,21 @@ Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
 '''
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
-from django.urls import reverse_lazy
+
 from django.views import generic
+from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import estoqueForm, pessoasForm
 from .models import pessoas, estoque, vendas, empresas
+import os
+import locale
 from pathlib import Path
 from datetime import date
 from datetime import datetime
-import locale
-import os
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -244,13 +246,24 @@ def stock(request, id):
 
 @login_required
 def newp(request):
-
+    
     """
     ->
     :return:
     """
+    
+    if request.method == 'POST':
+        form = estoqueForm(request.POST)
+        
+        if form.is_valid()
+            form.save()
+            
+            return redirect('/products')
+            
+    else:
+        form = estoqueForm()
 
-    return render(request, 'app/newp.html')  
+    return render(request, 'app/newp.html', {'form': form})
 
 
 @login_required
@@ -274,7 +287,17 @@ def newc(request):
     :return:
     """
     
-    return render(request, 'app/newc.html')  
+    if request.method == 'POST':
+        form = pessoasForm(request.POST)
+        
+        if form.is_valid()
+            form.save()
+            return redirect('/records')
+            
+    else:
+        form = pessoasForm()
+    
+    return render(request, 'app/newc.html', {'form': form})  
 
 
 """
