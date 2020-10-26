@@ -203,10 +203,6 @@ function confirmarVenda() {
     
     document.querySelector('#valorTotal-form').value = `${soma.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
 
-    let descontoDefault = 0;
-
-    document.querySelector('#valorDesconto-form').value = `${descontoDefault.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
-
 };
 
 function criarLista() {
