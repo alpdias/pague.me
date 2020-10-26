@@ -277,6 +277,7 @@ def newc(request):
     return render(request, 'app/newc.html')  
 
 
+"""
 class register(generic.CreateView):
 
     """
@@ -287,6 +288,7 @@ class register(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+"""
 
 
 def tratamento(numero=0):
