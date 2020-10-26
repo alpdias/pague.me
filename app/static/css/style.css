@@ -273,6 +273,12 @@ th {
     max-width: 60px;
 }
 
+#pesquisa-form {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
 /* CARRINHO */
 .botoes-carrinho button{
     background-color: #9A879D;
@@ -438,4 +444,11 @@ th {
     color: #9A879D;
     text-decoration: none;
     text-decoration-style: none;
+}
+
+/* PAGINAS */
+.paginacao {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 }

@@ -3,6 +3,9 @@ Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
 */
 
+
+// JS
+
 function adicionar() {
 
     let produto = document.querySelector('#produto').textContent;
@@ -12,7 +15,11 @@ function adicionar() {
 
     if (parseInt(disponivel) == 0) {
 
-        window.alert('Produto esgotado!')
+        window.alert('Produto Esgotado!');
+
+    } else if (qtd > parseFloat(disponivel)) {
+
+        window.alert('Quantidade Insuficiente!')
 
     } else {
 
@@ -109,29 +116,6 @@ function fecharVenda() {
         localStorage.setItem('resultadoVenda', JSON.stringify(resultadoVendas));
 
     };
-    
-    /*
-    document.querySelector('#resultado-vendas').innerHTML += `\
-        <tr>\
-            <td><a href="/records"><span class="span-titulo-2"><i class="fas fa-user-edit"></i></span></a></td>\
-            <td><span>${soma.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</span></td>\
-            <td>\
-                <select name="" id="">\
-                    <option value="">dinheiro</option>\
-                    <option value="">debito</option>\
-                    <option value="">credito</option>\
-                </select>\
-            </td>\
-            <td><a href=""><span class="span-titulo-2"><i class="fas fa-search-plus"></i></span></a></td>\
-            <td><a href=""><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>\
-            <td>\
-                <select name="" id="">\
-                    <option value="">aberto</option>\
-                    <option value="">fechado</option>\
-                </select>\
-            </td>\
-        </tr>`;
-    */
 
     removerVenda();
 
@@ -217,7 +201,11 @@ function confirmarVenda() {
 
     };
     
-    document.querySelector('#valorTotal-form').value = `${soma}`;
+    document.querySelector('#valorTotal-form').value = `${soma.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
+
+    let descontoDefault = 0;
+
+    document.querySelector('#valorDesconto-form').value = `${descontoDefault.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
 
 };
 
@@ -262,49 +250,39 @@ function tipoPagamento() {
 };
 
 
-function calculo() {
-    
-     /*
-    let total = vendas();
-    
-    document.querySelector('#valorTotal-form').value = `${total}`;
-    
-    let desconto = document.querySelector('#valorDesconto-form').value;
-    let recebido = document.querySelector('#valorRecebido-form').value;
-    let troco = document.querySelector('#valorTroco-form').value;
+function desconto() {
 
-    console.log(desconto);
-    console.log(recebido);
-    console.log(troco);
+    let desconto = (document.querySelector('#valorDesconto-form').value).replace(',','.');
+    let total = (document.querySelector('#valorTotal-form').value).replace(',','.');
 
-   
-    if (desconto != null) {
-    
-        let totalDescontado = (total - desconto)
-        
-        document.querySelector('#valorTotal-form').value = `${totalDescontado}`;
-        
-    } else {};
-    
-    if (recebido != null) {
-        
-        if (desconto != null) {
-    
-            let totalTroco = ((total - desconto) - recebido)
-            
-            document.querySelector('#valorTroco').value = `${totalTroco}`;
-            
-        } else {
-            
-            let totalTroco = (total - recebido)
-            
-            document.querySelector('#valorTroco').value = `${totalTroco}`;
-            
-        };
+    let novoTotal = (total - desconto);
 
-    } else {};
-    */
+    document.querySelector('#valorTotal-form').value = `${novoTotal.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
 
 };
 
+function troco() {
 
+    let recebido = (document.querySelector('#valorRecebido-form').value).replace(',','.');
+    let total = (document.querySelector('#valorTotal-form').value).replace(',','.');
+
+    let troco = (recebido - total);
+
+    document.querySelector('#valorTroco-form').value = `${troco.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
+
+};
+
+// JQUERY
+
+$(document).ready(function() {
+
+    let pesquisa = $('#pesquisa');
+    let pesquisar = $('#pesquisar');
+
+    $(pesquisar).on('click', function() {
+
+        pesquisa.submit();
+
+    });
+
+});

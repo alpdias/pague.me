@@ -8,8 +8,10 @@ Criado em 09/2020
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
+from django.core.paginator import Paginator
 from .models import pessoas, estoque, vendas
 from pathlib import Path
 from datetime import datetime
@@ -69,7 +71,13 @@ def buy(request):
     :return:
     """
     
-    venda = vendas.objects.all()
+    listaVendas = vendas.objects.all().filter(usuario=request.user)
+
+    paginas = Paginator(listaVendas, 8)
+
+    pagina = request.GET.get('page')
+
+    venda = paginas.get_page(pagina)
 
     return render(request, 'app/buy.html', {'venda': venda})  
 
@@ -82,7 +90,7 @@ def sales(request, id):
     :return:
     """
     
-    venda = get_object_or_404(vendas, pk=id)
+    venda = get_object_or_404(vendas, pk=id).filter(usuario=request.user)
 
     return render(request, 'app/sales.html', {'venda': venda})  
 
@@ -133,13 +141,15 @@ def cart(request):
     if request.method == 'POST':
 
         nomeCliente = request.POST.get('nomeCliente-form')
-        valorTotal = request.POST.get('valorTotal-form')
+        valorTotal = request.POST.get('valorTotal-form').replace(',','.')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
-        valorDesconto = request.POST.get('valorDesconto-form')
-        valorTroco = request.POST.get('valorTroco-form')
+        valorDesconto = request.POST.get('valorDesconto-form').replace(',','.')
+        valorTroco = request.POST.get('valorTroco-form').replace(',','.')
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
+
+        valorTotal = (float(valorTotal) - float(valorDesconto))
 
         removeItens = listaItens
         removeQtd = listaQuantidades
@@ -156,9 +166,7 @@ def cart(request):
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
 
-        print(listaRecibo)
-
-        if tipoPgto != 'dinhero':
+        if tipoPgto != 'dinheiro':
             valorTroco = '0'
 
         if valorDesconto == '':
@@ -199,7 +207,7 @@ def records(request):
     :return:
     """
     
-    registros = pessoas.objects.all()
+    registros = pessoas.objects.all().filter(usuario=request.user)
 
     return render(request, 'app/records.html', {'registros': registros})
 
@@ -211,8 +219,14 @@ def products(request):
     ->
     :return:
     """
-    
-    produtos = estoque.objects.all()
+
+    pesquisa = request.GET.get('procurar')
+
+    if pesquisa:
+        produtos = estoque.objects.filter(produto__icontains=pesquisa, usuario=request.user)
+
+    else:
+        produtos = estoque.objects.all().filter(usuario=request.user)
 
     return render(request, 'app/products.html', {'produtos': produtos})  
 
@@ -238,7 +252,7 @@ def people(request, id):
     :return:
     """
 
-    pessoa = get_object_or_404(pessoas, pk=id)
+    pessoa = get_object_or_404(pessoas, pk=id).filter(usuario=request.user)
 
     return render(request, 'app/people.html', {'pessoa': pessoa})
 
@@ -317,7 +331,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
         i = i - 1
     
     desconto = desconto.replace(',','.')
-    total = total.replace(',','.')
     troco = troco.replace(',','.')
 
     corpo = ['&nbsp;',

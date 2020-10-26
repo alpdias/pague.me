@@ -7,6 +7,7 @@ Criado em 09/2020
 '''
 
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
@@ -31,6 +32,7 @@ class pessoas(models.Model):
         max_length = 7, 
         choices = STATUS
     )
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
@@ -76,6 +78,7 @@ class estoque(models.Model):
         max_length = 10, 
         choices = STATUS
     )
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="title")
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
@@ -125,6 +128,7 @@ class vendas(models.Model):
         choices = STATUS,
         default='aberto'
     )
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
