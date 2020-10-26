@@ -12,8 +12,9 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
 from django.core.paginator import Paginator
-from .models import pessoas, estoque, vendas
+from .models import pessoas, estoque, vendas, empresas
 from pathlib import Path
+from datetime import date
 from datetime import datetime
 import locale
 import os
@@ -307,6 +308,14 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     ->
     :return:
     """
+    
+    empresa = empresas.objects.all().filter(usuario=usuario)
+    
+    data = date.today()
+    d = data.day
+    m = data.month
+    a = data.year
+    atual = f'{d}/{m}/{a}'
        
     itens = vendas[0]
     qtd = vendas[2]
@@ -323,15 +332,15 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     recibo = []
 
     cabecalho = ['--------------------------------------------------------------',
-    'EMPRESA ABC LTDA',
-    'RUA NADA, 1000',
-    'SAO PAULO - SP',
+    f'{empresa.empresa}',
+    f'{empresa.endereco}',
+    f'{empresa.cidadeEstado}',
     '--------------------------------------------------------------',
-    'CNPJ 00.000.000/0000-00',
+    f'{empresa.cnpj}',
     '--------------------------------------------------------------',
-    'EXTRATO N. 0001',
+    'EXTRATO N. 0000',
     'RECIBO DE COMPRA E VENDA',
-    '00/00/0000',
+    f'{atual}',
     '--------------------------------------------------------------',
     'ITEM | QTD | VALOR R$',
     '--------------------------------------------------------------',
@@ -360,7 +369,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     '&nbsp;']
 
     rodape = ['--------------------------------------------------------------',
-    'VOLTE SEMPRE !!',
+    f'{empresa.frase}',
     '--------------------------------------------------------------']
 
     # cabecalho
