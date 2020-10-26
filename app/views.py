@@ -13,7 +13,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import estoqueForm, pessoasForm
+from .forms import pessoasForm, estoqueForm, vendasForm
 from .models import pessoas, estoque, vendas, empresas
 import os
 import locale
@@ -91,8 +91,20 @@ def sales(request, id):
     """
     
     venda = get_object_or_404(vendas, pk=id).filter(usuario=request.user)
-
-    return render(request, 'app/sales.html', {'venda': venda})  
+    form = vendasForm(instance=venda)
+    
+    if request.method == 'POST':
+        form = vendasForm(request.POST, instance=venda)
+        
+        if form.is_valid:
+            form.save()
+            return redirect('/buy')
+        
+        else:
+            return render(request, 'app/sales.html', {'form': form, 'venda': venda})
+        
+    else:
+        return render(request, 'app/sales.html', {'form': form, 'venda': venda})  
 
 
 def opEstoque(itens, quantidades):
@@ -245,6 +257,31 @@ def stock(request, id):
 
 
 @login_required
+def editStock(request, id):
+
+    """
+    ->
+    :return:
+    """
+    
+    produto = get_object_or_404(estoque, pk=id).filter(usuario=request.user)
+    form = estoqueForm(instance=produto)
+    
+    if request.method == 'POST':
+        form = estoqueForm(request.POST, instance=produto)
+        
+        if form.is_valid:
+            form.save()
+            return redirect('/stock')
+        
+        else:
+            return render(request, 'app/editStock.html', {'form': form, 'estoques': estoques})
+        
+    else:
+        return render(request, 'app/stock.html', {'form': form, 'estoques': estoques}) 
+
+
+@login_required
 def newp(request):
     
     """
@@ -302,12 +339,9 @@ def newc(request):
 
 """
 class register(generic.CreateView):
-
-    """
-    ->
-    :return:
-    """
-
+    
+    # view para registrar um novo usuario
+    
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
