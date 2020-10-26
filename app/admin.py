@@ -9,7 +9,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import pessoas, estoque, vendas
+from .models import pessoas, estoque, vendas, empresas
 
 class pessoasAdmin(admin.ModelAdmin):
 
@@ -49,3 +49,17 @@ class vendasAdmin(admin.ModelAdmin):
 
 
 admin.site.register(vendas, vendasAdmin)
+
+class empresasAdmin(admin.ModelAdmin):
+
+    """
+    ->
+    :return:
+    """
+
+    list_display = ['empresa', 'cnpj', 'status', 'criado']
+    search_fields = ['empresa', 'criado']
+
+
+admin.site.register(empresas, empresasAdmin)
+
