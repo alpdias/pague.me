@@ -72,11 +72,8 @@ def buy(request):
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user)
-
     paginas = Paginator(listaVendas, 8)
-
     pagina = request.GET.get('page')
-
     venda = paginas.get_page(pagina)
 
     return render(request, 'app/buy.html', {'venda': venda})  
@@ -108,14 +105,11 @@ def opEstoque(itens, quantidades):
 
         nomeProduto = itens[0]
         qtd = int(quantidades[0])
-
         operacao = estoque.objects.get(produto=nomeProduto)
         operacao.quantidade -= qtd
         operacao.save()
-
         itens.pop(0)
         quantidades.pop(0)
-
         i = i - 1
 
 
@@ -148,12 +142,10 @@ def cart(request):
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
-
+        
         valorTotal = (float(valorTotal) - float(valorDesconto))
-
         removeItens = listaItens
         removeQtd = listaQuantidades
-
         opEstoque(removeItens, removeQtd)
 
         listaItens = request.POST.get('item-local').split(',')
@@ -161,7 +153,6 @@ def cart(request):
         listaQuantidades = request.POST.get('qtd-local').split(',')
 
         listaRecibo = []
-        
         listaRecibo.append(listaItens)
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
@@ -174,11 +165,11 @@ def cart(request):
 
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
-        
         usuario = request.user
 
         if os.path.isdir(f'app/static/archive/{usuario}'):
             pass
+        
         else:
             novoUsuario(usuario)
         
@@ -245,6 +236,17 @@ def stock(request, id):
 
 
 @login_required
+def newp(request):
+
+    """
+    ->
+    :return:
+    """
+
+    return render(request, 'app/newp.html')  
+
+
+@login_required
 def people(request, id):
 
     """
@@ -256,7 +258,18 @@ def people(request, id):
 
     return render(request, 'app/people.html', {'pessoa': pessoa})
 
+
+@login_required
+def newc(request):
+
+    """
+    ->
+    :return:
+    """
     
+    return render(request, 'app/newc.html')  
+
+
 class register(generic.CreateView):
 
     """
@@ -292,7 +305,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     itens = vendas[0]
     qtd = vendas[2]
     valor = vendas[1]
-
     quantidade = len(itens)
     totalItens = 0
     
@@ -302,7 +314,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     estilo = getSampleStyleSheet()
     centro = estilo['Normal']
     centro.alignment = 1
-
     recibo = []
 
     cabecalho = ['--------------------------------------------------------------',
@@ -324,6 +335,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
 
     i = len(itens)
     while i > 0:
+        
         conteudo.append(f'&nbsp;{itens[0]}&nbsp;&nbsp;&nbsp;({qtd[0]})&nbsp;&nbsp;&nbsp;{tratamento(float(valor[0]))}')
         itens.pop(0)
         qtd.pop(0)
@@ -348,6 +360,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # cabecalho
     i = len(cabecalho)
     while i > 0:
+        
         recibo.append(Paragraph(cabecalho[0], centro))
         cabecalho.pop(0)
         i = i - 1
@@ -356,6 +369,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # conteudo
     i = len(conteudo)
     while i > 0:
+        
         recibo.append(Paragraph(conteudo[0]))
         conteudo.pop(0)
         i = i - 1
@@ -364,6 +378,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # corpo
     i = len(corpo)
     while i > 0:
+        
         recibo.append(Paragraph(corpo[0]))
         corpo.pop(0)
         i = i - 1
@@ -372,6 +387,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # rodape
     i = len(rodape)
     while i > 0:
+        
         recibo.append(Paragraph(rodape[0], centro))
         rodape.pop(0)
         i = i - 1
