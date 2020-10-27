@@ -12,14 +12,14 @@ Criado em 09/2020
             <ul>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'dashboard' %}">ENTRAR </a>
+                        <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;</span><a href="{% url 'dashboard' %}">ENTRAR </a>
                     </li>
                     <li>
                         <a href="{% url 'dashboard' %}">registrar</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="/accounts/login">ENTRAR </a>
+                        <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;</span><a href="/accounts/login">ENTRAR </a>
                     </li>
                     <li>
                         <a href="{% url 'contact'  %}">registrar</a>
@@ -38,19 +38,19 @@ Criado em 09/2020
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            <div id="conteudo-login__user">
+            <div>
                 <label for="{{ form.username.id_for_label }}">usuario:</label>
                 {{ form.username }}
                 {{ form.username.errors }}
             </div>
-            <div id="conteudo-login__pwd">
+            <div>
                 <label for="{{ form.password.id_for_label }}">senha:</label>
                 {{ form.password }}
                 {{ form.password.errors }}
             </div>
-            <button type="submit" id="entrada-login">entrar&nbsp;&nbsp;<i class="fas fa-door-open"></i></button>
+            <button type="submit" id="form-login__botao">entrar&nbsp;&nbsp;<i class="fas fa-door-open"></i></button>
         </form>
-        <div id="conteudo-login">
+        <div>
             <span>ainda não tem uma conta? <a href="{% url 'contact' %}">registre-se</a></span>
         </div>
     </div>
