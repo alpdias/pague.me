@@ -329,7 +329,7 @@ th {
 }
 
 /* CARRINHO */
-.botoes-carrinho button{
+.botoes-carrinho button {
     background-color: #9A879D;
     color: #ffffff;
     box-shadow: 1px 1px 2px #0000001c;
@@ -428,7 +428,7 @@ th {
     font-weight: bolder;
 }
 
-.confirmacao-display input{
+.confirmacao-display input {
     max-width: 80%;
     margin-bottom: 10px;
     padding: 6px;
@@ -437,7 +437,7 @@ th {
     box-shadow: 1px 1px 2px #0000008c;
 }
 
-.confirmacao-display select{
+.confirmacao-display select {
     background-color: #ffffff;
     padding: 3px;
     border: none;
