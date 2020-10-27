@@ -15,7 +15,7 @@ Criado em 10/2020
                     {% csrf_token %}
                     <div class="confirmacao-texto"><label for="nomeCliente-form">cliente</label></div>
                     <div><input type="text" name="nomeCliente-form" id="nomeCliente-form"></div>
-                    <div class="selecao-confirmacao">
+                    <div class="confirmacao-selecao">
                         <label for="tipoPagamento-form">pagamento</label>
                         <select name="tipoPagamento-form" id="tipoPagamento-form" onclick="tipoPagamento()">
                             <option value="debito">debito</option>
@@ -26,9 +26,9 @@ Criado em 10/2020
                     <div class="confirmacao-texto"><label for="valorDesconto-form">desconto&nbsp;&nbsp;$</label></div>
                     <div><input type="text" name="valorDesconto-form" id="valorDesconto-form" onchange="desconto()"></div>
                     <div style="display: none;" id="tipoDependencia">
-                        <div class="texto-confirmacao"><label for="valorRecebido-form">recebido&nbsp;&nbsp;$</label></div>
+                        <div class="confirmacao-texto"><label for="valorRecebido-form">recebido&nbsp;&nbsp;$</label></div>
                         <div><input type="text" name="valorRecebido-form" id="valorRecebido-form" onchange="troco()"></div>
-                        <div class="texto-confirmacao"><label for="valorTroco-form">troco&nbsp;&nbsp;$</label></div>
+                        <div class="confirmacao-texto"><label for="valorTroco-form">troco&nbsp;&nbsp;$</label></div>
                         <div><input type="text" name="valorTroco-form" id="valorTroco-form"></div>
                     </div>
                     <div class="confirmacao-texto"><label for="valorTotal-form">total&nbsp;&nbsp;=</label></div>
@@ -43,7 +43,7 @@ Criado em 10/2020
                     </div>
                 </form>
             </div>
-            <div id="voltar-botao">
+            <div class="confirmarcao-botoes__voltar">
                 <button onclick="confirmarVenda()"><i class="fas fa-undo-alt"></i></button>
             </div>
         </div>
@@ -71,7 +71,7 @@ Criado em 10/2020
     </div>
     <div class="nav-bar__vertical">
         <nav>
-            <ul class="item-vertical">
+            <ul class="nav-bar__vertical-item">
                 <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
                 <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
                 <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
@@ -86,14 +86,14 @@ Criado em 10/2020
                 <th>produto</th>
                 <th>preço</th>
                 <th>quantidade</th>
-                <th><span id="soma" class="span-titulo-2" onclick="vendas()">total</span></th>
+                <th><span id="soma" class="lista-itens__titulo confirmacao-botoes__soma" onclick="vendas()">total</span></th>
                 <th>remover</th>
                 <tbody id="resultado"></tbody>
             </table>
         </div>
     </div>
     <div>
-        <div class="dupla-botoes">
+        <div class="botoes-carrinho__dupla">
             <button onclick="removerVenda()"><a href="{% url 'cart' %}">limpar&nbsp;<i class="far fa-trash-alt"></i></a></button>
             <button onclick="confirmarVenda()">fechar&nbsp;<i class="fas fa-share-square"></i></button>
         </div>
