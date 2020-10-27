@@ -13,7 +13,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'buy'  %}">VENDAS</a>
+                    <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;</span><a href="{% url 'buy'  %}">VENDAS</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -24,12 +24,12 @@ Criado em 10/2020
     </div>
     <div class="nav-bar__vertical">
         <nav>
-            <ul class="item-vertical">
-                <li><a href="{% url 'dashboard' %}"><span class="ajuste-menu__vertical"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
-                <li><a href="{% url 'buy' %}"><span class="ajuste-menu__vertical"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
-                <li><a href="{% url 'cart' %}"><span class="ajuste-menu__vertical"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
-                <li><a href="{% url 'products' %}"><span class="ajuste-menu__vertical"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
-                <li><a href="{% url 'records' %}"><span class="ajuste-menu__vertical"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
+            <ul class="nav-bar__vertical-item">
+                <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
+                <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
+                <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
+                <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
+                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
             </ul>
         </nav>
     </div>
@@ -48,9 +48,9 @@ Criado em 10/2020
                             <td><span>{{ vendas.cliente }}</span></td>
                             <td><span>{{ vendas.valor }}</span></td>
                             <td><span>{{ vendas.pagamento }}</span></td>
-                            <td><a href="/static/archive/{{ user }}/{{ vendas.recibo }}" target="_blank"><span class="span-titulo-2"><i class="fas fa-file"></i></span></a></td>
+                            <td><a href="/static/archive/{{ user }}/{{ vendas.recibo }}" target="_blank"><span class="lista-itens__titulo"><i class="fas fa-file"></i></span></a></td>
                             <td><span>{{ vendas.criado }}</span></td>
-                            <td><a href="/sales/{{ vendas.id }}"><span class="span-titulo-2"><i class="fas fa-edit"></i></span></a></td>
+                            <td><a href="/sales/{{ vendas.id }}"><span class="lista-itens__titulo"><i class="fas fa-edit"></i></span></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
