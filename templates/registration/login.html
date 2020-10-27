@@ -39,12 +39,12 @@ Criado em 09/2020
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
             <div>
-                <label for="{{ form.username.id_for_label }}">usuario:</label>
+                <label for="{{ form.username.id_for_label }}">usuário&nbsp;&nbsp;< class="fas fa-user-shield"></i></label>
                 {{ form.username }}
                 {{ form.username.errors }}
             </div>
             <div>
-                <label for="{{ form.password.id_for_label }}">senha:</label>
+                <label for="{{ form.password.id_for_label }}">senha&nbsp;&nbsp;<i class="fas fa-lock"></i></label>
                 {{ form.password }}
                 {{ form.password.errors }}
             </div>
