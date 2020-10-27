@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;&nbsp;&nbsp;</span><a href="{% url 'products'  %}"><i class="fas fa-undo"></i></a>
+                    <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;&nbsp;&nbsp;</span><a href="{% url 'products'  %}"><i class="fas fa-undo"></i></a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -24,13 +24,13 @@ Criado em 10/2020
     <div class="lista-itens">
             <div>
                 <ul>
-                    <li><span class="span-titulo">Produto:&nbsp;</span><span id="produto">{{ estoques.produto }}</span>&nbsp;&nbsp;&nbsp;<span class="span-titulo-2"><a href="/edit/{{ estoques.id }}"><i class="fas fa-edit"></i></a></span></li>
-                    <li><span class="span-titulo">Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
-                    <li id="custo"><span class="span-titulo">Custo:&nbsp;</span>{{ estoques.custo }}</li>
-                    <li><span class="span-titulo">Quantidade Disponível:&nbsp;</span><span id="dispo">{{ estoques.quantidade }}</span></li>
-                    <li id="desc"><span class="span-titulo">Descrição:&nbsp;</span>{{ estoques.descricao }}</li>
-                    <li id="status"><span class="span-titulo">Status:&nbsp;</span>{{ estoques.status }}</li>
-                    <li><span class="span-titulo">Quantidade:&nbsp;<input type="number" id="qtd"></span></li>
+                    <li><span class="lista-itens_titulo">Produto:&nbsp;</span><span id="produto">{{ estoques.produto }}</span>&nbsp;&nbsp;&nbsp;<span class="span-titulo-2"><a href="/edit/{{ estoques.id }}"><i class="fas fa-edit"></i></a></span></li>
+                    <li><span class="lista-itens_titulo">Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
+                    <li id="custo"><span class="lista-itens_tituloo">Custo:&nbsp;</span>{{ estoques.custo }}</li>
+                    <li><span class="lista-itens_titulo">Quantidade Disponível:&nbsp;</span><span id="dispo">{{ estoques.quantidade }}</span></li>
+                    <li id="desc"><span class="lista-itens_titulo">Descrição:&nbsp;</span>{{ estoques.descricao }}</li>
+                    <li id="status"><span class="lista-itens_titulo">Status:&nbsp;</span>{{ estoques.status }}</li>
+                    <li><span class="lista-itens_titulo">Quantidade:&nbsp;<input type="number" id="qtd"></span></li>
                     <li><button type="submit" id="add" onclick="adicionar()"><a href="{% url 'products' %}">adicionar&nbsp;<i class="fas fa-cart-plus"></i></a></button></li>
                 </ul>
             </div>
