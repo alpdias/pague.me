@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'dashboard'  %}">PAINEL</a>
+                    <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;</span><a href="{% url 'dashboard'  %}">PAINEL</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -23,17 +23,17 @@ Criado em 10/2020
     </div>
     <div class="nav-bar__vertical">
         <nav>
-            <ul class="item-vertical">
-                <li><a href="{% url 'dashboard' %}"><span class="ajuste-menu__vertical"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
-                <li><a href="{% url 'buy' %}"><span class="ajuste-menu__vertical"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
-                <li><a href="{% url 'cart' %}"><span class="ajuste-menu__vertical"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
-                <li><a href="{% url 'products' %}"><span class="ajuste-menu__vertical"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
-                <li><a href="{% url 'records' %}"><span class="ajuste-menu__vertical"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
+            <ul class="nav-bar__vertical-item">
+                <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
+                <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
+                <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
+                <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
+                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
             </ul>
         </nav>
     </div>
     <div class="painel">
-        <div class="dash-mostrador">
+        <div class="painel-mostrador">
             <ul>
                 <li>vendas hoje</li>
                 <li>30 dias</li>
@@ -41,7 +41,7 @@ Criado em 10/2020
                 <li>estoque</li>
             </ul>
         </div>
-        <div class="dash-grafico">
+        <div class="painel-grafico">
             <div>desempenho</div>
         </div>
     </div>
