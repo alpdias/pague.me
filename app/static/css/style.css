@@ -24,16 +24,6 @@ img {
     height: auto;
 }
 
-/* CORES 
-
-#0B2027
-#CFCFCD
-#9A879D
-#40798C
-#048A81
-
-*/
-
 /* GERAL */
 body {
     font-family: 'Noto Sans JP', sans-serif;
@@ -77,7 +67,7 @@ body {
     font-size: 20px;
 }
 
-.separador {
+.nav-bar__separador {
     color: #40798C;
 }
 
@@ -116,18 +106,18 @@ body {
     text-align: center;
 }
 
-#conteudo-login {
+#form-login__conteudo {
     padding-top: 10px;
     color: #40798C;
 }
 
-#conteudo-login a {
+#form-login__conteudo a {
     text-decoration: none;
     text-decoration-style: none;
     color: #9A879D;
 }
 
-#form-login input {
+#form-login__conteudo input {
     background-color: #8d8b8b27;
     padding: 6px;
     border-radius: 6px;
@@ -135,7 +125,7 @@ body {
     box-shadow: 1px 1px 2px #0000001c;
 }
 
-#entrada-login {
+#form-login__botao {
     margin-top: 16px;
     background-color: #9A879D;
     color: #ffffff;
@@ -176,7 +166,7 @@ body {
     padding-top: 0px;
 }
 
-.item-vertical li {
+.nav-bar__vertical_item li {
     display: block;
     text-decoration: none;
     text-decoration-style: none;
@@ -185,7 +175,7 @@ body {
     text-align: end;
 }
 
-.ajuste-menu__vertical {
+.nav-bar__vertical_ajuste {
     padding-left: 36px;
 }
 
@@ -252,7 +242,7 @@ th {
     padding: 6px;
 }
 
-.span-titulo {
+.lista-itens__titulo {
     color: #40798C;
     font-weight: bolder;
 }
@@ -281,7 +271,7 @@ th {
     margin: 0 auto;
 }
 
-.dash-mostrador li {
+.painel-mostrador li {
     display: inline-block;
     background-color: #ffffff;
     padding: 60px;
@@ -290,7 +280,7 @@ th {
     box-shadow: 1px 1px 2px #0000001c;
 }
 
-.dash-grafico {
+.painel-grafico {
     background-color: #ffffff;
     border-radius: 6px;
     box-shadow: 1px 1px 2px #0000001c;
@@ -299,36 +289,36 @@ th {
 }
 
 /* PRODUTOS */
-#qtd {
+.qtd-produtos {
     max-width: 60px;
 }
 
-#pesquisa-form {
+.pesquisa-form {
     display: block;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 0px;
 }
 
-#novo-produto {
+.novo-produto {
     display: inline-block;
     padding-bottom: 0px;
 }
 
-#pesquisa-form form {
+.pesquisa-form form {
     padding-top: 12px;
     display: inline-block;
     padding-bottom: 0px;
 }
 
-#pesquisa-form input {
+.pesquisa-form input {
     padding: 6px;
     border-radius: 6px;
     border: none;
     box-shadow: 1px 1px 2px #0000001c;
 }
 
-#pesquisa-form a {
+.pesquisa-form a {
     color: #40798C;
     font-weight: bolder;
     text-decoration: none;
@@ -336,7 +326,7 @@ th {
     padding-right: 10px;
 }
 
-#pesquisar {
+.pesquisa-botao {
     color: #40798C;
     font-weight: bolder;
     padding-left: 8px;
@@ -344,7 +334,7 @@ th {
 }
 
 /* CLIENTES */
-#novo-cliente {
+.novo-cliente {
     display: block;
     margin: 0 auto;
     text-align: center;
@@ -352,7 +342,7 @@ th {
     padding-bottom: 0px;
 }
 
-#novo-cliente a {
+.novo-cliente a {
     text-decoration: none;
     text-decoration-style: none;
     color: #40798C;
@@ -380,13 +370,13 @@ th {
     text-decoration-style: none;
 }
 
-.dupla-botoes {
+.botoes-carrinho__dupla {
     display: block;
     text-align: center;
     padding-top: 16px;
 }
 
-.dupla-botoes button {
+.botoes-carrinho__dupla button {
     background-color: #9A879D;
     color: #ffffff;
     box-shadow: 1px 1px 2px #0000001c;
@@ -397,13 +387,13 @@ th {
     margin-left: 8px;
 }
 
-.dupla-botoes a {
+.botoes-carrinho__dupla a {
     text-decoration: none;
     text-decoration-style: none;
     color: #ffffff;
 }
 
-#confirmacao {
+.confirmacao {
     display: none;
     position: fixed;
     top: 0;
@@ -413,7 +403,7 @@ th {
     z-index: 999;
 }
 
-#confirmacao-dentro {
+.confirmacao-dentro {
     display: table;
     width: 100%;
     height: 100%;
@@ -424,14 +414,14 @@ th {
     background-color: rgba(0, 0, 0, 0.527)
 }
 
-#confirmacao-interno {
+.confirmacao-interno {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
     font-size: 20px;
 }
 
-#confirmacao-formatacao {
+.confirmacao-display {
     display: block;
     max-width: 500px;
     margin: 0 auto;
@@ -442,7 +432,7 @@ th {
     box-shadow: 1px 1px 2px #0000001c;
 }
 
-.texto-confirmacao {
+.confirmacao-texto {
     font-weight: bolder;
     margin: 0 auto;
     text-align: left;
@@ -450,17 +440,17 @@ th {
     padding-top: 6px;
 }
 
-.selecao-confirmacao {
+.confirmacao-selecao {
     margin: 0 auto;
     text-align: left;
     width: 80%;
 }
 
-.selecao-confirmacao label {
+.confirmacao-selecao label {
     font-weight: bolder;
 }
 
-#confirmacao-formatacao input{
+.confirmacao-display input{
     max-width: 80%;
     margin-bottom: 10px;
     padding: 6px;
@@ -469,7 +459,7 @@ th {
     box-shadow: 1px 1px 2px #0000008c;
 }
 
-#confirmacao-formatacao select{
+.confirmacao-display select{
     background-color: #ffffff;
     padding: 3px;
     border: none;
@@ -478,7 +468,7 @@ th {
     margin-bottom: 4px;
 }
 
-#confirmacao-botoes a {
+.confirmacao-botoes a {
     text-decoration: none;
     text-decoration-style: none;
     color: #ffffff;
@@ -486,7 +476,7 @@ th {
     background-color: #9A879D;
 }
 
-#confirmacao-botoes button {
+.confirmacao-botoes button {
     color: #ffffff;
     font-weight: bolder;
     background-color: #9A879D;
@@ -499,7 +489,7 @@ th {
     font-size: 18px;
 }
 
-#voltar-botao button {
+.confirmarcao-botoes__voltar button {
     text-decoration: none;
     text-decoration-style: none;
     color: #9A879D;
@@ -511,17 +501,17 @@ th {
     background-color: #ffffff00;
 }
 
-#soma {
+.confirmacao-botoes__soma {
     cursor: pointer;
 }
 
 /* VENDAS */
-.span-titulo-2 {
+.vendas-titulo {
     color: #9A879D;
     font-weight: bolder;
 }
 
-.span-titulo-2 a {
+.vendas-titulo a {
     color: #9A879D;
     text-decoration: none;
     text-decoration-style: none;
