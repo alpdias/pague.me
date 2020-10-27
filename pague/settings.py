@@ -1,4 +1,3 @@
-  
 # -*- coding: utf-8 -*-
 
 '''
@@ -132,3 +131,18 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/dashboard'
 
 LOGOUT_REDIRECT_URL = '/'
+
+# SEND EMAIL
+
+EMAIL_BACKED = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+
+EMAIL_HOST_USER = hostUser
+
+EMAIL_HOST_PASSWORD = hostPWD
+
+EMAIL_PORT = '2525'
+
