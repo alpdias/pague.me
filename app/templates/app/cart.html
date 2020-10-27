@@ -7,13 +7,13 @@ Criado em 10/2020
 {% block title %}pague.me{% endblock %}
 {% block top %}
 {% if user.is_authenticated %}
-<div id="confirmacao">
-    <div id="confirmacao-dentro">
-        <div id="confirmacao-interno">
-            <div id="confirmacao-formatacao">
+<div class="confirmacao">
+    <div class="confirmacao-dentro">
+        <div class="confirmacao-interno">
+            <div claass="confirmacao-display">
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="texto-confirmacao"><label for="nomeCliente-form">cliente</label></div>
+                    <div class="confirmacao-texto"><label for="nomeCliente-form">cliente</label></div>
                     <div><input type="text" name="nomeCliente-form" id="nomeCliente-form"></div>
                     <div class="selecao-confirmacao">
                         <label for="tipoPagamento-form">pagamento</label>
@@ -23,7 +23,7 @@ Criado em 10/2020
                             <option value="dinheiro">dinheiro</option>
                         </select>
                     </div>
-                    <div class="texto-confirmacao"><label for="valorDesconto-form">desconto&nbsp;&nbsp;$</label></div>
+                    <div class="confirmacao-texto"><label for="valorDesconto-form">desconto&nbsp;&nbsp;$</label></div>
                     <div><input type="text" name="valorDesconto-form" id="valorDesconto-form" onchange="desconto()"></div>
                     <div style="display: none;" id="tipoDependencia">
                         <div class="texto-confirmacao"><label for="valorRecebido-form">recebido&nbsp;&nbsp;$</label></div>
@@ -31,7 +31,7 @@ Criado em 10/2020
                         <div class="texto-confirmacao"><label for="valorTroco-form">troco&nbsp;&nbsp;$</label></div>
                         <div><input type="text" name="valorTroco-form" id="valorTroco-form"></div>
                     </div>
-                    <div class="texto-confirmacao"><label for="valorTotal-form">total&nbsp;&nbsp;=</label></div>
+                    <div class="confirmacao-texto"><label for="valorTotal-form">total&nbsp;&nbsp;=</label></div>
                     <div><input type="text" name="valorTotal-form" id="valorTotal-form"></div>
                     <div id="confirmacao-botoes">
                         <button onclick="fecharVenda()" type="submit">registrar&nbsp;<i class="fas fa-cash-register"></i></button>
@@ -60,7 +60,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'cart'  %}">CARRINHO</a>
+                    <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;</span><a href="{% url 'cart'  %}">CARRINHO</a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -72,11 +72,11 @@ Criado em 10/2020
     <div class="nav-bar__vertical">
         <nav>
             <ul class="item-vertical">
-                <li><a href="{% url 'dashboard' %}"><span class="ajuste-menu__vertical"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
-                <li><a href="{% url 'buy' %}"><span class="ajuste-menu__vertical"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
-                <li><a href="{% url 'cart' %}"><span class="ajuste-menu__vertical"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
-                <li><a href="{% url 'products' %}"><span class="ajuste-menu__vertical"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
-                <li><a href="{% url 'records' %}"><span class="ajuste-menu__vertical"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
+                <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
+                <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
+                <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
+                <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
+                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
             </ul>
         </nav>
     </div>
