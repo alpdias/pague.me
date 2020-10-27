@@ -6,8 +6,10 @@ Criado em 09/2020
 '''
 
 from django.views import generic
+from django.conf import settings
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -350,6 +352,22 @@ class register(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 """
+
+def enviarRecibo(emailUsuario, recibo):
+
+    """
+    -> 
+    :return:
+    """
+
+    assunto = 'pague.me | nova venda realizada !!'
+    mensagem = 'Olá, você acaba de realizar uma nova venda pela plataforma pague.me e aqui está o seu recibo de venda!\
+    \n\n\
+    \n\nhttps://pague-me.herokuapp.com/'
+    
+    enviar = settings.EMAIL_HOST_USER
+    destinatarios = [f'{emailUsuario}']
+    send_mail(assunto, mesnagem, enviar, destinatarios)
 
 
 def tratamento(numero=0):
