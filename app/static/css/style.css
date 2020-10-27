@@ -166,7 +166,7 @@ body {
     padding-top: 0px;
 }
 
-.nav-bar__vertical_item li {
+.nav-bar__vertical-item li {
     display: block;
     text-decoration: none;
     text-decoration-style: none;
@@ -175,7 +175,7 @@ body {
     text-align: end;
 }
 
-.nav-bar__vertical_ajuste {
+.nav-bar__vertical-ajuste {
     padding-left: 36px;
 }
 
@@ -300,11 +300,6 @@ th {
     padding-bottom: 0px;
 }
 
-.novo-produto {
-    display: inline-block;
-    padding-bottom: 0px;
-}
-
 .pesquisa-form form {
     padding-top: 12px;
     display: inline-block;
@@ -332,23 +327,6 @@ th {
     padding-left: 8px;
     cursor: pointer;
 }
-
-/* CLIENTES */
-.novo-cliente {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 12px;
-    padding-bottom: 0px;
-}
-
-.novo-cliente a {
-    text-decoration: none;
-    text-decoration-style: none;
-    color: #40798C;
-    font-weight: bolder;
-}
-
 
 /* CARRINHO */
 .botoes-carrinho button{
