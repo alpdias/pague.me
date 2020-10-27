@@ -157,6 +157,12 @@ def cart(request):
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
+
+        if tipoPgto != 'dinheiro':
+            valorTroco = '0'
+
+        if valorDesconto == '':
+            valorDesconto = '0'
         
         valorTotal = (float(valorTotal) - float(valorDesconto))
         removeItens = listaItens
@@ -171,12 +177,6 @@ def cart(request):
         listaRecibo.append(listaItens)
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
-
-        if tipoPgto != 'dinheiro':
-            valorTroco = '0'
-
-        if valorDesconto == '':
-            valorDesconto = '0'
 
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
@@ -257,28 +257,28 @@ def stock(request, id):
 
 
 @login_required
-def editStock(request, id):
+def edit(request, id):
 
     """
     ->
     :return:
     """
     
-    produto = get_object_or_404(estoque, pk=id).filter(usuario=request.user)
-    form = estoqueForm(instance=produto)
+    estoques = get_object_or_404(estoque, pk=id)
+    form = estoqueForm(instance=estoques, usuario=request.user)
     
     if request.method == 'POST':
-        form = estoqueForm(request.POST, instance=produto)
+        form = estoqueForm(request.POST, instance=estoques, usuario=request.user)
         
         if form.is_valid:
             form.save()
-            return redirect('/stock')
+            return redirect('/products')
         
         else:
-            return render(request, 'app/editStock.html', {'form': form, 'estoques': estoques})
+            return render(request, 'app/edit.html', {'form': form, 'estoques': estoques})
         
     else:
-        return render(request, 'app/stock.html', {'form': form, 'estoques': estoques}) 
+        return render(request, 'app/edit.html', {'form': form, 'estoques': estoques}) 
 
 
 @login_required
@@ -292,8 +292,10 @@ def newp(request):
     if request.method == 'POST':
         form = estoqueForm(request.POST)
         
-        if form.is_valid()
-            form.save()
+        if form.is_valid():
+            produto = form.save(commit=False)
+            produto.usuario = request.user
+            produto.save()
             
             return redirect('/products')
             
@@ -311,7 +313,7 @@ def people(request, id):
     :return:
     """
 
-    pessoa = get_object_or_404(pessoas, pk=id).filter(usuario=request.user)
+    pessoa = get_object_or_404(pessoas, pk=id)
 
     return render(request, 'app/people.html', {'pessoa': pessoa})
 
@@ -325,9 +327,10 @@ def newc(request):
     """
     
     if request.method == 'POST':
-        form = pessoasForm(request.POST)
+        form = pessoasForm(request.POST).filter(usuario=request.user)
         
-        if form.is_valid()
+        if form.is_valid():
+            form.user = request.user
             form.save()
             return redirect('/records')
             
@@ -368,7 +371,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     :return:
     """
     
-    empresa = empresas.objects.all().filter(usuario=usuario)
+    empresa = empresas.objects.get()
     
     data = date.today()
     d = data.day

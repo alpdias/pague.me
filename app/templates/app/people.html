@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;</span><a href="{% url 'records'  %}"><i class="fas fa-undo"></i></a>
+                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;&nbsp;&nbsp;</span><a href="{% url 'records'  %}"><i class="fas fa-undo"></i></a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -23,6 +23,7 @@ Criado em 10/2020
     </div>
     <div class="lista-itens">
         <ul>
+            <li><span class="span-titulo">Nome:&nbsp;</span>{{ pessoa.nome}}</li>
             <li><span class="span-titulo">Telefone:&nbsp;</span>{{ pessoa.telefone }}</li>
             <li><span class="span-titulo">E-mail:&nbsp;</span>{{ pessoa.email }}</li>
             <li><span class="span-titulo">CPF:&nbsp;</span>{{ pessoa.cpf }}</li>

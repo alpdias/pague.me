@@ -33,8 +33,8 @@ Criado em 10/2020
         </nav>
     </div>
     <div id="pesquisa-form">
-        <div>
-            <a href="{% url 'newp' %}"><i class="fas fa-plus-circle"></i></a>
+        <div id="novo-produto">
+            <a href="{% url 'newp' %}">produto&nbsp;&nbsp;<i class="fas fa-plus-circle"></i></a>
         </div>
         <form method="GET" id="pesquisa">
             <input type="text" name="procurar" id="procurar" value="{{ request.GET.procurar }}">

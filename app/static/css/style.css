@@ -103,17 +103,47 @@ body {
 }
 
 /* LOGIN */
-.form__login form {
+#form-login {
+    background-color: #ffffff;
     display: block;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 26px auto 0px auto;
+    box-shadow: 1px 1px 2px #0000001c;
+    font-weight: bolder;
+    border: none;
+    border-radius: 6px;
+    padding: 26px;
+    text-align: center;
 }
 
-/* REGISTRO */
-.form__registro form {
-    display: block;
-    max-width: 600px;
-    margin: 0 auto;
+#conteudo-login {
+    padding-top: 10px;
+    color: #40798C;
+}
+
+#conteudo-login a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #9A879D;
+}
+
+#form-login input {
+    background-color: #8d8b8b27;
+    padding: 6px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 1px 1px 2px #0000001c;
+}
+
+#entrada-login {
+    margin-top: 16px;
+    background-color: #9A879D;
+    color: #ffffff;
+    box-shadow: 1px 1px 2px #0000001c;
+    font-weight: bolder;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px 8px 10px;
 }
 
 /* MENU VERTICAL */
@@ -167,7 +197,7 @@ body {
     text-align: center;
     padding-left: 172px;
     padding-right: 26px;
-    padding-top: 26px;
+    padding-top: 12px;
 }
 
 .tabelas select {
@@ -277,7 +307,58 @@ th {
     display: block;
     margin: 0 auto;
     text-align: center;
+    padding-bottom: 0px;
 }
+
+#novo-produto {
+    display: inline-block;
+    padding-bottom: 0px;
+}
+
+#pesquisa-form form {
+    padding-top: 12px;
+    display: inline-block;
+    padding-bottom: 0px;
+}
+
+#pesquisa-form input {
+    padding: 6px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 1px 1px 2px #0000001c;
+}
+
+#pesquisa-form a {
+    color: #40798C;
+    font-weight: bolder;
+    text-decoration: none;
+    text-decoration-style: none;
+    padding-right: 10px;
+}
+
+#pesquisar {
+    color: #40798C;
+    font-weight: bolder;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+/* CLIENTES */
+#novo-cliente {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 0px;
+}
+
+#novo-cliente a {
+    text-decoration: none;
+    text-decoration-style: none;
+    color: #40798C;
+    font-weight: bolder;
+}
+
 
 /* CARRINHO */
 .botoes-carrinho button{
@@ -451,4 +532,15 @@ th {
     display: block;
     margin: 0 auto;
     text-align: center;
+    margin-top: 16px;
+    color: #40798C;
+    font-weight: bolder;
+}
+
+.paginacao i {
+    color: #9A879D;
+    text-decoration: none;
+    text-decoration-style: none;
+    font-size: 18px;
+    font-weight: bolder;
 }

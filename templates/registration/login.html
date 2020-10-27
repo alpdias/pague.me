@@ -34,12 +34,12 @@ Criado em 09/2020
             </ul>
         </nav>
     </div>
-    <div class="form__login">
+    <div id="form-login">
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
             {% for field in form %}
-                <div>
+                <div id="conteudo-login">
                     {{ field.label_tag }}
                 </div>
                 <div>
@@ -49,11 +49,11 @@ Criado em 09/2020
             <div>
                 {{ form.non_field_errors }}
             </div>
-            <input type="submit" value="ENTRAR">
+            <button type="submit" id="entrada-login">entrar&nbsp;&nbsp;<i class="fas fa-door-open"></i></button>
         </form>
-    </div>
-    <div>
-        <span>ainda não tem uma conta? <a href="{% url 'contact' %}">registre-se</a></span>
+        <div id="conteudo-login">
+            <span>ainda não tem uma conta? <a href="{% url 'contact' %}">registre-se</a></span>
+        </div>
     </div>
 </main>
 {% endblock %}

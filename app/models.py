@@ -73,7 +73,7 @@ class estoque(models.Model):
     custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('Quantidade')
     descricao = models.TextField('Descrição', blank=True)
-    fornecedor = models.CharField('Fornecedor', blank=True)
+    fornecedor = models.CharField('Fornecedor', max_length=255, blank=True)
     status = models.CharField(
         max_length = 10, 
         choices = STATUS
@@ -161,7 +161,7 @@ class empresas(models.Model):
     :return:
     """
     
-     STATUS = (
+    STATUS = (
         ('ativo', 'ATIVO'), 
         ('inativo', 'INATIVO'),
     )
