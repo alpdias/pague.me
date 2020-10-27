@@ -64,7 +64,7 @@ Criado em 10/2020
      <div class="paginacao">
         <span>
             {% if produtos.has_previous %}
-                <a href="?page={{ produtos.preivous_page_number }}"><i class="fas fa-angle-left"></i></a>
+                <a href="?page={{ produtos.preivous_page_number }}"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;</a>
             {% endif %}
             {% if produtos.paginator.num_pages %}
             <span>
@@ -72,7 +72,7 @@ Criado em 10/2020
             </span>
             {% endif %}
             {% if produtos.has_next %}
-            <a href="?page={{ produtos.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+            <a href="?page={{ produtos.next_page_number }}">&nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
             {% endif %}
         </span>
     </div>
