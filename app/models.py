@@ -21,19 +21,19 @@ class pessoas(models.Model):
         ('ativo', 'ATIVO'), 
         ('inativo', 'INATIVO'),
     )
-    nome = models.CharField('Nome', max_length=255)
-    telefone = models.CharField('Telefone', max_length=14, blank=True)
-    email = models.EmailField('E-mail', blank=True)
-    cpf = models.CharField('CPF', max_length=14, blank=True)
-    endereco = models.CharField('Endereço', max_length=255, blank=True)
-    observacao = models.TextField('Observações', blank=True)
+    nome = models.CharField('nome', max_length=255)
+    telefone = models.CharField('telefone', max_length=14, blank=True)
+    email = models.EmailField('e-mail', blank=True)
+    cpf = models.CharField('cpf', max_length=14, blank=True)
+    endereco = models.CharField('endereço', max_length=255, blank=True)
+    observacao = models.TextField('observações', blank=True)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS
     )
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    criado = models.DateTimeField('Criado em', auto_now_add=True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
+    criado = models.DateTimeField('criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('atualizado em', auto_now=True)
 
     def __str__(self):
 
@@ -68,12 +68,12 @@ class estoque(models.Model):
         ('disponivel', 'DISPONIVEL'), 
         ('esgotado', 'ESGOTADO'),
     )
-    produto = models.CharField('Produto', max_length=255)
-    preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
-    custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
-    quantidade = models.IntegerField('Quantidade')
-    descricao = models.TextField('Descrição', blank=True)
-    fornecedor = models.CharField('Fornecedor', max_length=255, blank=True)
+    produto = models.CharField('produto', max_length=255)
+    preco = models.DecimalField('preço', max_digits=999, decimal_places=2)
+    custo = models.DecimalField('custo', max_digits=999, decimal_places=2)
+    quantidade = models.IntegerField('quantidade')
+    descricao = models.TextField('descrição', blank=True)
+    fornecedor = models.CharField('fornecedor', max_length=255, blank=True)
     status = models.CharField(
         max_length = 10, 
         choices = STATUS
@@ -115,14 +115,14 @@ class vendas(models.Model):
         ('aberto', 'ABERTO'),
         ('fechado', 'FECHADO'),
     )
-    cliente = models.CharField('Cliente', max_length=255, blank=True)
-    valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
-    pagamento = models.CharField('Pagamento', max_length=8)
+    cliente = models.CharField('cliente', max_length=255, blank=True)
+    valor = models.DecimalField('valor', max_digits=999, decimal_places=2)
+    pagamento = models.CharField('pagamento', max_length=8)
     comprovante = models.FileField(
-        verbose_name = 'Comprovante',
+        verbose_name = 'comprovante',
         blank=True
     )
-    recibo = models.CharField('Recibo', max_length=255, blank=True)
+    recibo = models.CharField('recibo', max_length=255, blank=True)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS,
@@ -165,19 +165,19 @@ class empresas(models.Model):
         ('ativo', 'ATIVO'), 
         ('inativo', 'INATIVO'),
     )
-    empresa = models.CharField('Empresa', max_length=255)
-    cnpj = models.CharField('CNPJ', max_length=18)
-    endereco = models.CharField('Endereço', max_length=255)
-    cidadeEstado = models.CharField('Cidade/Estado', max_length=255)
-    observacao = models.TextField('Observações', blank=True)
-    frase = models.CharField('Rodapé', max_length=255)
+    empresa = models.CharField('empresa', max_length=255)
+    cnpj = models.CharField('cnpj', max_length=18)
+    endereco = models.CharField('endereço', max_length=255)
+    cidadeEstado = models.CharField('cidade/estado', max_length=255)
+    observacao = models.TextField('observações', blank=True)
+    frase = models.CharField('rodapé', max_length=255)
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS
     )
-    criado = models.DateTimeField('Criado em', auto_now_add=True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
+    criado = models.DateTimeField('criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('atualizado em', auto_now=True)
 
     def __str__(self):
 
