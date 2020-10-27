@@ -12,7 +12,7 @@ Criado em 10/2020
         <nav>
             <ul>
                 <li>
-                    <a href="/">pague.me</a><span class="separador">&nbsp;|&nbsp;&nbsp;&nbsp;</span><a href="{% url 'records'  %}"><i class="fas fa-undo"></i></a>
+                    <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;&nbsp;&nbsp;</span><a href="{% url 'records'  %}"><i class="fas fa-undo"></i></a>
                 </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
@@ -23,13 +23,13 @@ Criado em 10/2020
     </div>
     <div class="lista-itens">
         <ul>
-            <li><span class="span-titulo">Nome:&nbsp;</span>{{ pessoa.nome}}</li>
-            <li><span class="span-titulo">Telefone:&nbsp;</span>{{ pessoa.telefone }}</li>
-            <li><span class="span-titulo">E-mail:&nbsp;</span>{{ pessoa.email }}</li>
-            <li><span class="span-titulo">CPF:&nbsp;</span>{{ pessoa.cpf }}</li>
-            <li><span class="span-titulo">Endereço:&nbsp;</span>{{ pessoa.endereco }}</li>
-            <li><span class="span-titulo">Observações:&nbsp;</span>{{ pessoa.observacao }}</li>
-            <li><span class="span-titulo">Status:&nbsp;</span>{{ pessoa.status }}</li>
+            <li><span class="lista-itens__titulo">Nome:&nbsp;</span>{{ pessoa.nome}}</li>
+            <li><span class="lista-itens__titulo">Telefone:&nbsp;</span>{{ pessoa.telefone }}</li>
+            <li><span class="lista-itens__titulo">E-mail:&nbsp;</span>{{ pessoa.email }}</li>
+            <li><span class="lista-itens__titulo">CPF:&nbsp;</span>{{ pessoa.cpf }}</li>
+            <li><span class="lista-itens__titulo">Endereço:&nbsp;</span>{{ pessoa.endereco }}</li>
+            <li><span class="lista-itens__titulo">Observações:&nbsp;</span>{{ pessoa.observacao }}</li>
+            <li><span class="lista-itens__titulo">Status:&nbsp;</span>{{ pessoa.status }}</li>
         </ul>
     </div>
 </main>
