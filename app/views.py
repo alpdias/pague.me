@@ -5,7 +5,6 @@ Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
 '''
 
-
 from django.views import generic
 from django.urls import reverse_lazy
 from django.http import HttpResponse
