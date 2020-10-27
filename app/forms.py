@@ -1,6 +1,15 @@
 from django import forms
 from .models import pessoas, estoque, vendas
+from django.contrib.auth.forms import AuthenticationForm, UsernameField, PasswordField
 
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        label = 'usuario',
+        widget = forms.TextInput(attrs={'autofocus': True})
+    )
+    password = PasswordField(label = 'senha')
+
+    
 class pessoasForm(forms.ModelForm):
   
   class Meta:
