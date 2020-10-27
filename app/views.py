@@ -120,7 +120,7 @@ def opEstoque(itens, quantidades):
 
         nomeProduto = itens[0]
         qtd = int(quantidades[0])
-        operacao = estoque.objects.get(produto=nomeProduto)
+        operacao = estoque.objects.filter(produto=nomeProduto).get()
         operacao.quantidade -= qtd
         operacao.save()
         itens.pop(0)
@@ -265,10 +265,10 @@ def edit(request, id):
     """
     
     estoques = get_object_or_404(estoque, pk=id)
-    form = estoqueForm(instance=estoques, usuario=request.user)
+    form = estoqueForm(instance=estoques)
     
     if request.method == 'POST':
-        form = estoqueForm(request.POST, instance=estoques, usuario=request.user)
+        form = estoqueForm(request.POST, instance=estoques)
         
         if form.is_valid:
             form.save()
@@ -327,11 +327,13 @@ def newc(request):
     """
     
     if request.method == 'POST':
-        form = pessoasForm(request.POST).filter(usuario=request.user)
+        form = pessoasForm(request.POST)
         
         if form.is_valid():
-            form.user = request.user
-            form.save()
+            pessoa = form.save(commit=False)
+            pessoa.usuario = request.user
+            pessoa.save()
+            
             return redirect('/records')
             
     else:
@@ -371,7 +373,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     :return:
     """
     
-    empresa = empresas.objects.get()
+    empresa = empresas.objects.filter(usuario=usuario).get()
     
     data = date.today()
     d = data.day
