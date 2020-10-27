@@ -38,16 +38,15 @@ Criado em 09/2020
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            {% for field in form %}
-                <div id="conteudo-login">
-                    {{ field.label_tag }}
-                </div>
-                <div>
-                    {{ field }}
-                </div>
-            {% endfor %}
-            <div>
-                {{ form.non_field_errors }}
+            <div id="conteudo-login__user">
+                <label for="{{ form.username.id_for_label }}">usuario:</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+            <div id="conteudo-login__pwd">
+                <label for="{{ form.password.id_for_label }}">senha:</label>
+                {{ form.password }}
+                {{ form.password.errors }}
             </div>
             <button type="submit" id="entrada-login">entrar&nbsp;&nbsp;<i class="fas fa-door-open"></i></button>
         </form>
