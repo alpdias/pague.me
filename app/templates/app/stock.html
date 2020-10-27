@@ -26,12 +26,11 @@ Criado em 10/2020
                 <ul>
                     <li><span class="lista-itens_titulo">Produto:&nbsp;</span><span id="produto">{{ estoques.produto }}</span>&nbsp;&nbsp;&nbsp;<span class="span-titulo-2"><a href="/edit/{{ estoques.id }}"><i class="fas fa-edit"></i></a></span></li>
                     <li><span class="lista-itens_titulo">Preço:&nbsp;</span><span id="preco">{{ estoques.preco }}</span></li>
-                    <li id="custo"><span class="lista-itens_tituloo">Custo:&nbsp;</span>{{ estoques.custo }}</li>
+                    <li id="custo"><span class="lista-itens_titulo">Custo:&nbsp;</span>{{ estoques.custo }}</li>
                     <li><span class="lista-itens_titulo">Quantidade Disponível:&nbsp;</span><span id="dispo">{{ estoques.quantidade }}</span></li>
                     <li id="desc"><span class="lista-itens_titulo">Descrição:&nbsp;</span>{{ estoques.descricao }}</li>
                     <li id="status"><span class="lista-itens_titulo">Status:&nbsp;</span>{{ estoques.status }}</li>
-                    <li><span class="lista-itens_titulo">Quantidade:&nbsp;<input type="number" id="qtd"></span></li>
-                    <li><button type="submit" id="add" onclick="adicionar()"><a href="{% url 'products' %}">adicionar&nbsp;<i class="fas fa-cart-plus"></i></a></button></li>
+                    <li><span class="lista-itens_titulo">Quantidade:&nbsp;<input type="number" id="qtd"><button type="submit" id="add" onclick="adicionar()"><a href="{% url 'products' %}">adicionar&nbsp;<i class="fas fa-cart-plus"></i></a></button></span></li>
                 </ul>
             </div>
     </div>
