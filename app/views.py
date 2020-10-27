@@ -90,7 +90,7 @@ def sales(request, id):
     :return:
     """
     
-    venda = get_object_or_404(vendas, pk=id).filter(usuario=request.user)
+    venda = get_object_or_404(vendas, pk=id)
     form = vendasForm(instance=venda)
     
     if request.method == 'POST':
