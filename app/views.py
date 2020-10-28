@@ -375,8 +375,8 @@ def enviarRecibo(recibo, usuario):
     
     porta = empresa.porta
     smtpServidor = empresa.servidor
-    login = empresa.usuario
-    pwd = empresa.senha
+    login = empresa.usuarioServidor
+    pwd = empresa.senhaServidor
 
     assunto = 'pague.me | nova venda realizada !!'
     de = empresa.email
