@@ -18,10 +18,10 @@ class pessoas(models.Model):
     """
 
     STATUS = (
-        ('ativo', 'ATIVO'), 
-        ('inativo', 'INATIVO'),
+        ('ativo', 'ativo'), 
+        ('inativo', 'inativo'),
     )
-    nome = models.CharField('nome', max_length=255)
+    nome = models.CharField('nome', max_length=255, unique=True)
     telefone = models.CharField('telefone', max_length=15, blank=True)
     email = models.EmailField('e-mail', blank=True)
     cpf = models.CharField('cpf', max_length=14, blank=True)
@@ -52,8 +52,8 @@ class pessoas(models.Model):
         :return:
         """
 
-        verbose_name = 'CADASTRO'
-        verbose_name_plural = 'CADASTROS'
+        verbose_name = 'cadastro'
+        verbose_name_plural = 'cadastros'
         ordering = ['nome'] 
  
 
@@ -65,13 +65,13 @@ class estoque(models.Model):
     """
 
     STATUS = (
-        ('disponivel', 'DISPONIVEL'), 
-        ('esgotado', 'ESGOTADO'),
+        ('disponivel', 'disponivel'), 
+        ('esgotado', 'esgotado'),
     )
     produto = models.CharField('produto', max_length=255, unique=True)
     preco = models.DecimalField('preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('custo', max_digits=999, decimal_places=2)
-    quantidade = models.IntegerField('quantidade')
+    quantidade = models.IntegerField('quantidade', blank=True, defautl=0)
     descricao = models.CharField('descrição', max_length=255, blank=True)
     fornecedor = models.CharField('fornecedor', max_length=255, blank=True)
     status = models.CharField(
@@ -99,8 +99,8 @@ class estoque(models.Model):
         :return:
         """
 
-        verbose_name = 'PRODUTO'
-        verbose_name_plural = 'PRODUTOS'
+        verbose_name = 'produto'
+        verbose_name_plural = 'produtos'
         ordering = ['produto'] 
  
 
@@ -112,14 +112,14 @@ class vendas(models.Model):
     """
     
     STATUS = (
-        ('aberto', 'ABERTO'),
-        ('fechado', 'FECHADO'),
+        ('aberto', 'aberto'),
+        ('fechado', 'fechado'),
     )
     cliente = models.CharField('cliente', max_length=255, blank=True, default='cliente')
     valor = models.DecimalField('valor', max_digits=999, decimal_places=2)
     pagamento = models.CharField('pagamento', max_length=8)
-    comprovante = models.FileField(blank=True)
-    recibo = models.CharField('recibo', max_length=255, blank=True)
+    comprovante = models.FileField()
+    recibo = models.CharField('recibo', max_length=255)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS,
@@ -146,8 +146,8 @@ class vendas(models.Model):
         :return:
         """
 
-        verbose_name = 'VENDA'
-        verbose_name_plural = 'VENDAS'
+        verbose_name = 'venda'
+        verbose_name_plural = 'vendas'
         ordering = ['-criado'] 
         
         
@@ -159,15 +159,20 @@ class empresas(models.Model):
     """
     
     STATUS = (
-        ('ativo', 'ATIVO'), 
-        ('inativo', 'INATIVO'),
+        ('ativo', 'ativo'), 
+        ('inativo', 'inativo'),
     )
     empresa = models.CharField('empresa', max_length=255)
     cnpj = models.CharField('cnpj', max_length=18)
     endereco = models.CharField('endereço', max_length=255)
     cidadeEstado = models.CharField('cidade/estado', max_length=255)
     observacao = models.CharField('observações', max_length=255, blank=True)
-    frase = models.CharField('rodapé', max_length=255)
+    frase = models.CharField('rodapé', max_length=255, default='VOLTE SEMPRE!!')
+    porta = 
+    servidor = models.CharField('host', max_length=255)
+    usuarioServidor = models.CharField('host usuário', max_length=255)
+    senhaServidor = models.CharField('host senha', max_length=255)
+    email = models.EmailField('e-mail')
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     status = models.CharField(
         max_length = 7, 
@@ -193,6 +198,6 @@ class empresas(models.Model):
         :return:
         """
 
-        verbose_name = 'EMPRESA'
-        verbose_name_plural = 'EMPRESAS'
+        verbose_name = 'empresa'
+        verbose_name_plural = 'empresas'
         ordering = ['empresa'] 
