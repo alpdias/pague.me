@@ -131,6 +131,10 @@ body {
     font-size: 12px;
 }
 
+.form-login__ajuste {
+    display: block;
+    padding: 4px;
+}
 
 #form-login__botao {
     margin-top: 6px;
