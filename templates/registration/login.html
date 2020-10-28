@@ -40,11 +40,13 @@ Criado em 09/2020
             <input type="hidden" name="next" value="{{ next }}">
             <div class="form-login__texto">
                 <label for="{{ form.username.id_for_label }}">usuário&nbsp;&nbsp;<i class="fas fa-user-shield"></i></label>
+                <span class="form-login__ajuste"></span>
                 {{ form.username }}
                 {{ form.username.errors }}
             </div>
             <div class="form-login__texto">
                 <label for="{{ form.password.id_for_label }}">senha&nbsp;&nbsp;<i class="fas fa-lock"></i></label>
+                <span class="form-login__ajuste"></span>
                 {{ form.password }}
                 {{ form.password.errors }}
             </div>
