@@ -72,6 +72,7 @@ class estoque(models.Model):
     preco = models.DecimalField('preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('quantidade', blank=True, defautl=0)
+    aviso = models.IntegerField('aviso', blank=True, defautl=0)
     descricao = models.CharField('descrição', max_length=255, blank=True)
     fornecedor = models.CharField('fornecedor', max_length=255, blank=True)
     status = models.CharField(
