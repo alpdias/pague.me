@@ -18,9 +18,14 @@ from .forms import pessoasForm, estoqueForm, vendasForm
 from .models import pessoas, estoque, vendas, empresas
 import os
 import locale
+import smtplib
 from pathlib import Path
 from datetime import date
 from datetime import datetime
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -366,6 +371,44 @@ def enviarRecibo(recibo, usuario):
     :return:
     """
     
+    empresa = empresas.objects.filter(usuario=usuario).get()
+    
+    porta = empresa.porta
+    smtpServidor = empresa.servidor
+    login = empresa.usuario
+    pwd = empresa.senha
+
+    assunto = 'pague.me | nova venda realizada !!'
+    de = empresa.email
+    para = empresa.email
+
+    mensagem = MIMEMultipart()
+    mensagem['From'] = de
+    mensagem['To'] = para
+    mensagem['Subject'] = assunto
+
+    corpo = 'Olá, você acaba de realizar uma nova venda pela plataforma pague.me e aqui está o seu recibo de venda!'
+    messagem.attach(MIMEText(corpo, "plain"))
+
+    arquivo = recibo
+
+    with open(arquivo, 'rb') as attachment:
+        email = MIMEBase('application', 'octet-stream')
+        email.set_payload(attachment.read())
+
+    encoders.encode_base64(email)
+
+    email.add_header(
+        'Content-Disposition',
+        f'attachment; filename={arquivo}',
+    )
+
+    messagem.attach(email)
+    texto = messagem.as_string()
+    
+    with smtplib.SMTP(smtpServidor, porta) as server:
+        server.login(login, pwd)
+        server.sendmail(de, para, texto)
 
 
 def tratamento(numero=0):
