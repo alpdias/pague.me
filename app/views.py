@@ -127,7 +127,16 @@ def opEstoque(itens, quantidades):
         itens.pop(0)
         quantidades.pop(0)
         i = i - 1
+    
+        estado = operacao.quantidade
+        
+        if estado == 0:
+            operacao.status = 'esgotado'
+            operacao.save()
 
+        else:
+            pass
+    
 
 def novoUsuario(nome):
     
@@ -169,7 +178,7 @@ def cart(request):
         removeItens = listaItens
         removeQtd = listaQuantidades
         opEstoque(removeItens, removeQtd)
-
+        
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
@@ -191,11 +200,8 @@ def cart(request):
         
         caminho = Path(f'static/archive/{usuario}')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
-       
         f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo, usuario=usuario)
-
         pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
-
         f.save()
 
         return redirect('/buy')
@@ -336,7 +342,7 @@ def newc(request):
             pessoa.save()
             
             return redirect('/records')
-            
+        
     else:
         form = pessoasForm()
     
@@ -352,6 +358,14 @@ class register(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
 """
+
+def enviarRecibo(recibo, usuario):
+    
+    """
+    ->
+    :return:
+    """
+    
 
 
 def tratamento(numero=0):
@@ -412,10 +426,9 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     '&nbsp;']
 
     conteudo = []
-
+    
     i = len(itens)
     while i > 0:
-        
         conteudo.append(f'&nbsp;{itens[0]}&nbsp;&nbsp;&nbsp;({qtd[0]})&nbsp;&nbsp;&nbsp;{tratamento(float(valor[0]))}')
         itens.pop(0)
         qtd.pop(0)
@@ -440,7 +453,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # cabecalho
     i = len(cabecalho)
     while i > 0:
-        
         recibo.append(Paragraph(cabecalho[0], centro))
         cabecalho.pop(0)
         i = i - 1
@@ -449,7 +461,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # conteudo
     i = len(conteudo)
     while i > 0:
-        
         recibo.append(Paragraph(f'&nbsp;&nbsp;&nbsp;{conteudo[0]}'))
         conteudo.pop(0)
         i = i - 1
@@ -458,7 +469,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # corpo
     i = len(corpo)
     while i > 0:
-        
         recibo.append(Paragraph(corpo[0]))
         corpo.pop(0)
         i = i - 1
@@ -467,7 +477,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     # rodape
     i = len(rodape)
     while i > 0:
-        
         recibo.append(Paragraph(rodape[0], centro))
         rodape.pop(0)
         i = i - 1
@@ -475,10 +484,10 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     
     caminho = Path(f'app/static/archive/{usuario}')
     salvarEm = f'{caminho}/' + f'{nome}'
-
     pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
-
     pdf.build(recibo)
+    
+    enviarRecibo(salvarEm, usuario)
 
 
     
