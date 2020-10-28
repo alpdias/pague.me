@@ -10,7 +10,7 @@ Criado em 10/2020
 <div class="confirmacao">
     <div class="confirmacao-dentro">
         <div class="confirmacao-interno">
-            <div claass="confirmacao-display">
+            <div class="confirmacao-display">
                 <form method="POST">
                     {% csrf_token %}
                     <div class="confirmacao-texto"><label for="nomeCliente-form">cliente</label></div>
@@ -33,7 +33,7 @@ Criado em 10/2020
                     </div>
                     <div class="confirmacao-texto"><label for="valorTotal-form">total&nbsp;&nbsp;=</label></div>
                     <div><input type="text" name="valorTotal-form" id="valorTotal-form"></div>
-                    <div id="confirmacao-botoes">
+                    <div class="confirmacao-botoes">
                         <button onclick="fecharVenda()" type="submit">registrar&nbsp;<i class="fas fa-cash-register"></i></button>
                     </div>
                     <div id="carrinho-lista" style="display: none;">

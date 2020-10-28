@@ -38,19 +38,19 @@ Criado em 09/2020
         <form method="POST">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            <div>
-                <label for="{{ form.username.id_for_label }}">usuário&nbsp;&nbsp;< class="fas fa-user-shield"></i></label>
+            <div class="form-login__texto">
+                <label for="{{ form.username.id_for_label }}">usuário&nbsp;&nbsp;<i class="fas fa-user-shield"></i></label>
                 {{ form.username }}
                 {{ form.username.errors }}
             </div>
-            <div>
+            <div class="form-login__texto">
                 <label for="{{ form.password.id_for_label }}">senha&nbsp;&nbsp;<i class="fas fa-lock"></i></label>
                 {{ form.password }}
                 {{ form.password.errors }}
             </div>
             <button type="submit" id="form-login__botao">entrar&nbsp;&nbsp;<i class="fas fa-door-open"></i></button>
         </form>
-        <div>
+        <div class="form-login__texto-2">
             <span>ainda não tem uma conta? <a href="{% url 'contact' %}">registre-se</a></span>
         </div>
     </div>

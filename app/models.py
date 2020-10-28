@@ -22,7 +22,7 @@ class pessoas(models.Model):
         ('inativo', 'INATIVO'),
     )
     nome = models.CharField('nome', max_length=255)
-    telefone = models.CharField('telefone', max_length=14, blank=True)
+    telefone = models.CharField('telefone', max_length=15, blank=True)
     email = models.EmailField('e-mail', blank=True)
     cpf = models.CharField('cpf', max_length=14, blank=True)
     endereco = models.CharField('endereço', max_length=255, blank=True)
@@ -68,7 +68,7 @@ class estoque(models.Model):
         ('disponivel', 'DISPONIVEL'), 
         ('esgotado', 'ESGOTADO'),
     )
-    produto = models.CharField('produto', max_length=255)
+    produto = models.CharField('produto', max_length=255, unique=True)
     preco = models.DecimalField('preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('quantidade')

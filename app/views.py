@@ -9,7 +9,7 @@ from django.views import generic
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -76,7 +76,7 @@ def buy(request):
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user)
-    paginas = Paginator(listaVendas, 8)
+    paginas = Paginator(listaVendas, 5)
     pagina = request.GET.get('page')
     venda = paginas.get_page(pagina)
 
@@ -353,22 +353,6 @@ class register(generic.CreateView):
     template_name = 'registration/register.html'
 """
 
-def enviarRecibo(emailUsuario, recibo):
-
-    """
-    -> 
-    :return:
-    """
-
-    assunto = 'pague.me | nova venda realizada !!'
-    mensagem = 'Olá, você acaba de realizar uma nova venda pela plataforma pague.me e aqui está o seu recibo de venda!\
-    \n\n\
-    \n\nhttps://pague-me.herokuapp.com/'
-    
-    enviar = settings.EMAIL_HOST_USER
-    destinatarios = [f'{emailUsuario}']
-    send_mail(assunto, mesnagem, enviar, destinatarios)
-
 
 def tratamento(numero=0):
     
@@ -442,11 +426,11 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     troco = troco.replace(',','.')
 
     corpo = ['&nbsp;',
-    f'TOTAL ITENS:&nbsp;&nbsp;{totalItens}',
-    f'DESCONTO:&nbsp;&nbsp;{tratamento(float(desconto))}',
-    f'TOTAL:&nbsp;&nbsp;{tratamento(float(total))}',
-    f'PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
-    f'TROCO:&nbsp;&nbsp;{tratamento(float(troco))}',
+    f'&nbsp;&nbsp;&nbsp;TOTAL ITENS:&nbsp;&nbsp;{totalItens}',
+    f'&nbsp;&nbsp;&nbsp;DESCONTO:&nbsp;&nbsp;{tratamento(float(desconto))}',
+    f'&nbsp;&nbsp;&nbsp;TOTAL:&nbsp;&nbsp;{tratamento(float(total))}',
+    f'&nbsp;&nbsp;&nbsp;PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
+    f'&nbsp;&nbsp;&nbsp;TROCO:&nbsp;&nbsp;{tratamento(float(troco))}',
     '&nbsp;']
 
     rodape = ['--------------------------------------------------------------',
@@ -466,7 +450,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     i = len(conteudo)
     while i > 0:
         
-        recibo.append(Paragraph(conteudo[0]))
+        recibo.append(Paragraph(f'&nbsp;&nbsp;&nbsp;{conteudo[0]}'))
         conteudo.pop(0)
         i = i - 1
     #conteudo
@@ -495,5 +479,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
 
     pdf.build(recibo)
+
 
     

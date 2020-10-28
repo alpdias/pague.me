@@ -140,9 +140,9 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST = 'smtp.mailtrap.io'
 
-EMAIL_HOST_USER = hostUser
+EMAIL_HOST_USER = pagueMe.hostUser
 
-EMAIL_HOST_PASSWORD = hostPWD
+EMAIL_HOST_PASSWORD = pagueMe.hostPWD
 
 EMAIL_PORT = '2525'
 

@@ -24,12 +24,12 @@ Criado em 09/2020
     <div class="nav-bar__vertical">
         <nav>
             <ul class="nav-bar__vertical-item">
-                <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste"></span>painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></a></li>
-                <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste"></span>vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></a></li>
-                <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
-                <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
-                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
-                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste"></span>cliente&nbsp;&nbsp;&nbsp;<i class="fas fa-user-plus"></i></a></li>
+                <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste">painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></span></a></li>
+                <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste">vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></span></a></li>
+                <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste">carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></span></a></li>
+                <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste">estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></span></a></li>
+                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste">clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></span></a></li>
+                <li><a href="{% url 'newc' %}"><span class="nav-bar__vertical-ajuste-2">cliente&nbsp;&nbsp;&nbsp;<i class="fas fa-user-plus"></i></span></a></li>
             </ul>
         </nav>
     </div>
@@ -54,7 +54,7 @@ Criado em 09/2020
     <div class="paginacao">
         <span>
             {% if registros.has_previous %}
-                <a href="?page={{ registros.preivous_page_number }}"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;</a>
+                <a href="?page={{ registros.preivous_page_number }}"><i class="fas fa-angle-left"></i></a>
             {% endif %}
             {% if registros.paginator.num_pages %}
             <span>
@@ -62,7 +62,7 @@ Criado em 09/2020
             </span>
             {% endif %}
             {% if registros.has_next %}
-            <a href="?page={{ registros.next_page_number }}">&nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
+            <a href="?page={{ registros.next_page_number }}"><i class="fas fa-angle-right"></i></a>
             {% endif %}
         </span>
     </div>

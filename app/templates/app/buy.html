@@ -48,9 +48,9 @@ Criado em 10/2020
                             <td><span>{{ vendas.cliente }}</span></td>
                             <td><span>{{ vendas.valor }}</span></td>
                             <td><span>{{ vendas.pagamento }}</span></td>
-                            <td><a href="/static/archive/{{ user }}/{{ vendas.recibo }}" target="_blank"><span class="lista-itens__titulo"><i class="fas fa-file"></i></span></a></td>
+                            <td><a href="/static/archive/{{ user }}/{{ vendas.recibo }}" target="_blank"><span class="confirmacao-botoes__soma"><i class="fas fa-file"></i></span></a></td>
                             <td><span>{{ vendas.criado }}</span></td>
-                            <td><a href="/sales/{{ vendas.id }}"><span class="lista-itens__titulo"><i class="fas fa-edit"></i></span></a></td>
+                            <td><a href="/sales/{{ vendas.id }}"><span class="confirmacao-botoes__soma"><i class="fas fa-edit"></i></span></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -60,7 +60,7 @@ Criado em 10/2020
     <div class="paginacao">
         <span>
             {% if venda.has_previous %}
-                <a href="?page={{ venda.preivous_page_number }}"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;</a>
+                <a href="?page={{ venda.preivous_page_number }}"><i class="fas fa-angle-left"></i></a>
             {% endif %}
             {% if venda.paginator.num_pages %}
             <span>
@@ -68,7 +68,7 @@ Criado em 10/2020
             </span>
             {% endif %}
             {% if venda.has_next %}
-            <a href="?page={{ venda.next_page_number }}">&nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
+            <a href="?page={{ venda.next_page_number }}"><i class="fas fa-angle-right"></i></a>
             {% endif %}
         </span>
     </div>

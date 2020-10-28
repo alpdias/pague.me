@@ -96,7 +96,7 @@ body {
 #form-login {
     background-color: #ffffff;
     display: block;
-    max-width: 600px;
+    max-width: 300px;
     margin: 26px auto 0px auto;
     box-shadow: 1px 1px 2px #0000001c;
     font-weight: bolder;
@@ -104,29 +104,37 @@ body {
     border-radius: 6px;
     padding: 26px;
     text-align: center;
-}
-
-#form-login__conteudo {
-    padding-top: 10px;
+    padding-top: 26px;
     color: #40798C;
 }
 
-#form-login__conteudo a {
+#form-login a {
     text-decoration: none;
     text-decoration-style: none;
     color: #9A879D;
 }
 
-#form-login__conteudo input {
+#form-login input {
     background-color: #8d8b8b27;
     padding: 6px;
+    max-width: 240px;
     border-radius: 6px;
     border: none;
     box-shadow: 1px 1px 2px #0000001c;
 }
 
+.form-login__texto {
+    margin-bottom: 10px;
+}
+
+.form-login__texto-2 {
+    font-size: 12px;
+}
+
+
 #form-login__botao {
-    margin-top: 16px;
+    margin-top: 6px;
+    margin-bottom: 16px;
     background-color: #9A879D;
     color: #ffffff;
     box-shadow: 1px 1px 2px #0000001c;
@@ -177,6 +185,15 @@ body {
 
 .nav-bar__vertical-ajuste {
     padding-left: 36px;
+}
+
+.nav-bar__vertical-ajuste-2 {
+    font-size: 14px;
+    padding-left: 36px;
+}
+
+.nav-bar__vertical-ajuste-2 i {
+    color: #9A879D;
 }
 
 /* TABELAS/GERAL */
@@ -302,12 +319,12 @@ th {
 
 .pesquisa-form form {
     padding-top: 12px;
-    display: inline-block;
     padding-bottom: 0px;
 }
 
 .pesquisa-form input {
     padding: 6px;
+    width: 600px;
     border-radius: 6px;
     border: none;
     box-shadow: 1px 1px 2px #0000001c;
@@ -320,8 +337,13 @@ th {
     text-decoration-style: none;
     padding-right: 10px;
 }
-
 .pesquisa-botao {
+    color: #40798C;
+    font-weight: bolder;
+    padding-left: 8px;
+}
+
+.pesquisa-botao i {
     color: #40798C;
     font-weight: bolder;
     padding-left: 8px;
@@ -480,6 +502,7 @@ th {
 }
 
 .confirmacao-botoes__soma {
+    color: #9A879D;
     cursor: pointer;
 }
 
@@ -511,4 +534,59 @@ th {
     text-decoration-style: none;
     font-size: 18px;
     font-weight: bolder;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+/* EDICOES */
+.editar {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #ffffff;
+    max-width: 600px;
+    display: block;
+    margin: 26px auto 26px auto;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.editar li {
+    display: block;
+    text-decoration: none;
+    text-decoration-style: none;
+    padding: 6px;
+    word-wrap: break-word;
+}
+     
+.editar input {
+    background-color: #8d8b8b27;
+    padding: 5px;
+    max-width: 60px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000008c;
+}
+ .editar button {
+    background-color: #9A879D;  
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000008c;
+ }
+
+ .editar a {
+    color: #ffffff;
+    font-weight: bolder;
+    text-decoration: none;
+    text-decoration-style: none;
+ }
+
+.botao-editar i {
+    color: #9A879D;
+}
+
+.editar-dentro {
+    margin-right: 30px;
 }
