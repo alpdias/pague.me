@@ -26,7 +26,7 @@ class pessoas(models.Model):
     email = models.EmailField('e-mail', blank=True)
     cpf = models.CharField('cpf', max_length=14, blank=True)
     endereco = models.CharField('endereço', max_length=255, blank=True)
-    observacao = models.TextField('observações', blank=True)
+    observacao = models.CharField('observações', max_length=255, blank=True)
     status = models.CharField(
         max_length = 7, 
         choices = STATUS
@@ -72,15 +72,15 @@ class estoque(models.Model):
     preco = models.DecimalField('preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('quantidade')
-    descricao = models.TextField('descrição', blank=True)
+    descricao = models.CharField('descrição', max_length=255, blank=True)
     fornecedor = models.CharField('fornecedor', max_length=255, blank=True)
     status = models.CharField(
         max_length = 10, 
         choices = STATUS
     )
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    criado = models.DateTimeField('Criado em', auto_now_add=True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
+    criado = models.DateTimeField('criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('atualizado em', auto_now=True)
 
     def __str__(self):
 
@@ -115,13 +115,10 @@ class vendas(models.Model):
         ('aberto', 'ABERTO'),
         ('fechado', 'FECHADO'),
     )
-    cliente = models.CharField('cliente', max_length=255, blank=True)
+    cliente = models.CharField('cliente', max_length=255, blank=True, default='cliente')
     valor = models.DecimalField('valor', max_digits=999, decimal_places=2)
     pagamento = models.CharField('pagamento', max_length=8)
-    comprovante = models.FileField(
-        verbose_name = 'comprovante',
-        blank=True
-    )
+    comprovante = models.FileField(blank=True)
     recibo = models.CharField('recibo', max_length=255, blank=True)
     status = models.CharField(
         max_length = 7, 
@@ -129,8 +126,8 @@ class vendas(models.Model):
         default='aberto'
     )
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    criado = models.DateTimeField('Criado em', auto_now_add=True)
-    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
+    criado = models.DateTimeField('criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('atualizado em', auto_now=True)
 
     def __str__(self):
 
@@ -169,7 +166,7 @@ class empresas(models.Model):
     cnpj = models.CharField('cnpj', max_length=18)
     endereco = models.CharField('endereço', max_length=255)
     cidadeEstado = models.CharField('cidade/estado', max_length=255)
-    observacao = models.TextField('observações', blank=True)
+    observacao = models.CharField('observações', max_length=255, blank=True)
     frase = models.CharField('rodapé', max_length=255)
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     status = models.CharField(
