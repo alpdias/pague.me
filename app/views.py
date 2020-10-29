@@ -164,7 +164,7 @@ def cart(request):
 
     if request.method == 'POST':
 
-        nomeCliente = request.POST.get('nomeCliente-form')
+        cpfCliente = request.POST.get('cpfCliente-form')
         valorTotal = request.POST.get('valorTotal-form').replace('.','').replace(',','.')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         valorDesconto = request.POST.get('valorDesconto-form').replace(',','.')
@@ -205,9 +205,13 @@ def cart(request):
         
         caminho = Path(f'static/archive/{usuario}')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
-        f = vendas(cliente=nomeCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo, usuario=usuario)
-        pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco)
+        f = vendas(cpf=cpfCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo, usuario=usuario)
         f.save()
+        
+        extrato = vendas.objects.filter(recibo=nomeRecibo).get()
+        nExtrato = extrato.id
+        
+        pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco, cpfCliente, nExtrato)
 
         return redirect('/buy')
     
@@ -387,7 +391,8 @@ def enviarRecibo(recibo, usuario):
     mensagem['To'] = para
     mensagem['Subject'] = assunto
 
-    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!'
+    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!\
+    \nhttp://pague-me.herokuapp.com/'
     mensagem.attach(MIMEText(corpo, "plain"))
 
     arquivo = recibo
@@ -426,7 +431,7 @@ def tratamento(numero=0):
     return locale.currency(numero, grouping=True)
 
 
-def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
+def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     """
     ->
@@ -462,7 +467,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     '--------------------------------------------------------------',
     f'{empresa.cnpj}',
     '--------------------------------------------------------------',
-    'EXTRATO N. 0000',
+    f'EXTRATO N. {extrato}',
     'RECIBO DE COMPRA E VENDA',
     f'{atual}',
     '--------------------------------------------------------------',
@@ -489,7 +494,8 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     f'&nbsp;&nbsp;&nbsp;TOTAL:&nbsp;&nbsp;{tratamento(float(total))}',
     f'&nbsp;&nbsp;&nbsp;PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
     f'&nbsp;&nbsp;&nbsp;TROCO:&nbsp;&nbsp;{tratamento(float(troco))}',
-    '&nbsp;']
+    '&nbsp;',
+    f'Cliente:&nbsp;&nbsp;{cpf}']
 
     rodape = ['--------------------------------------------------------------',
     f'{empresa.frase}',
