@@ -30,7 +30,7 @@ Criado em 10/2020
                 <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste"></span>carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></a></li>
                 <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste"></span>estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></a></li>
                 <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste"></span>clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></a></li>
-                <li><a href="{% url '' %}"><span class="nav-bar__vertical-ajuste"></span>configuração&nbsp;&nbsp;&nbsp;<i class="fas fa-tools"></i></a></li>
+                <li><a href=""><span class="nav-bar__vertical-ajuste"></span>config&nbsp;&nbsp;&nbsp;<i class="fas fa-tools"></i></a></li>
             </ul>
         </nav>
     </div>
@@ -50,7 +50,7 @@ Criado em 10/2020
                             <td><span>{{ vendas.valor }}</span></td>
                             <td><span>{{ vendas.pagamento }}</span></td>
                             <td><a href="/static/archive/{{ user }}/{{ vendas.recibo }}" target="_blank"><span class="confirmacao-botoes__soma"><i class="fas fa-file"></i></span></a></td>
-                            <td><span>{{ vendas.criado }}</span></td>
+                            <td><span>{{ vendas.criado|date:"d/m/Y" }}</span></td>
                             <td><a href="/sales/{{ vendas.id }}"><span class="confirmacao-botoes__soma"><i class="fas fa-edit"></i></span></a></td>
                         </tr>
                     {% endfor %}

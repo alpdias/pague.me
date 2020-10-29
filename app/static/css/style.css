@@ -146,6 +146,7 @@ body {
     border: none;
     border-radius: 6px;
     padding: 4px 10px 8px 10px;
+    cursor: pointer;
 }
 
 /* MENU VERTICAL */

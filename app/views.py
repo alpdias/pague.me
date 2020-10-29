@@ -81,7 +81,7 @@ def buy(request):
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user)
-    paginas = Paginator(listaVendas, 5)
+    paginas = Paginator(listaVendas, 8)
     pagina = request.GET.get('page')
     venda = paginas.get_page(pagina)
 
@@ -165,7 +165,7 @@ def cart(request):
     if request.method == 'POST':
 
         nomeCliente = request.POST.get('nomeCliente-form')
-        valorTotal = request.POST.get('valorTotal-form').replace(',','.')
+        valorTotal = request.POST.get('valorTotal-form').replace('.','').replace(',','.')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
         valorDesconto = request.POST.get('valorDesconto-form').replace(',','.')
         valorTroco = request.POST.get('valorTroco-form').replace(',','.')
@@ -387,8 +387,8 @@ def enviarRecibo(recibo, usuario):
     mensagem['To'] = para
     mensagem['Subject'] = assunto
 
-    corpo = 'Olá, você acaba de realizar uma nova venda pela plataforma pague.me e aqui está o seu recibo de venda!'
-    messagem.attach(MIMEText(corpo, "plain"))
+    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!'
+    mensagem.attach(MIMEText(corpo, "plain"))
 
     arquivo = recibo
 
@@ -403,12 +403,14 @@ def enviarRecibo(recibo, usuario):
         f'attachment; filename={arquivo}',
     )
 
-    messagem.attach(email)
-    texto = messagem.as_string()
+    mensagem.attach(email)
+    texto = mensagem.as_string()
     
     with smtplib.SMTP(smtpServidor, porta) as server:
+        server.starttls()
         server.login(login, pwd)
         server.sendmail(de, para, texto)
+        server.quit()
 
 
 def tratamento(numero=0):
@@ -527,7 +529,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco):
     
     caminho = Path(f'app/static/archive/{usuario}')
     salvarEm = f'{caminho}/' + f'{nome}'
-    pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=2.2, rightMargin=2.2, topMargin=10, bottomMargin=10)
+    pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=3, rightMargin=1.5, topMargin=10, bottomMargin=10)
     pdf.build(recibo)
     
     enviarRecibo(salvarEm, usuario)

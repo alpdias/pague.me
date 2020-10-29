@@ -232,8 +232,6 @@ function tipoPagamento() {
     let tipoSelecao = document.querySelector('#tipoPagamento-form');
     let tipoSelecionado = tipoSelecao.options[tipoSelecao.selectedIndex].value;
     
-    console.log(tipoSelecionado);
-    
     if (tipoSelecionado == 'dinheiro') {
         
         document.querySelector('#tipoDependencia').style.display = 'block';
@@ -249,7 +247,7 @@ function tipoPagamento() {
 function desconto() {
 
     let desconto = (document.querySelector('#valorDesconto-form').value).replace(',','.');
-    let total = (document.querySelector('#valorTotal-form').value).replace(',','.');
+    let total = (document.querySelector('#valorTotal-form').value).replace('.','').replace(',','.');
 
     let novoTotal = (total - desconto);
 
@@ -260,7 +258,7 @@ function desconto() {
 function troco() {
 
     let recebido = (document.querySelector('#valorRecebido-form').value).replace(',','.');
-    let total = (document.querySelector('#valorTotal-form').value).replace(',','.');
+    let total = (document.querySelector('#valorTotal-form').value).replace('.','').replace(',','.');
 
     let troco = (recebido - total);
 
