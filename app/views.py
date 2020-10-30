@@ -485,11 +485,12 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     f'{empresa.endereco}',
     f'{empresa.cidadeEstado}',
     '--------------------------------------------------------------',
-    f'{empresa.cnpj}',
+    f'CNPJ:&nbsp;{empresa.cnpj}',
     '--------------------------------------------------------------',
     f'EXTRATO N. {extrato}',
     'RECIBO DE COMPRA E VENDA',
     f'{atual}',
+    f'CLIENTE:&nbsp;&nbsp;{cpf}',             
     '--------------------------------------------------------------',
     'ITEM | QTD | VALOR R$',
     '--------------------------------------------------------------',
@@ -515,8 +516,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     f'&nbsp;&nbsp;&nbsp;PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
     f'&nbsp;&nbsp;&nbsp;TROCO:&nbsp;&nbsp;{tratamento(float(troco))}',
     '&nbsp;']
-
-    identidade = [f'CLIENTE:&nbsp;&nbsp;{cpf}']
 
     rodape = ['--------------------------------------------------------------',
     f'{empresa.frase}',
@@ -545,14 +544,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
         corpo.pop(0)
         i = i - 1
     # corpo
-
-    # identidade
-    i = len(identidade)
-    while i > 0:
-        recibo.append(Paragraph(identidade[0], centro))
-        identidade.pop(0)
-        i = i - 1
-    # identidade
 
     # rodape
     i = len(rodape)
