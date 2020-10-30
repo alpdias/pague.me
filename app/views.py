@@ -468,7 +468,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     itens = vendas[0]
     qtd = vendas[2]
     valor = vendas[1]
-    quantidade = len(itens)
     totalItens = 0
     
     for i in qtd:
