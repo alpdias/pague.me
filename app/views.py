@@ -81,7 +81,7 @@ def buy(request):
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user)
-    paginas = Paginator(listaVendas, 8)
+    paginas = Paginator(listaVendas, 6)
     pagina = request.GET.get('page')
     venda = paginas.get_page(pagina)
 
@@ -175,6 +175,9 @@ def cart(request):
 
         if tipoPgto != 'dinheiro':
             valorTroco = '0'
+        
+        if valorTroco == '':
+            valorTroco = '0,00'
 
         if valorDesconto == '':
             valorDesconto = '0'
@@ -210,6 +213,9 @@ def cart(request):
         
         extrato = vendas.objects.filter(recibo=nomeRecibo).get()
         nExtrato = extrato.id
+
+        if cpfCliente == '':
+            cpfCliente = 'Não Identificado'
         
         pdf(nomeRecibo, usuario, listaRecibo, valorDesconto, valorTotal, tipoPgto, valorTroco, cpfCliente, nExtrato)
 
@@ -268,6 +274,19 @@ def stock(request, id):
     """
 
     estoques = get_object_or_404(estoque, pk=id)
+
+    estado = estoques.quantidade
+        
+    if estado == 0:
+        estoques.status = 'esgotado'
+        estoques.save()
+
+    elif estado > 0:
+        estoques.status = 'disponivel'
+        estoques.save()
+
+    else:
+        pass
 
     return render(request, 'app/stock.html', {'estoques': estoques})
 
@@ -458,6 +477,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     estilo = getSampleStyleSheet()
     centro = estilo['Normal']
     centro.alignment = 1
+    
     recibo = []
 
     cabecalho = ['--------------------------------------------------------------',
@@ -494,8 +514,9 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     f'&nbsp;&nbsp;&nbsp;TOTAL:&nbsp;&nbsp;{tratamento(float(total))}',
     f'&nbsp;&nbsp;&nbsp;PAGAMENTO:&nbsp;&nbsp;{pagamento.upper()}',
     f'&nbsp;&nbsp;&nbsp;TROCO:&nbsp;&nbsp;{tratamento(float(troco))}',
-    '&nbsp;',
-    f'Cliente:&nbsp;&nbsp;{cpf}']
+    '&nbsp;']
+
+    identidade = [f'CLIENTE:&nbsp;&nbsp;{cpf}']
 
     rodape = ['--------------------------------------------------------------',
     f'{empresa.frase}',
@@ -524,6 +545,14 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
         corpo.pop(0)
         i = i - 1
     # corpo
+
+    # identidade
+    i = len(identidade)
+    while i > 0:
+        recibo.append(Paragraph(identidade[0], centro))
+        identidade.pop(0)
+        i = i - 1
+    # identidade
 
     # rodape
     i = len(rodape)
