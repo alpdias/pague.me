@@ -26,7 +26,8 @@ Criado em 10/2020
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">salvar</button> 
+            <button type="submit">salvar&nbsp;<i class="fas fa-save"></i></button>
+            <button type="submit">excluir&nbsp;<i class="far fa-trash-alt"></i></button>
         </form>
     </div>       
 </main>
