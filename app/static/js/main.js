@@ -245,11 +245,25 @@ function tipoPagamento() {
 
 
 function desconto() {
+    
+    let itens = JSON.parse(localStorage.getItem('carrinho'));
+
+    var soma = 0;
+
+    for (let i = 0; i < itens.length; i++) { 
+        
+        let preco = itens[i].valor;
+        let qtd = itens[i].quantidade;
+
+        let total = (parseFloat(preco.replace(',','.')) * parseInt(qtd));
+
+        soma += total;
+
+    };
 
     let desconto = (document.querySelector('#valorDesconto-form').value).replace(',','.');
-    let total = (document.querySelector('#valorTotal-form').value).replace('.','').replace(',','.');
 
-    let novoTotal = (total - desconto);
+    let novoTotal = (soma - desconto);
 
     document.querySelector('#valorTotal-form').value = `${novoTotal.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
 
