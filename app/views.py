@@ -554,7 +554,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     caminho = Path(f'app/static/archive/{usuario}')
     salvarEm = f'{caminho}/' + f'{nome}'
-    pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=3, rightMargin=1.5, topMargin=10, bottomMargin=10)
+    pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=1.5, rightMargin=1.5, topMargin=10, bottomMargin=10)
     pdf.build(recibo)
     
     enviarRecibo(salvarEm, usuario)
