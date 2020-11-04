@@ -21,12 +21,14 @@ Criado em 10/2020
             </ul>
         </nav>
     </div>
-    <div>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">salvar</button> 
-        </form>
+    <div class="campo-novos">
+        <div class="campo-novos__dentro">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">salvar</button> 
+            </form>
+        </div>
     </div>  
 </main>
 {% else %}

@@ -424,7 +424,7 @@ def enviarRecibo(recibo, usuario):
 
     email.add_header(
         'Content-Disposition',
-        f'attachment; filename={arquivo}',
+        f'attachment; filename={"recibo"}',
     )
 
     mensagem.attach(email)

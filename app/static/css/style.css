@@ -575,7 +575,7 @@ th {
 }
  .editar button {
     background-color: #9A879D;  
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
     border: none;
     border-radius: 6px;
     box-shadow: 1px 1px 2px #0000008c;
@@ -594,4 +594,56 @@ th {
 
 .editar-dentro {
     margin-right: 36px;
+}
+
+/* NOVOS */
+.campo-novos {
+    background-color: #ffffff;
+    color: #40798C;
+    font-weight: bolder;
+    display: block;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 16px;
+    margin: 26px auto 26px auto;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000001c;
+
+}
+
+.campo-novos button {
+    margin-bottom: 16px;
+    font-weight: bolder;
+    color: #ffffff;
+    background-color: #9A879D;
+    padding: 5px 10px 5px 10px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px #0000008c;
+}
+
+.campo-novos input {
+    background-color: #8d8b8b27;
+    padding: 6px;
+    max-width: 300px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 1px 1px 2px #0000008c;
+    margin-left: 6px;
+}
+
+.campo-novos select {
+    background-color: #8d8b8b27;
+    padding: 3px;
+    border-radius: 6px;
+    border: none;
+    box-shadow: 1px 1px 2px #0000008c;
+    margin-left: 6px;
+}
+
+.campo-novos__dentro {
+    display: block;
+    margin: 0 auto;
+    text-align: right;
+    padding-right: 16px;
 }
