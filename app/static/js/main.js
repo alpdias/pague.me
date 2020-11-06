@@ -49,6 +49,42 @@ function adicionar() {
 
 };
 
+function adicionarRapido(produto, preco, status) {
+
+    let disponivel = status;
+    let qtd = 1;
+
+    if (disponivel == 'esgotado') {
+
+        window.alert('Produto Esgotado!');
+
+    } else {
+
+        let compra = {
+            nome: produto,
+            valor: preco,
+            quantidade: qtd,
+        };
+        
+        if (localStorage.getItem('carrinho') === null) {
+
+            let itens = [];
+            itens.push(compra);
+
+            localStorage.setItem('carrinho', JSON.stringify(itens));
+
+        } else {
+
+            let itens = JSON.parse(localStorage.getItem('carrinho'));
+            itens.push(compra);
+            
+            localStorage.setItem('carrinho', JSON.stringify(itens));
+
+        };
+
+    };
+};
+
 function compras() {
     
     if (localStorage.getItem('carrinho') === null) {} else {
@@ -294,4 +330,3 @@ $(document).ready(function() {
     });
 
 });
-

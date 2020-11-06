@@ -38,9 +38,9 @@ Criado em 10/2020
     <div class="pesquisa-form">
         <form method="GET" class="pesquisa-form" id="pesquisa">
             <div class="pesquisa-botao">
-                <span>buscar:&nbsp;&nbsp;</span>
+                <span>buscar:&nbsp;</span>
                 <input type="text" name="procurar" id="procurar" value="{{ request.GET.procurar }}">
-                &nbsp;&nbsp;<i class="fas fa-search" id="pesquisar"></i>
+                &nbsp;<i class="fas fa-search" id="pesquisar"></i>
             </div>
         </form>
     </div>
@@ -51,6 +51,7 @@ Criado em 10/2020
                 <th>preço</th>
                 <th>quantidade</th>
                 <th>status</th>
+                <th>+1</th>
                 <tbody>
                     {% for produto in produtos %}
                         <tr>
@@ -58,6 +59,7 @@ Criado em 10/2020
                             <td style="word-wrap: break-word;">{{ produto.preco }}</td>
                             <td style="word-wrap: break-word;">{{ produto.quantidade }}</td>
                             <td style="word-wrap: break-word;">{{ produto.status }}</td>
+                            <td style="word-wrap: break-word;"><span class="confirmacao-botoes__soma"><i class="fas fa-plus-circle" onclick="adicionarRapido('{{ produto.produto }}', '{{ produto.preco }}', '{{ produto.status }}')"></i></span></td>
                         </tr>
                     {% endfor %}
                 </tbody>

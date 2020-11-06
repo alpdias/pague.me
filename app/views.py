@@ -81,8 +81,10 @@ def buy(request):
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user)
+
     paginas = Paginator(listaVendas, 6)
     pagina = request.GET.get('page')
+
     venda = paginas.get_page(pagina)
 
     return render(request, 'app/buy.html', {'venda': venda})  
@@ -97,19 +99,34 @@ def sales(request, id):
     """
     
     venda = get_object_or_404(vendas, pk=id)
+
     form = vendasForm(instance=venda)
     
     if request.method == 'POST':
-        form = vendasForm(request.POST, instance=venda)
+
+        excluir = request.POST.get('excluir-venda')
         
-        if form.is_valid:
-            form.save()
+        if (excluir == 'excluir'):
+
+            venda.delete()
             return redirect('/buy')
         
         else:
-            return render(request, 'app/sales.html', {'form': form, 'venda': venda})
+
+            form = vendasForm(request.POST, instance=venda)
+            
+            if form.is_valid:
+
+                form.save()
+
+                return redirect('/buy')
+            
+            else:
+
+                return render(request, 'app/sales.html', {'form': form, 'venda': venda})
         
     else:
+
         return render(request, 'app/sales.html', {'form': form, 'venda': venda})  
 
 
@@ -126,16 +143,20 @@ def opEstoque(itens, quantidades):
 
         nomeProduto = itens[0]
         qtd = int(quantidades[0])
+
         operacao = estoque.objects.filter(produto=nomeProduto).get()
         operacao.quantidade -= qtd
         operacao.save()
+
         itens.pop(0)
         quantidades.pop(0)
+
         i = i - 1
     
         estado = operacao.quantidade
         
         if estado == 0:
+
             operacao.status = 'esgotado'
             operacao.save()
 
@@ -183,8 +204,10 @@ def cart(request):
             valorDesconto = '0'
         
         valorTotal = (float(valorTotal) - float(valorDesconto))
+
         removeItens = listaItens
         removeQtd = listaQuantidades
+
         opEstoque(removeItens, removeQtd)
         
         listaItens = request.POST.get('item-local').split(',')
@@ -192,22 +215,27 @@ def cart(request):
         listaQuantidades = request.POST.get('qtd-local').split(',')
 
         listaRecibo = []
+
         listaRecibo.append(listaItens)
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
 
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
+
         nomeRecibo = f'recibo{agora}.pdf'
+
         usuario = request.user
 
         if os.path.isdir(f'app/static/archive/{usuario}'):
             pass
         
         else:
+
             novoUsuario(usuario)
         
         caminho = Path(f'static/archive/{usuario}')
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  
+
         f = vendas(cpf=cpfCliente, valor=valorTotal, pagamento=tipoPgto, comprovante=salvoEm, recibo=nomeRecibo, usuario=usuario)
         f.save()
         
@@ -236,8 +264,10 @@ def records(request):
     """
     
     listaRegistros = pessoas.objects.all().filter(usuario=request.user)
+
     paginas = Paginator(listaRegistros, 8)
     pagina = request.GET.get('page')
+
     registros = paginas.get_page(pagina)
 
     return render(request, 'app/records.html', {'registros': registros})
@@ -254,12 +284,16 @@ def products(request):
     pesquisa = request.GET.get('procurar')
 
     if pesquisa:
+
         produtos = estoque.objects.filter(produto__icontains=pesquisa, usuario=request.user)
 
     else:
+
         listaProdutos = estoque.objects.all().filter(usuario=request.user)
+
         paginas = Paginator(listaProdutos, 8)
         pagina = request.GET.get('page')
+
         produtos = paginas.get_page(pagina)
 
     return render(request, 'app/products.html', {'produtos': produtos})  
@@ -278,10 +312,12 @@ def stock(request, id):
     estado = estoques.quantidade
         
     if estado == 0:
+
         estoques.status = 'esgotado'
         estoques.save()
 
     elif estado > 0:
+    
         estoques.status = 'disponivel'
         estoques.save()
 
@@ -300,19 +336,31 @@ def edit(request, id):
     """
     
     estoques = get_object_or_404(estoque, pk=id)
+
     form = estoqueForm(instance=estoques)
     
     if request.method == 'POST':
+
+        excluir = request.POST.get('excluir-produto')
+        
+        if (excluir == 'excluir'):
+
+            estoques.delete()
+            return redirect('/products')
+
         form = estoqueForm(request.POST, instance=estoques)
         
         if form.is_valid:
+            
             form.save()
             return redirect('/products')
         
         else:
+
             return render(request, 'app/edit.html', {'form': form, 'estoques': estoques})
         
     else:
+
         return render(request, 'app/edit.html', {'form': form, 'estoques': estoques}) 
 
 
@@ -325,9 +373,11 @@ def newp(request):
     """
     
     if request.method == 'POST':
+
         form = estoqueForm(request.POST)
         
         if form.is_valid():
+
             produto = form.save(commit=False)
             produto.usuario = request.user
             produto.save()
@@ -335,6 +385,7 @@ def newp(request):
             return redirect('/products')
             
     else:
+
         form = estoqueForm()
 
     return render(request, 'app/newp.html', {'form': form})
@@ -362,9 +413,11 @@ def newc(request):
     """
     
     if request.method == 'POST':
+
         form = pessoasForm(request.POST)
         
         if form.is_valid():
+
             pessoa = form.save(commit=False)
             pessoa.usuario = request.user
             pessoa.save()
@@ -372,6 +425,7 @@ def newc(request):
             return redirect('/records')
         
     else:
+
         form = pessoasForm()
     
     return render(request, 'app/newc.html', {'form': form})  
@@ -406,6 +460,7 @@ def enviarRecibo(recibo, usuario):
     para = empresa.email
 
     mensagem = MIMEMultipart()
+
     mensagem['From'] = de
     mensagem['To'] = para
     mensagem['Subject'] = assunto
@@ -417,6 +472,7 @@ def enviarRecibo(recibo, usuario):
     arquivo = recibo
 
     with open(arquivo, 'rb') as attachment:
+
         email = MIMEBase('application', 'octet-stream')
         email.set_payload(attachment.read())
 
@@ -431,9 +487,11 @@ def enviarRecibo(recibo, usuario):
     texto = mensagem.as_string()
     
     with smtplib.SMTP(smtpServidor, porta) as server:
+
         server.starttls()
         server.login(login, pwd)
         server.sendmail(de, para, texto)
+
         server.quit()
 
 
@@ -471,6 +529,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     totalItens = 0
     
     for i in qtd:
+
         totalItens = totalItens + int(i)
 
     estilo = getSampleStyleSheet()
@@ -498,11 +557,15 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     conteudo = []
     
     i = len(itens)
+
     while i > 0:
+
         conteudo.append(f'&nbsp;{itens[0]}&nbsp;&nbsp;&nbsp;({qtd[0]})&nbsp;&nbsp;&nbsp;{tratamento(float(valor[0]))}')
+
         itens.pop(0)
         qtd.pop(0)
         valor.pop(0)
+
         i = i - 1
     
     desconto = desconto.replace(',','.')
@@ -522,38 +585,51 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
 
     # cabecalho
     i = len(cabecalho)
+
     while i > 0:
+
         recibo.append(Paragraph(cabecalho[0], centro))
         cabecalho.pop(0)
+
         i = i - 1
     # cabecalho
 
     # conteudo
     i = len(conteudo)
+
     while i > 0:
+
         recibo.append(Paragraph(f'&nbsp;&nbsp;&nbsp;{conteudo[0]}'))
         conteudo.pop(0)
+
         i = i - 1
     #conteudo
 
     # corpo
     i = len(corpo)
+
     while i > 0:
+
         recibo.append(Paragraph(corpo[0]))
         corpo.pop(0)
+
         i = i - 1
     # corpo
 
     # rodape
     i = len(rodape)
+
     while i > 0:
+
         recibo.append(Paragraph(rodape[0], centro))
         rodape.pop(0)
+
         i = i - 1
     #rodape
     
     caminho = Path(f'app/static/archive/{usuario}')
     salvarEm = f'{caminho}/' + f'{nome}'
+
     pdf = SimpleDocTemplate(salvarEm, pagesize=(226, ((len(recibo) * 14) - 18)), leftMargin=1.5, rightMargin=1.5, topMargin=10, bottomMargin=10)
     pdf.build(recibo)
     
