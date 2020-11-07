@@ -14,8 +14,7 @@ from .models import pessoas, estoque, vendas, empresas
 class pessoasAdmin(admin.ModelAdmin):
 
     """
-    ->
-    :return:
+    -> definiçao do 'display' das tabelas no admin do site
     """
 
     list_display = ['nome', 'telefone', 'email', 'status']
@@ -27,8 +26,7 @@ admin.site.register(pessoas, pessoasAdmin)
 class estoqueAdmin(admin.ModelAdmin):
 
     """
-    ->
-    :return:
+    -> definiçao do 'display' das tabelas no admin do site
     """
 
     list_display = ['produto', 'preco', 'quantidade', 'status']
@@ -40,8 +38,7 @@ admin.site.register(estoque, estoqueAdmin)
 class vendasAdmin(admin.ModelAdmin):
 
     """
-    ->
-    :return:
+    -> definiçao do 'display' das tabelas no admin do site
     """
 
     list_display = ['cliente', 'valor', 'pagamento', 'status', 'criado']
@@ -53,8 +50,7 @@ admin.site.register(vendas, vendasAdmin)
 class empresasAdmin(admin.ModelAdmin):
 
     """
-    ->
-    :return:
+    -> definiçao do 'display' das tabelas no admin do site
     """
 
     list_display = ['empresa', 'cnpj', 'status', 'criado']

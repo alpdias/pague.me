@@ -21,10 +21,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+# bibliotecas django
 from django.contrib import admin
 from django.urls import path, include
-from app.views import home, about, contact, dashboard, cart, buy, sales, products, newp, stock, edit, records, people, newc #register
+
+# minhas views do aplicativo
 from app import views
+from app.views import home, about, contact, dashboard, cart, buy, sales, products, newp, stock, edit, records, people, newc #register
 
 urlpatterns = [
     path('admin/', admin.site.urls),

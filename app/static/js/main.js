@@ -3,10 +3,8 @@ Criado em 09/2020
 @Autor: Paulo https://github.com/alpdias
 */
 
-
 // JS
-
-function adicionar() {
+function adicionar() { // adiciona o item ao carrinho
 
     let produto = document.querySelector('#produto').textContent;
     let preco = document.querySelector('#preco').textContent;
@@ -49,7 +47,7 @@ function adicionar() {
 
 };
 
-function adicionarRapido(produto, preco, status) {
+function adicionarRapido(produto, preco, status) { // faz uma adiçao rapida ao carrinho de um unico item
 
     let disponivel = status;
     let qtd = 1;
@@ -85,7 +83,7 @@ function adicionarRapido(produto, preco, status) {
     };
 };
 
-function compras() {
+function compras() { // adiciona os os produtos selecionados ao carrinho
     
     if (localStorage.getItem('carrinho') === null) {} else {
 
@@ -114,7 +112,7 @@ function compras() {
 
 };
 
-function fecharVenda() {
+function fecharVenda() { // mostra os resultados do carrinho
 
     confirmarVenda();
 
@@ -157,7 +155,7 @@ function fecharVenda() {
 
 };
 
-function vendas() {
+function vendas() { // adiciona o valor total do carrinho
 
     let itens = JSON.parse(localStorage.getItem('carrinho'));
 
@@ -178,7 +176,7 @@ function vendas() {
 
 };
 
-function removerVenda() {
+function removerVenda() { // remove todos os itens do carrinho
 
     if (localStorage.length === 0) {} else {
 
@@ -192,7 +190,7 @@ function removerVenda() {
 
 };
 
-function removerItem(nome) {
+function removerItem(nome) { // remove um item do carrinho
     
     let itens = JSON.parse(localStorage.getItem('carrinho'));
     
@@ -208,7 +206,7 @@ function removerItem(nome) {
     
 };
 
-function confirmarVenda() {
+function confirmarVenda() { // cria a confirmacao de venda 
 
     criarLista();
     
@@ -241,7 +239,7 @@ function confirmarVenda() {
 
 };
 
-function criarLista() {
+function criarLista() { // cria uma lista com os produtos da venda para o backend
 
     let recibo = JSON.parse(localStorage.getItem('carrinho'));
 
@@ -263,7 +261,7 @@ function criarLista() {
 
 };
 
-function tipoPagamento() {
+function tipoPagamento() { // espeficia o tipo de pagamento
     
     let tipoSelecao = document.querySelector('#tipoPagamento-form');
     let tipoSelecionado = tipoSelecao.options[tipoSelecao.selectedIndex].value;
@@ -280,7 +278,7 @@ function tipoPagamento() {
 };
 
 
-function desconto() {
+function desconto() { // calcula o valor do desconto
     
     let itens = JSON.parse(localStorage.getItem('carrinho'));
 
@@ -305,7 +303,7 @@ function desconto() {
 
 };
 
-function troco() {
+function troco() { // calcula o valor do troco
 
     let recebido = (document.querySelector('#valorRecebido-form').value).replace(',','.');
     let total = (document.querySelector('#valorTotal-form').value).replace('.','').replace(',','.');
@@ -315,10 +313,10 @@ function troco() {
     document.querySelector('#valorTroco-form').value = `${troco.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
 
 };
+// JS
 
 // JQUERY
-
-$(document).ready(function() {
+$(document).ready(function() { // submit em um elemento tipo 'i'
 
     let pesquisa = $('#pesquisa');
     let pesquisar = $('#pesquisar');
@@ -330,3 +328,4 @@ $(document).ready(function() {
     });
 
 });
+// JQUERY

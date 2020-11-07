@@ -13,8 +13,7 @@ from django.contrib.auth import get_user_model
 class pessoas(models.Model):
 
     """
-    ->
-    :return:
+    ->  modelo de objeto para registro de 'clientes'
     """
 
     STATUS = (
@@ -38,8 +37,7 @@ class pessoas(models.Model):
     def __str__(self):
 
         """
-        ->
-        :return:
+        -> especifica qual campo será mostrado
         """
 
         return self.nome
@@ -48,8 +46,7 @@ class pessoas(models.Model):
     class Meta:
 
         """
-        ->
-        :return:
+        -> define os nomes e a ordem
         """
 
         verbose_name = 'cadastro'
@@ -60,8 +57,7 @@ class pessoas(models.Model):
 class estoque(models.Model):
 
     """
-    ->
-    :return:
+    -> modelo de objeto para registro de 'produtos'
     """
 
     STATUS = (
@@ -86,8 +82,7 @@ class estoque(models.Model):
     def __str__(self):
 
         """
-        ->
-        :return:
+        -> especifica qual campo será mostrado
         """
 
         return self.produto
@@ -96,8 +91,7 @@ class estoque(models.Model):
     class Meta:
 
         """
-        ->
-        :return:
+        -> define os nomes e a ordem
         """
 
         verbose_name = 'produto'
@@ -108,7 +102,7 @@ class estoque(models.Model):
 class vendas(models.Model):
 
     """
-    ->
+    -> modelo de objeto para registro de 'vendas'
     :return:
     """
     
@@ -134,8 +128,7 @@ class vendas(models.Model):
     def __str__(self):
 
         """
-        ->
-        :return:
+        -> especifica qual campo será mostrado
         """
 
         return str(self.criado) if self.criado else ''
@@ -144,8 +137,7 @@ class vendas(models.Model):
     class Meta:
 
         """
-        ->
-        :return:
+        -> define os nomes e a ordem
         """
 
         verbose_name = 'venda'
@@ -156,8 +148,7 @@ class vendas(models.Model):
 class empresas(models.Model):
 
     """
-    ->
-    :return:
+    -> modelo de objeto para registro de 'empresas'
     """
     
     STATUS = (
@@ -186,8 +177,7 @@ class empresas(models.Model):
     def __str__(self):
 
         """
-        ->
-        :return:
+        -> especifica qual campo será mostrao
         """
 
         return self.empresa
@@ -196,8 +186,7 @@ class empresas(models.Model):
     class Meta:
 
         """
-        ->
-        :return:
+        -> define os nomes e a ordem
         """
 
         verbose_name = 'empresa'
