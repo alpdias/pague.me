@@ -22,7 +22,8 @@ from .models import pessoas, estoque, vendas, empresas
 
 # bibliotecas externas
 import os
-from src import *
+from code import *
+from pathlib import Path
 
 # Create your views here.
 
@@ -159,7 +160,7 @@ def cart(request):
 
         removeItens = listaItens
         removeQtd = listaQuantidades
-        src.opEstoque(removeItens, removeQtd)
+        code.opEstoque(removeItens, removeQtd)
 
         # tratamento de erro -->
         listaItens = request.POST.get('item-local').split(',')
@@ -183,7 +184,7 @@ def cart(request):
             pass
         
         else:
-            src.novoUsuario(usuario) 
+            code.novoUsuario(usuario) 
         
         caminho = Path(f'static/archive/{usuario}') # caminho do diretorio
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  # caminho do arquivo salvo
@@ -202,7 +203,7 @@ def cart(request):
         extrato = vendas.objects.filter(recibo=nomeRecibo).get() # resgata o numero de ID da objeto criado anteriormente
         nExtrato = extrato.id
         
-        src.pdf(
+        code.pdf(
             nomeRecibo, 
             usuario, 
             listaRecibo, 
