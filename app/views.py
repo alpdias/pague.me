@@ -138,8 +138,8 @@ def sales(request, id):
 def cart(request):
 
     """
-    ->\
-    \n:return:
+    -> Renderiza a pagina 'cart.html' e realiza o processo de requisiçao no estoque
+    \n:return: Retorna o registro de uma nova venda e envia o recibo
     """
 
     if request.method == 'POST':
