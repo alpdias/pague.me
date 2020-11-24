@@ -13,23 +13,26 @@ from django.contrib.auth import get_user_model
 class pessoas(models.Model):
 
     """
-    ->  modelo de objeto para registro de 'clientes'
+    ->  Modelo de objeto para registro de 'clientes'
     """
 
     STATUS = (
         ('ativo', 'ativo'), 
         ('inativo', 'inativo'),
     )
+    
     nome = models.CharField('Nome', max_length=255, unique=True)
     telefone = models.CharField('Telefone', max_length=15, blank=True)
     email = models.EmailField('E-mail', blank=True)
     cpf = models.CharField('CPF', max_length=14, blank=True)
     endereco = models.CharField('Endereço', max_length=255, blank=True)
     observacao = models.CharField('Observações', max_length=255, blank=True)
+    
     status = models.CharField(
         max_length = 7, 
         choices = STATUS
     )
+    
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
@@ -37,7 +40,7 @@ class pessoas(models.Model):
     def __str__(self):
 
         """
-        -> especifica qual campo será mostrado
+        -> Especifica qual campo será mostrado
         """
 
         return self.nome
@@ -46,7 +49,7 @@ class pessoas(models.Model):
     class Meta:
 
         """
-        -> define os nomes e a ordem
+        -> Define os nomes e a ordem
         """
 
         verbose_name = 'cadastro'
@@ -57,13 +60,14 @@ class pessoas(models.Model):
 class estoque(models.Model):
 
     """
-    -> modelo de objeto para registro de 'produtos'
+    -> Modelo de objeto para registro de 'produtos'
     """
 
     STATUS = (
         ('disponivel', 'disponível'), 
         ('esgotado', 'esgotado'),
     )
+    
     produto = models.CharField('Produto', max_length=255, unique=True)
     preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
@@ -71,10 +75,12 @@ class estoque(models.Model):
     aviso = models.IntegerField('Aviso', blank=True, default=0)
     descricao = models.CharField('Descrição', max_length=255, blank=True)
     fornecedor = models.CharField('Fornecedor', max_length=255, blank=True)
+    
     status = models.CharField(
         max_length = 10, 
         choices = STATUS
     )
+    
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
@@ -82,7 +88,7 @@ class estoque(models.Model):
     def __str__(self):
 
         """
-        -> especifica qual campo será mostrado
+        -> Especifica qual campo será mostrado
         """
 
         return self.produto
@@ -91,7 +97,7 @@ class estoque(models.Model):
     class Meta:
 
         """
-        -> define os nomes e a ordem
+        -> Define os nomes e a ordem
         """
 
         verbose_name = 'produto'
@@ -102,25 +108,27 @@ class estoque(models.Model):
 class vendas(models.Model):
 
     """
-    -> modelo de objeto para registro de 'vendas'
-    :return:
+    -> Modelo de objeto para registro de 'vendas'
     """
     
     STATUS = (
         ('aberto', 'aberto'),
         ('fechado', 'fechado'),
     )
+    
     cliente = models.CharField('Cliente', max_length=255, default='Não Identificado')
     cpf = models.CharField('CPF', max_length=14, blank=True)
     valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
     pagamento = models.CharField('Pagamento', max_length=8)
     comprovante = models.FileField('Comprovante')
     recibo = models.CharField('Recibo', max_length=255)
+    
     status = models.CharField(
         max_length = 7, 
         choices = STATUS,
         default='aberto'
     )
+    
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
@@ -128,7 +136,7 @@ class vendas(models.Model):
     def __str__(self):
 
         """
-        -> especifica qual campo será mostrado
+        -> Especifica qual campo será mostrado
         """
 
         return str(self.criado) if self.criado else ''
@@ -137,7 +145,7 @@ class vendas(models.Model):
     class Meta:
 
         """
-        -> define os nomes e a ordem
+        -> Define os nomes e a ordem
         """
 
         verbose_name = 'venda'
@@ -155,6 +163,7 @@ class empresas(models.Model):
         ('ativo', 'ativo'), 
         ('inativo', 'inativo'),
     )
+    
     empresa = models.CharField('Empresa', max_length=255)
     cnpj = models.CharField('CNPJ', max_length=18)
     endereco = models.CharField('Endereço', max_length=255)
@@ -167,17 +176,19 @@ class empresas(models.Model):
     senhaServidor = models.CharField('Senha', max_length=255)
     email = models.EmailField('E-mail')
     usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    
     status = models.CharField(
         max_length = 7, 
         choices = STATUS
     )
+    
     criado = models.DateTimeField('Criado em', auto_now_add=True)
     atualizado = models.DateTimeField('Atualizado em', auto_now=True)
 
     def __str__(self):
 
         """
-        -> especifica qual campo será mostrao
+        -> Especifica qual campo será mostrao
         """
 
         return self.empresa
@@ -186,7 +197,7 @@ class empresas(models.Model):
     class Meta:
 
         """
-        -> define os nomes e a ordem
+        -> Define os nomes e a ordem
         """
 
         verbose_name = 'empresa'
