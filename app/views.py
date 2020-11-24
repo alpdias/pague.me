@@ -43,8 +43,8 @@ from reportlab.lib.styles import getSampleStyleSheet
 def home(request):
 
     """
-    -> renderiza a pagina 'home.html'
-    :return: retorna a pagina 'home.html'
+    -> Renderiza a pagina 'home.html'\
+    \n:return: Retorna a pagina 'home.html'
     """
     
     return render(request, 'app/home.html')
@@ -53,8 +53,8 @@ def home(request):
 def about(request):
 
     """
-    -> renderiza a pagina 'about.html'
-    :return: retorna a pagian 'about.html'
+    -> Renderiza a pagina 'about.html'\
+    \n:return: Retorna a pagian 'about.html'
     """
     
     return render(request, 'app/about.html')
@@ -63,8 +63,8 @@ def about(request):
 def contact(request):
 
     """
-    -> renderiza a pagina 'contact.html'
-    :return: retorna a pagina 'contact.html'
+    -> Renderiza a pagina 'contact.html'\
+    \n:return: Retorna a pagina 'contact.html'
     """
     
     return render(request, 'app/contact.html')
@@ -74,8 +74,8 @@ def contact(request):
 def dashboard(request):
 
     """
-    -> renderiza a pagina 'dashboard.html'
-    :return: retorna a pagina 'dashboard.html'
+    -> Renderiza a pagina 'dashboard.html'\
+    \n:return: Retorna a pagina 'dashboard.html'
     """
     
     return render(request, 'app/dashboard.html')
@@ -85,13 +85,13 @@ def dashboard(request):
 def buy(request):
 
     """
-    -> renderiza a pagina 'buy.html' e os objetos do model 'vendas'
-    :return: retorna a pagina 'buy.html' com os objetos do model 'vendas' de cada usuario
+    -> Renderiza a pagina 'buy.html' e os objetos do model 'vendas'\
+    \n:return: Retorna a pagina 'buy.html' com os objetos do model 'vendas' de cada usuario logado
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user) # requisicao do objeto com filtro de usuario
 
-    paginas = Paginator(listaVendas, 6) # paginacao do conteudo exibido
+    paginas = Paginator(listaVendas, 8) # paginacao do conteudo exibido
     pagina = request.GET.get('page')
 
     venda = paginas.get_page(pagina)
@@ -103,8 +103,8 @@ def buy(request):
 def sales(request, id):
 
     """
-    -> renderiza a pagina 'sales.html' com opçoes de ediçao do model 'vendas'
-    :return: retorna a pagina 'sales.html' de acordo com o  'id' especifico do objeto para ediçao
+    -> Renderiza a pagina 'sales.html' com as opçoes de ediçao do model 'vendas'\
+    \n:return: Retorna a pagina 'sales.html' de acordo com o  'id' especifico do objeto para ediçao
     """
     
     venda = get_object_or_404(vendas, pk=id) # requisacao do objeto a partir do ID
@@ -116,6 +116,7 @@ def sales(request, id):
         
         if (excluir == 'excluir'):
             venda.delete() # remove o objeto do DB
+            
             return redirect('/buy') # redireciona a pagina
         
         else:
@@ -137,13 +138,13 @@ def sales(request, id):
 def cart(request):
 
     """
-    ->
-    :return:
+    ->\
+    \n:return:
     """
 
     if request.method == 'POST':
 
-        # requisiçoes dentro do metodo POST
+        # requisiçoes dentro do metodo POST  -->
         cpfCliente = request.POST.get('cpfCliente-form') 
         valorTotal = request.POST.get('valorTotal-form').replace('.','').replace(',','.')
         tipoPgto = request.POST.get(['tipoPagamento-form'][0])
@@ -152,9 +153,9 @@ def cart(request):
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
-        # requisiçoes dentro do metodo POST
+        # requisiçoes dentro do metodo POST <--
 
-        # tratamento de erro
+        # tratamento de erro -->
         if tipoPgto != 'dinheiro':
             valorTroco = '0'
         
@@ -166,14 +167,14 @@ def cart(request):
         
         if cpfCliente == '':
             cpfCliente = 'Não Identificado'
-        # tratamento de erro
+        # tratamento de erro <--
         
         valorTotal = (float(valorTotal) - float(valorDesconto)) # calculo do valor total
 
         def opEstoque(itens, quantidades):
             
             """
-            -> realiza a operaçao de 'delete' e mudança de estado do objeto dentro do models 'estoque'
+            -> Realiza a operaçao de 'delete' e mudança de estado do objeto dentro do model 'estoque'
             """
 
             i = len(itens)
@@ -206,18 +207,18 @@ def cart(request):
         removeQtd = listaQuantidades
         opEstoque(removeItens, removeQtd)
 
-        # tratamento de erro
+        # tratamento de erro -->
         listaItens = request.POST.get('item-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
-        # tratamento de erro
+        # tratamento de erro <--
 
-        # atribuicao das listas
+        # atribuicao das listas -->
         listaRecibo = []
         listaRecibo.append(listaItens)
         listaRecibo.append(listaValores)
         listaRecibo.append(listaQuantidades)
-        # atribuicao das listas
+        # atribuicao das listas <--
 
         agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
@@ -228,12 +229,12 @@ def cart(request):
             pass
         
         else:
-
+            
             def novoUsuario(nome):
     
                 """
-                -> criar um novo diretorio para o usuario
-                :return: novo diretorio de arquivo 'static'
+                -> Criar um novo diretorio para o usuario\
+                \n:return: Novo diretorio de arquivo em 'static'
                 """
 
                 dir = f'app/static/archive/{nome}'       
@@ -272,8 +273,8 @@ def cart(request):
 def records(request):
 
     """
-    -> renderiza a pagina 'records.html' e os objetos do model 'pessoas'
-    :return: retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario
+    -> Renderiza a pagina 'records.html' e os objetos do model 'pessoas'\
+    \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado
     """
     
     listaRegistros = pessoas.objects.all().filter(usuario=request.user)
@@ -290,8 +291,8 @@ def records(request):
 def products(request):
 
     """
-    -> renderiza a pagina 'products.html' e os objetos do model 'estoque' 
-    :return: retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa
+    -> Renderiza a pagina 'products.html' e os objetos do model 'estoque'\
+    \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa
     """
 
     pesquisa = request.GET.get('procurar')
@@ -314,8 +315,8 @@ def products(request):
 def stock(request, id):
 
     """
-    -> renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'
-    :return: retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao
+    -> Renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'\
+    \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao
     """
 
     estoques = get_object_or_404(estoque, pk=id)
@@ -339,8 +340,8 @@ def stock(request, id):
 def edit(request, id):
 
     """
-    -> renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'
-    :return: retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao
+    -> Renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'\
+    \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao
     """
     
     estoques = get_object_or_404(estoque, pk=id)
@@ -372,8 +373,8 @@ def edit(request, id):
 def newp(request):
     
     """
-    -> renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'
-    :return: retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'
+    -> Renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'\
+    \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'
     """
     
     if request.method == 'POST':
@@ -396,8 +397,8 @@ def newp(request):
 def people(request, id):
 
     """
-    -> rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'
-    :return: retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados
+    -> Rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'\
+    \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados
     """
 
     pessoa = get_object_or_404(pessoas, pk=id)
@@ -409,8 +410,8 @@ def people(request, id):
 def newc(request):
 
     """
-    -> renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'
-    :return: retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'
+    -> Renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'\
+    \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'
     """
     
     if request.method == 'POST':
@@ -429,24 +430,24 @@ def newc(request):
     return render(request, 'app/newc.html', {'form': form})  
 
 
-####### funções internas para as views.py #######
+####### funçoes internas para as views.py (realocar) #######
 
 def enviarRecibo(recibo, usuario):
     
     """
-    -> enviar um e-mail a partir do servidor SMTP de cada usuario
+    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario
     """
     
     empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
     
-    # configuraçoes do servidor
+    # configuraçoes do servidor -->
     porta = empresa.porta
     smtpServidor = empresa.servidor
     login = empresa.usuarioServidor
     pwd = empresa.senhaServidor
-    # configuraçoes do servidor
+    # configuraçoes do servidor <--
 
-    # especificoes do e-mail
+    # especificoes do e-mail -->
     assunto = 'pague.me | nova venda realizada !!'
     de = empresa.email
     para = empresa.email
@@ -477,7 +478,7 @@ def enviarRecibo(recibo, usuario):
 
     mensagem.attach(email)
     texto = mensagem.as_string()
-     # especificoes do e-mail
+     # especificoes do e-mail <--
     
     with smtplib.SMTP(smtpServidor, porta) as server: # envio do e-mail pelo servidor
 
@@ -491,9 +492,9 @@ def enviarRecibo(recibo, usuario):
 def tratamento(numero=0):
     
     """
-    -> funcao para tratar o numero de acordo com o padrao do local
-    :param numero: numero para ser formatado
-    :return: numero formatado
+    -> Funcao para tratar o numero de acordo com o padrao do local\
+    \n:param numero: Numero para ser formatado\
+    \n:return: Numero formatado
     """
 
     locale.setlocale(locale.LC_MONETARY, "pt_BR.UTF-8") # tratamento de numero no padrao brasileiro
@@ -504,26 +505,27 @@ def tratamento(numero=0):
 def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     """
-    -> cria um arquivo de pdf 
-    :return: retorna um arquivo de pdf para envio
+    -> Cria um arquivo de pdf\
+    \n:return: Retorna um arquivo de pdf para envio
     """
     
     empresa = empresas.objects.filter(usuario=usuario).get() 
     
-    # datas
+    # datas -->
     data = date.today()
     d = data.day
     m = data.month
     a = data.year
     atual = f'{d}/{m}/{a}'
-    # datas
+    # datas <--
     
-    # listas
+    # listas -->
     itens = vendas[0]
     qtd = vendas[2]
     valor = vendas[1]
+    # listas -->
+    
     totalItens = 0
-    # listas
     
     for i in qtd:
         totalItens = totalItens + int(i)
@@ -579,7 +581,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     f'{empresa.frase}',
     '--------------------------------------------------------------']
 
-    # cabecalho
+    # cabecalho -->
     i = len(cabecalho)
 
     while i > 0:
@@ -588,9 +590,9 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
         cabecalho.pop(0)
 
         i = i - 1
-    # cabecalho
+    # cabecalho <--
 
-    # conteudo
+    # conteudo -->
     i = len(conteudo)
 
     while i > 0:
@@ -599,9 +601,9 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
         conteudo.pop(0)
 
         i = i - 1
-    #conteudo
+    #conteudo <--
 
-    # corpo
+    # corpo -->
     i = len(corpo)
 
     while i > 0:
@@ -610,9 +612,9 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
         corpo.pop(0)
 
         i = i - 1
-    # corpo
+    # corpo <--
 
-    # rodape
+    # rodape -->
     i = len(rodape)
 
     while i > 0:
@@ -621,12 +623,13 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
         rodape.pop(0)
 
         i = i - 1
-    #rodape
+    #rodape <--
     
     caminho = Path(f'app/static/archive/{usuario}')
     salvarEm = f'{caminho}/' + f'{nome}'
 
-    pdf = SimpleDocTemplate(salvarEm, 
+    pdf = SimpleDocTemplate(
+        salvarEm, 
         pagesize=(226, ((len(recibo) * 14) - 18)), 
         leftMargin=1.5, 
         rightMargin=1.5, 
@@ -639,15 +642,18 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     enviarRecibo(salvarEm, usuario) # envia o pdf
 
 
-####### funções internas para as views.py #######  
+####### funçoes internas para as views.py (realocar) #######
+
 
 """
-class register(generic.CreateView):
-    
+
+class register(generic.CreateView):  
+
     # view para registrar um novo usuario
     
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+    
 """
 
