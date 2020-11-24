@@ -40,7 +40,7 @@ class pessoas(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo será mostrado
+        -> Especifica qual campo sera mostrado
         """
 
         return self.nome
@@ -88,7 +88,7 @@ class estoque(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo será mostrado
+        -> Especifica qual campo sera mostrado
         """
 
         return self.produto
@@ -136,7 +136,7 @@ class vendas(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo será mostrado
+        -> Especifica qual campo sera mostrado
         """
 
         return str(self.criado) if self.criado else ''
@@ -188,7 +188,7 @@ class empresas(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo será mostrao
+        -> Especifica qual campo sera mostrao
         """
 
         return self.empresa
