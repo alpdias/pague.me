@@ -14,6 +14,16 @@ Criado em 10/2020
                 <li>
                     <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;</span><a href="{% url 'products'  %}">ESTOQUE</a>
                 </li>
+                <li>
+                    <div class="pesquisa-form">
+                        <form method="GET" class="pesquisa-form" id="pesquisa">
+                            <div class="pesquisa-botao">
+                                <span><i class="fas fa-search" id="pesquisar"></i>&nbsp;buscar</span>
+                                <input type="text" name="procurar" id="procurar" value="{{ request.GET.procurar }}">
+                            </div>
+                        </form>
+                    </div>
+                </li>
                 <li class="nav-bar__usuario">{{ user }}</li>
                 <li>
                     <a href="/accounts/logout">sair</a>
@@ -34,15 +44,6 @@ Criado em 10/2020
                 <li><a href=""><span class="nav-bar__vertical-ajuste"></span>config&nbsp;&nbsp;&nbsp;<i class="fas fa-tools"></i></a></li>
             </ul>
         </nav>
-    </div>
-    <div class="pesquisa-form">
-        <form method="GET" class="pesquisa-form" id="pesquisa">
-            <div class="pesquisa-botao">
-                <span>buscar:&nbsp;</span>
-                <input type="text" name="procurar" id="procurar" value="{{ request.GET.procurar }}">
-                &nbsp;<i class="fas fa-search" id="pesquisar"></i>
-            </div>
-        </form>
     </div>
     <div class="tabelas">
         <div class="tabelas-interno">
