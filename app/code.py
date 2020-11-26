@@ -131,7 +131,7 @@ def tratamento(numero=0):
     
     """
     -> Funcao para tratar o numero de acordo com o padrao do local\
-    \n:param numero: Numero para ser formatado\
+    \n:param numero: Numero para ser formatado
     \n:return: Numero formatado
     """
 
@@ -284,7 +284,7 @@ def gerador(size):
     
     """
     -> Gerador de codigo simples\
-    \n:param size: Tamanho do codigo\
+    \n:param size: Tamanho do codigo
     \n:return: Codigo
     """
     
