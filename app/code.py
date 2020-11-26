@@ -31,16 +31,19 @@ def opEstoque(itens, quantidades):
             
     """
     -> Realiza a operaçao de 'delete' e mudança de estado do objeto dentro do model 'estoque'
+    \n:param itens:
+    \n:param quantidades:
+    \n:return:
     """
 
     i = len(itens)
 
     while i > 0:
 
-        nomeProduto = itens[0]
+        nCodigo = itens[0]
         qtd = int(quantidades[0])
 
-        operacao = estoque.objects.filter(produto=nomeProduto).get()
+        operacao = estoque.objects.filter(codigo=nCodigo).get()
         operacao.quantidade -= qtd # diminui o valor do objeto dentro do DB
         operacao.save() # salva a operaçao
 
@@ -63,6 +66,7 @@ def novoUsuario(nome):
 
     """
     -> Criar um novo diretorio para o usuario\
+    \n:param nome:
     \n:return: Novo diretorio de arquivo em 'static'
     """
 
@@ -74,6 +78,9 @@ def enviarRecibo(recibo, usuario):
     
     """
     -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario
+    \n:param recibo:
+    \n:param usuario:
+    \n:return:
     """
     
     empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
@@ -144,6 +151,15 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     """
     -> Cria um arquivo de pdf\
+    \n:param nome:
+    \n:param usuario:
+    \n:param vendas:
+    \n:param desconto:
+    \n:param total:
+    \n:param pagamento:
+    \n:param troco:
+    \n:param cpf:
+    \n:param extrato:
     \n:return: Retorna um arquivo de pdf para envio
     """
     
@@ -280,14 +296,15 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     enviarRecibo(salvarEm, usuario) # envia o pdf
 
 
-def gerador(size):
+def gerador(request, tamanho):
     
     """
     -> Gerador de codigo simples\
-    \n:param size: Tamanho do codigo
+    \n:param request:
+    \n:param tamanho: Tamanho do codigo
     \n:return: Codigo
     """
-    
+
     numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] # lista de numeros
     letrasMin = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'w', 'y', 'z'] # lista de letras minusculas
     letrasMax = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'W', 'Y', 'Z'] # lista de letras maiusculas
@@ -299,7 +316,7 @@ def gerador(size):
 
     codigo = ''
 
-    for i in range(size):
+    for i in range(tamanho):
         codigo += random.choice(lista[0]) # escolha dos caracters
 
     return codigo

@@ -29,7 +29,7 @@ class estoqueAdmin(admin.ModelAdmin):
     -> definiçao do 'display' das tabelas no admin do site
     """
 
-    list_display = ['produto', 'preco', 'quantidade', 'status']
+    list_display = ['produto', 'codigo', 'preco', 'quantidade', 'status']
     search_fields = ['produto', 'fornecedor', 'status']
 
 

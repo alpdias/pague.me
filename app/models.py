@@ -7,6 +7,7 @@ Criado em 09/2020
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from .code import gerador
 
 # Create your models here.
 
@@ -68,6 +69,8 @@ class estoque(models.Model):
         ('esgotado', 'esgotado'),
     )
     
+    
+
     produto = models.CharField('Produto', max_length=255, unique=True)
     preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
@@ -75,7 +78,21 @@ class estoque(models.Model):
     aviso = models.IntegerField('Aviso', blank=True, default=0)
     descricao = models.CharField('Descrição', max_length=255, blank=True)
     fornecedor = models.CharField('Fornecedor', max_length=255, blank=True)
-    codigo = models.CharField('Código', max_length=8, unique=True)
+    
+    codigos = estoque.objects.all()
+
+    novoCodigo = gerador(8)
+
+    while True:
+
+        if novoCodigo in codigos.codigo:
+            pass 
+
+        else:
+            novoCodigo = novoCodigo
+            break
+
+    codigo = models.CharField('Código', max_length=8, unique=True, default=novoCodigo)
     
     status = models.CharField(
         max_length = 10, 

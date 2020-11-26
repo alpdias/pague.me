@@ -31,6 +31,7 @@ def home(request):
 
     """
     -> Renderiza a pagina 'home.html'\
+    \n:param request:
     \n:return: Retorna a pagina 'home.html'
     """
     
@@ -41,6 +42,7 @@ def about(request):
 
     """
     -> Renderiza a pagina 'about.html'\
+    \n:param request:
     \n:return: Retorna a pagian 'about.html'
     """
     
@@ -51,6 +53,7 @@ def contact(request):
 
     """
     -> Renderiza a pagina 'contact.html'\
+    \n:param request:
     \n:return: Retorna a pagina 'contact.html'
     """
     
@@ -62,6 +65,7 @@ def dashboard(request):
 
     """
     -> Renderiza a pagina 'dashboard.html'\
+    \n:param request:
     \n:return: Retorna a pagina 'dashboard.html'
     """
     
@@ -73,6 +77,7 @@ def buy(request):
 
     """
     -> Renderiza a pagina 'buy.html' e os objetos do model 'vendas'\
+    \n:param request:
     \n:return: Retorna a pagina 'buy.html' com os objetos do model 'vendas' de cada usuario logado
     """
     
@@ -91,6 +96,8 @@ def sales(request, id):
 
     """
     -> Renderiza a pagina 'sales.html' com as opçoes de ediçao do model 'vendas'\
+    \n:param request:
+    \n:param id:
     \n:return: Retorna a pagina 'sales.html' de acordo com o  'id' especifico do objeto para ediçao
     """
     
@@ -126,6 +133,7 @@ def cart(request):
 
     """
     -> Renderiza a pagina 'cart.html' e realiza o processo de requisiçao no estoque
+    \n:param request:
     \n:return: Retorna o registro de uma nova venda e envia o recibo
     """
 
@@ -138,6 +146,7 @@ def cart(request):
         valorDesconto = request.POST.get('valorDesconto-form').replace(',','.')
         valorTroco = request.POST.get('valorTroco-form').replace(',','.')
         listaItens = request.POST.get('item-local').split(',')
+        listaCodigos = request.POST.get('codigo-local').split(',')
         listaValores = request.POST.get('valor-local').split(',')
         listaQuantidades = request.POST.get('qtd-local').split(',')
         # requisiçoes dentro do metodo POST <--
@@ -158,9 +167,9 @@ def cart(request):
         
         valorTotal = (float(valorTotal) - float(valorDesconto)) # calculo do valor total
 
-        removeItens = listaItens
+        removeItens = listaCodigos
         removeQtd = listaQuantidades
-        code.opEstoque(removeItens, removeQtd)
+        opEstoque(removeItens, removeQtd)
 
         # tratamento de erro -->
         listaItens = request.POST.get('item-local').split(',')
@@ -184,7 +193,7 @@ def cart(request):
             pass
         
         else:
-            code.novoUsuario(usuario) 
+            novoUsuario(usuario) 
         
         caminho = Path(f'static/archive/{usuario}') # caminho do diretorio
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  # caminho do arquivo salvo
@@ -203,7 +212,7 @@ def cart(request):
         extrato = vendas.objects.filter(recibo=nomeRecibo).get() # resgata o numero de ID da objeto criado anteriormente
         nExtrato = extrato.id
         
-        code.pdf(
+        pdf(
             nomeRecibo, 
             usuario, 
             listaRecibo, 
@@ -228,6 +237,7 @@ def records(request):
 
     """
     -> Renderiza a pagina 'records.html' e os objetos do model 'pessoas'\
+    \n:param request:
     \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado
     """
     
@@ -246,6 +256,7 @@ def products(request):
 
     """
     -> Renderiza a pagina 'products.html' e os objetos do model 'estoque'\
+    \n:param request:
     \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa
     """
 
@@ -270,6 +281,8 @@ def stock(request, id):
 
     """
     -> Renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'\
+    \n:param request:
+    \n:param id:
     \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao
     """
 
@@ -295,6 +308,8 @@ def edit(request, id):
 
     """
     -> Renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'\
+    \n:param request:
+    \n:param id:
     \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao
     """
     
@@ -328,6 +343,7 @@ def newp(request):
     
     """
     -> Renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'\
+    \n:param request:
     \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'
     """
     
@@ -352,6 +368,8 @@ def people(request, id):
 
     """
     -> Rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'\
+    \n:param request:
+    \n:param id:
     \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados
     """
 
@@ -365,6 +383,7 @@ def newc(request):
 
     """
     -> Renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'\
+    \n:param request:
     \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'
     """
     
