@@ -75,6 +75,7 @@ class estoque(models.Model):
     aviso = models.IntegerField('Aviso', blank=True, default=0)
     descricao = models.CharField('Descrição', max_length=255, blank=True)
     fornecedor = models.CharField('Fornecedor', max_length=255, blank=True)
+    codigo = models.CharField('Código', max_length=8, unique=True)
     
     status = models.CharField(
         max_length = 10, 
