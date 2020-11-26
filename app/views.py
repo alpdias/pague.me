@@ -22,7 +22,7 @@ from .models import pessoas, estoque, vendas, empresas
 
 # bibliotecas externas
 import os
-from code import *
+from .code import *
 from pathlib import Path
 
 # Create your views here.
