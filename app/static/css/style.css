@@ -156,7 +156,6 @@ body {
     position: fixed;
     display: block;
     height: 100vh;
-    box-shadow: 1px 1px 2px #0000001c;
     padding-right: 6px;
 }
 
@@ -323,13 +322,12 @@ th {
 }
 
 .pesquisa-form form {
-    padding-top: 12px;
-    padding-bottom: 0px;
+    padding-top: 12px 12px 0px 156px;
 }
 
 .pesquisa-form input {
     padding: 6px;
-    width: 600px;
+    width: 80%;
     border-radius: 6px;
     border: none;
     box-shadow: 1px 1px 2px #0000001c;
