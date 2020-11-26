@@ -11,6 +11,7 @@ from .models import estoque, empresas
 # bibliotecas externas
 import os
 import locale
+import random
 import smtplib
 from pathlib import Path
 from datetime import date
@@ -278,4 +279,28 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     enviarRecibo(salvarEm, usuario) # envia o pdf
 
+
+def gerador(size):
+    
+    """
+    -> Gerador de codigo simples\
+    \n:param size: Tamanho do codigo\
+    \n:return: Codigo
+    """
+    
+    numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] # lista de numeros
+    letrasMin = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'w', 'y', 'z'] # lista de letras minusculas
+    letrasMax = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'W', 'Y', 'Z'] # lista de letras maiusculas
+    simbolos = ['!', '@', '#', '$', '%', '&', '*'] # lista de simbolos
+
+    lista = []
+
+    lista.append(numeros + letrasMin + letrasMax + simbolos) # lista unica para todos os caracteres
+
+    codigo = ''
+
+    for i in range(size):
+        codigo += random.choice(lista[0]) # escolha dos caracters
+
+    return codigo
   
