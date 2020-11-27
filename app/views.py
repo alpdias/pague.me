@@ -31,8 +31,8 @@ def home(request):
 
     """
     -> Renderiza a pagina 'home.html'\
-    \n:param request:
-    \n:return: Retorna a pagina 'home.html'
+    \n:param request:\
+    \n:return: Retorna a pagina 'home.html'\
     """
     
     return render(request, 'app/home.html')
@@ -42,8 +42,8 @@ def about(request):
 
     """
     -> Renderiza a pagina 'about.html'\
-    \n:param request:
-    \n:return: Retorna a pagian 'about.html'
+    \n:param request:\
+    \n:return: Retorna a pagian 'about.html'\
     """
     
     return render(request, 'app/about.html')
@@ -53,8 +53,8 @@ def contact(request):
 
     """
     -> Renderiza a pagina 'contact.html'\
-    \n:param request:
-    \n:return: Retorna a pagina 'contact.html'
+    \n:param request:\
+    \n:return: Retorna a pagina 'contact.html'\
     """
     
     return render(request, 'app/contact.html')
@@ -65,8 +65,8 @@ def dashboard(request):
 
     """
     -> Renderiza a pagina 'dashboard.html'\
-    \n:param request:
-    \n:return: Retorna a pagina 'dashboard.html'
+    \n:param request:\
+    \n:return: Retorna a pagina 'dashboard.html'\
     """
     
     return render(request, 'app/dashboard.html')
@@ -77,8 +77,8 @@ def buy(request):
 
     """
     -> Renderiza a pagina 'buy.html' e os objetos do model 'vendas'\
-    \n:param request:
-    \n:return: Retorna a pagina 'buy.html' com os objetos do model 'vendas' de cada usuario logado
+    \n:param request:\
+    \n:return: Retorna a pagina 'buy.html' com os objetos do model 'vendas' de cada usuario logado\
     """
     
     listaVendas = vendas.objects.all().filter(usuario=request.user) # requisicao do objeto com filtro de usuario
@@ -96,9 +96,9 @@ def sales(request, id):
 
     """
     -> Renderiza a pagina 'sales.html' com as opçoes de ediçao do model 'vendas'\
-    \n:param request:
-    \n:param id:
-    \n:return: Retorna a pagina 'sales.html' de acordo com o  'id' especifico do objeto para ediçao
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'sales.html' de acordo com o  'id' especifico do objeto para ediçao\
     """
     
     venda = get_object_or_404(vendas, pk=id) # requisacao do objeto a partir do ID
@@ -132,9 +132,9 @@ def sales(request, id):
 def cart(request):
 
     """
-    -> Renderiza a pagina 'cart.html' e realiza o processo de requisiçao no estoque
-    \n:param request:
-    \n:return: Retorna o registro de uma nova venda e envia o recibo
+    -> Renderiza a pagina 'cart.html' e realiza o processo de requisiçao no estoque\
+    \n:param request:\
+    \n:return: Retorna o registro de uma nova venda e envia o recibo\
     """
 
     if request.method == 'POST':
@@ -237,8 +237,8 @@ def records(request):
 
     """
     -> Renderiza a pagina 'records.html' e os objetos do model 'pessoas'\
-    \n:param request:
-    \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado
+    \n:param request:\
+    \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado\
     """
     
     listaRegistros = pessoas.objects.all().filter(usuario=request.user)
@@ -256,8 +256,8 @@ def products(request):
 
     """
     -> Renderiza a pagina 'products.html' e os objetos do model 'estoque'\
-    \n:param request:
-    \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa
+    \n:param request:\
+    \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa\
     """
 
     pesquisa = request.GET.get('procurar')
@@ -281,9 +281,9 @@ def stock(request, id):
 
     """
     -> Renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'\
-    \n:param request:
-    \n:param id:
-    \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao\
     """
 
     estoques = get_object_or_404(estoque, pk=id)
@@ -308,9 +308,9 @@ def edit(request, id):
 
     """
     -> Renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'\
-    \n:param request:
-    \n:param id:
-    \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao\
     """
     
     estoques = get_object_or_404(estoque, pk=id)
@@ -343,8 +343,8 @@ def newp(request):
     
     """
     -> Renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'\
-    \n:param request:
-    \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'
+    \n:param request:\
+    \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'\
     """
     
     if request.method == 'POST':
@@ -368,9 +368,9 @@ def people(request, id):
 
     """
     -> Rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'\
-    \n:param request:
-    \n:param id:
-    \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados\
     """
 
     pessoa = get_object_or_404(pessoas, pk=id)
@@ -383,8 +383,8 @@ def newc(request):
 
     """
     -> Renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'\
-    \n:param request:
-    \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'
+    \n:param request:\
+    \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'\
     """
     
     if request.method == 'POST':
