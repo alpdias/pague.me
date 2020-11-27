@@ -31,9 +31,9 @@ def opEstoque(itens, quantidades):
             
     """
     -> Realiza a operaçao de 'delete' e mudança de estado do objeto dentro do model 'estoque'
-    \n:param itens:
-    \n:param quantidades:
-    \n:return:
+    \n:param itens:\
+    \n:param quantidades:\
+    \n:return:\
     """
 
     i = len(itens)
@@ -66,8 +66,8 @@ def novoUsuario(nome):
 
     """
     -> Criar um novo diretorio para o usuario\
-    \n:param nome:
-    \n:return: Novo diretorio de arquivo em 'static'
+    \n:param nome:\
+    \n:return: Novo diretorio de arquivo em 'static'\
     """
 
     dir = f'app/static/archive/{nome}'       
@@ -77,10 +77,10 @@ def novoUsuario(nome):
 def enviarRecibo(recibo, usuario):
     
     """
-    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario
-    \n:param recibo:
-    \n:param usuario:
-    \n:return:
+    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario\
+    \n:param recibo:\
+    \n:param usuario:\
+    \n:return:\
     """
     
     empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
@@ -138,8 +138,8 @@ def tratamento(numero=0):
     
     """
     -> Funcao para tratar o numero de acordo com o padrao do local\
-    \n:param numero: Numero para ser formatado
-    \n:return: Numero formatado
+    \n:param numero: Numero para ser formatado\
+    \n:return: Numero formatado\
     """
 
     locale.setlocale(locale.LC_MONETARY, "pt_BR.UTF-8") # tratamento de numero no padrao brasileiro
@@ -151,16 +151,16 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     """
     -> Cria um arquivo de pdf\
-    \n:param nome:
-    \n:param usuario:
-    \n:param vendas:
-    \n:param desconto:
-    \n:param total:
-    \n:param pagamento:
-    \n:param troco:
-    \n:param cpf:
-    \n:param extrato:
-    \n:return: Retorna um arquivo de pdf para envio
+    \n:param nome:\
+    \n:param usuario:\
+    \n:param vendas:\
+    \n:param desconto:\
+    \n:param total:\
+    \n:param pagamento:\
+    \n:param troco:\
+    \n:param cpf:\
+    \n:param extrato:\
+    \n:return: Retorna um arquivo de pdf para envio\
     """
     
     empresa = empresas.objects.filter(usuario=usuario).get() 
@@ -300,9 +300,9 @@ def gerador(request, tamanho):
     
     """
     -> Gerador de codigo simples\
-    \n:param request:
-    \n:param tamanho: Tamanho do codigo
-    \n:return: Codigo
+    \n:param request:\
+    \n:param tamanho: Tamanho do codigo\
+    \n:return: Codigo\
     """
 
     numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] # lista de numeros
