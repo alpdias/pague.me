@@ -14,7 +14,7 @@ from .code import gerador
 class pessoas(models.Model):
 
     """
-    ->  Modelo de objeto para registro de 'clientes'
+    ->  Modelo de objeto para registro de 'clientes'\
     """
 
     STATUS = (
@@ -41,7 +41,7 @@ class pessoas(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo sera mostrado
+        -> Especifica qual campo sera mostrado\
         """
 
         return self.nome
@@ -50,7 +50,7 @@ class pessoas(models.Model):
     class Meta:
 
         """
-        -> Define os nomes e a ordem
+        -> Define os nomes e a ordem\
         """
 
         verbose_name = 'cadastro'
@@ -61,7 +61,7 @@ class pessoas(models.Model):
 class estoque(models.Model):
 
     """
-    -> Modelo de objeto para registro de 'produtos'
+    -> Modelo de objeto para registro de 'produtos'\
     """
 
     STATUS = (
@@ -106,7 +106,7 @@ class estoque(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo sera mostrado
+        -> Especifica qual campo sera mostrado\
         """
 
         return self.produto
@@ -115,7 +115,7 @@ class estoque(models.Model):
     class Meta:
 
         """
-        -> Define os nomes e a ordem
+        -> Define os nomes e a ordem\
         """
 
         verbose_name = 'produto'
@@ -126,7 +126,7 @@ class estoque(models.Model):
 class vendas(models.Model):
 
     """
-    -> Modelo de objeto para registro de 'vendas'
+    -> Modelo de objeto para registro de 'vendas'\
     """
     
     STATUS = (
@@ -154,7 +154,7 @@ class vendas(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo sera mostrado
+        -> Especifica qual campo sera mostrado\
         """
 
         return str(self.criado) if self.criado else ''
@@ -163,7 +163,7 @@ class vendas(models.Model):
     class Meta:
 
         """
-        -> Define os nomes e a ordem
+        -> Define os nomes e a ordem\
         """
 
         verbose_name = 'venda'
@@ -174,7 +174,7 @@ class vendas(models.Model):
 class empresas(models.Model):
 
     """
-    -> modelo de objeto para registro de 'empresas'
+    -> Modelo de objeto para registro de 'empresas'\
     """
     
     STATUS = (
@@ -206,7 +206,7 @@ class empresas(models.Model):
     def __str__(self):
 
         """
-        -> Especifica qual campo sera mostrao
+        -> Especifica qual campo sera mostrado\
         """
 
         return self.empresa
@@ -215,7 +215,7 @@ class empresas(models.Model):
     class Meta:
 
         """
-        -> Define os nomes e a ordem
+        -> Define os nomes e a ordem\
         """
 
         verbose_name = 'empresa'
