@@ -18,8 +18,8 @@ Criado em 10/2020
                     <div class="pesquisa-form">
                         <form method="GET" class="pesquisa-form" id="pesquisa">
                             <div class="pesquisa-botao">
-                                <span><i class="fas fa-search" id="pesquisar"></i>&nbsp;buscar</span>
-                                <input type="text" name="procurar" id="procurar" value="{{ request.GET.procurar }}">
+                                <span>buscar<i class="fas fa-search" id="pesquisar"></i>&nbsp;</span>
+                                <input type="text" name="procurar" id="procurar" value="{{ request.GET.procurar }}" onclick="mudarBusca()">
                             </div>
                         </form>
                     </div>
@@ -60,7 +60,7 @@ Criado em 10/2020
                             <td style="word-wrap: break-word;">{{ produto.preco }}</td>
                             <td style="word-wrap: break-word;">{{ produto.quantidade }}</td>
                             <td style="word-wrap: break-word;">{{ produto.status }}</td>
-                            <td style="word-wrap: break-word;"><span class="confirmacao-botoes__soma"><i class="fas fa-plus-circle" onclick="adicionarRapido('{{ produto.produto }}', '{{ produto.preco }}', '{{ produto.status }}')"></i></span></td>
+                            <td style="word-wrap: break-word;"><span class="confirmacao-botoes__soma"><i class="fas fa-plus-circle" onclick="adicionarRapido('{{ produto.produto }}', '{{ produto.codigo }}', '{{ produto.preco }}', '{{ produto.status }}')"></i></span></td>
                         </tr>
                     {% endfor %}
                 </tbody>

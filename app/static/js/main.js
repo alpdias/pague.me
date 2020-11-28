@@ -7,6 +7,7 @@ Criado em 09/2020
 function adicionar() { // adiciona o item ao carrinho
 
     let produto = document.querySelector('#produto').textContent;
+    let codigo = document.querySelector('#codigo');
     let preco = document.querySelector('#preco').textContent;
     let disponivel = document.querySelector('#dispo').textContent;
     let qtd = document.querySelector('#qtd').value;
@@ -23,6 +24,7 @@ function adicionar() { // adiciona o item ao carrinho
 
         let compra = {
             nome: produto,
+            ident: codigo,
             valor: preco,
             quantidade: qtd,
         };
@@ -47,7 +49,7 @@ function adicionar() { // adiciona o item ao carrinho
 
 };
 
-function adicionarRapido(produto, preco, status) { // faz uma adiçao rapida ao carrinho de um unico item
+function adicionarRapido(produto, codigo, preco, status) { // faz uma adiçao rapida ao carrinho de um unico item
 
     let disponivel = status;
     let qtd = 1;
@@ -60,6 +62,7 @@ function adicionarRapido(produto, preco, status) { // faz uma adiçao rapida ao 
 
         let compra = {
             nome: produto,
+            ident: codigo,
             valor: preco,
             quantidade: qtd,
         };
@@ -92,6 +95,7 @@ function compras() { // adiciona os os produtos selecionados ao carrinho
         for (let i = 0; i < itens.length; i++) { 
 
             let nome =  itens[i].nome;
+            let codigo = itens[i].codigo;
             let preco = itens[i].valor;
             let qtd = itens[i].quantidade;
 
@@ -244,18 +248,21 @@ function criarLista() { // cria uma lista com os produtos da venda para o backen
     let recibo = JSON.parse(localStorage.getItem('carrinho'));
 
     let item = [];
+    let codigo = [];
     let valor = [];
     let qtd = [];
 
     for (let i = 0; i < recibo.length; i++) { 
         
         item.push(recibo[i].nome);
+        codigo.push(recibo[i].ident);
         valor.push((recibo[i].valor).replace(',','.'));
         qtd.push(recibo[i].quantidade);
 
     };
 
     document.querySelector('#item-local').value = `${item}`;
+    document.querySelector('#codigo-local').value = `${codigo}`;
     document.querySelector('#valor-local').value = `${valor}`;
     document.querySelector('#qtd-local').value = `${qtd}`;
 
@@ -311,6 +318,20 @@ function troco() { // calcula o valor do troco
     let troco = (recebido - total);
 
     document.querySelector('#valorTroco-form').value = `${troco.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
+
+};
+
+function mudarBusca() {
+
+    if (document.querySelector('#procurar').style.width == '100px') {
+        
+        document.querySelector('#procurar').style.width = '400px';
+        
+    } else {
+    
+        document.querySelector('#procurar').style.width = '100px';
+    
+    };
 
 };
 // JS

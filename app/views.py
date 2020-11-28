@@ -140,8 +140,55 @@ def sales(request, id):
         
     else:
         return render(request, 'app/sales.html', {'form': form, 'venda': venda})  
-    
-    
+
+
+def opEstoque(itens, quantidades):
+            
+    """
+    -> Realiza a operaçao de 'delete' e mudança de estado do objeto dentro do model 'estoque'
+    \n:param itens:\
+    \n:param quantidades:\
+    \n:return:\
+    """
+
+    i = len(itens)
+
+    while i > 0:
+
+        nCodigo = itens[0]
+        qtd = int(quantidades[0])
+
+        operacao = estoque.objects.filter(codigo=nCodigo).get()
+        operacao.quantidade -= qtd # diminui o valor do objeto dentro do DB
+        operacao.save() # salva a operaçao
+
+        itens.pop(0)
+        quantidades.pop(0)
+
+        i = i - 1
+
+        estado = operacao.quantidade
+
+        if estado == 0:
+            operacao.status = 'esgotado' # muda o 'status' do objeto no DB
+            operacao.save()
+
+        else:
+            pass
+
+
+def novoUsuario(nome):
+
+    """
+    -> Criar um novo diretorio para o usuario\
+    \n:param nome:\
+    \n:return: Novo diretorio de arquivo em 'static'\
+    """
+
+    dir = f'app/static/archive/{nome}'       
+    os.mkdir(dir)   
+
+
 @login_required
 def cart(request):
 
@@ -183,6 +230,7 @@ def cart(request):
 
         removeItens = listaCodigos
         removeQtd = listaQuantidades
+
         opEstoque(removeItens, removeQtd)
 
         # tratamento de erro -->
@@ -220,7 +268,7 @@ def cart(request):
             recibo=nomeRecibo, 
             usuario=usuario
         )  # cria uma novo objeto no model 'vendas'
-
+        
         f.save()
         
         extrato = vendas.objects.filter(recibo=nomeRecibo).get() # resgata o numero de ID da objeto criado anteriormente
@@ -246,297 +294,6 @@ def cart(request):
     return render(request, 'app/cart.html')  
 
 
-@login_required
-def records(request):
-
-    """
-    -> Renderiza a pagina 'records.html' e os objetos do model 'pessoas'\
-    \n:param request:\
-    \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado\
-    """
-    
-    listaRegistros = pessoas.objects.all().filter(usuario=request.user)
-
-    paginas = Paginator(listaRegistros, 8)
-    pagina = request.GET.get('page')
-
-    registros = paginas.get_page(pagina)
-
-    return render(request, 'app/records.html', {'registros': registros})
-
-
-@login_required
-def products(request):
-
-    """
-    -> Renderiza a pagina 'products.html' e os objetos do model 'estoque'\
-    \n:param request:\
-    \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa\
-    """
-
-    pesquisa = request.GET.get('procurar')
-
-    if pesquisa:
-        produtos = estoque.objects.filter(produto__icontains=pesquisa, usuario=request.user) # retorna o valor da pesquisa contido na requisicao
-
-    else:
-        listaProdutos = estoque.objects.all().filter(usuario=request.user)
-
-        paginas = Paginator(listaProdutos, 8)
-        pagina = request.GET.get('page')
-
-        produtos = paginas.get_page(pagina)
-
-    return render(request, 'app/products.html', {'produtos': produtos})  
-
-
-@login_required
-def stock(request, id):
-
-    """
-    -> Renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'\
-    \n:param request:\
-    \n:param id:\
-    \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao\
-    """
-
-    estoques = get_object_or_404(estoque, pk=id)
-    estado = estoques.quantidade
-        
-    if estado == 0: # altera o 'status' do objeto do model 'estoque'
-        estoques.status = 'esgotado'
-        estoques.save()
-
-    elif estado > 0:
-        estoques.status = 'disponivel'
-        estoques.save()
-
-    else:
-        pass
-
-    return render(request, 'app/stock.html', {'estoques': estoques})
-
-
-@login_required
-def edit(request, id):
-
-    """
-    -> Renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'\
-    \n:param request:\
-    \n:param id:\
-    \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao\
-    """
-    
-    estoques = get_object_or_404(estoque, pk=id)
-    form = estoqueForm(instance=estoques)
-    
-    if request.method == 'POST':
-        excluir = request.POST.get('excluir-produto')
-        
-        if (excluir == 'excluir'):
-            estoques.delete()
-
-            return redirect('/products')
-
-        form = estoqueForm(request.POST, instance=estoques)
-        
-        if form.is_valid:
-            form.save()
-
-            return redirect('/products')
-        
-        else:
-            return render(request, 'app/edit.html', {'form': form, 'estoques': estoques})
-        
-    else:
-        return render(request, 'app/edit.html', {'form': form, 'estoques': estoques}) 
-
-
-@login_required
-def newp(request):
-    
-    """
-    -> Renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'\
-    \n:param request:\
-    \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'\
-    """
-    
-    if request.method == 'POST':
-        form = estoqueForm(request.POST)
-        
-        if form.is_valid():
-            produto = form.save(commit=False)
-            produto.usuario = request.user
-            produto.save()
-            
-            return redirect('/products')
-            
-    else:
-        form = estoqueForm()
-
-    return render(request, 'app/newp.html', {'form': form})
-
-
-@login_required
-def people(request, id):
-
-    """
-    -> Rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'\
-    \n:param request:\
-    \n:param id:\
-    \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados\
-    """
-
-    pessoa = get_object_or_404(pessoas, pk=id)
-
-    return render(request, 'app/people.html', {'pessoa': pessoa})
-
-
-@login_required
-def newc(request):
-
-    """
-    -> Renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'\
-    \n:param request:\
-    \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'\
-    """
-    
-    if request.method == 'POST':
-        form = pessoasForm(request.POST)
-        
-        if form.is_valid():
-            pessoa = form.save(commit=False) # não salva o objeto direto, podendo adicionar mais dados
-            pessoa.usuario = request.user
-            pessoa.save()
-            
-            return redirect('/records')
-        
-    else:
-        form = pessoasForm()
-    
-    return render(request, 'app/newc.html', {'form': form})  
-
-
-"""
-
-class register(generic.CreateView):  
-
-    # view para registrar um novo usuario
-    
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/register.html'
-    
-"""
-
-### funçoes internas ### -->
-def opEstoque(itens, quantidades):
-            
-    """
-    -> Realiza a operaçao de 'delete' e mudança de estado do objeto dentro do model 'estoque'
-    \n:param itens:\
-    \n:param quantidades:\
-    \n:return:\
-    """
-
-    i = len(itens)
-
-    while i > 0:
-
-        nCodigo = itens[0]
-        qtd = int(quantidades[0])
-
-        operacao = estoque.objects.filter(codigo=nCodigo).get()
-        operacao.quantidade -= qtd # diminui o valor do objeto dentro do DB
-        operacao.save() # salva a operaçao
-
-        itens.pop(0)
-        quantidades.pop(0)
-
-        i = i - 1
-
-        estado = operacao.quantidade
-
-        if estado == 0:
-            operacao.status = 'esgotado' # muda o 'status' do objeto no DB
-            operacao.save()
-
-        else:
-            pass
-      
-    
-def novoUsuario(nome):
-
-    """
-    -> Criar um novo diretorio para o usuario\
-    \n:param nome:\
-    \n:return: Novo diretorio de arquivo em 'static'\
-    """
-
-    dir = f'app/static/archive/{nome}'       
-    os.mkdir(dir)   
-
-    
-def enviarRecibo(recibo, usuario):
-    
-    """
-    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario\
-    \n:param recibo:\
-    \n:param usuario:\
-    \n:return:\
-    """
-    
-    empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
-    
-    # configuraçoes do servidor -->
-    porta = empresa.porta
-    smtpServidor = empresa.servidor
-    login = empresa.usuarioServidor
-    pwd = empresa.senhaServidor
-    # configuraçoes do servidor <--
-
-    # especificoes do e-mail -->
-    assunto = 'pague.me | nova venda realizada !!'
-    de = empresa.email
-    para = empresa.email
-
-    mensagem = MIMEMultipart()
-
-    mensagem['From'] = de
-    mensagem['To'] = para
-    mensagem['Subject'] = assunto
-
-    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!\
-    \nhttp://pague-me.herokuapp.com/'
-    mensagem.attach(MIMEText(corpo, "plain"))
-
-    arquivo = recibo
-
-    with open(arquivo, 'rb') as attachment:
-
-        email = MIMEBase('application', 'octet-stream')
-        email.set_payload(attachment.read())
-
-    encoders.encode_base64(email) # codificao do anexo do e-mail
-
-    email.add_header(
-        'Content-Disposition',
-        f'attachment; filename={"recibo.pdf"}',
-    ) # anexo ao e-mail
-
-    mensagem.attach(email)
-    texto = mensagem.as_string()
-     # especificoes do e-mail <--
-    
-    with smtplib.SMTP(smtpServidor, porta) as server: # envio do e-mail pelo servidor
-
-        server.starttls()
-        server.login(login, pwd)
-        server.sendmail(de, para, texto)
-
-        server.quit()
-        
-        
 def tratamento(numero=0):
     
     """
@@ -699,11 +456,216 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     enviarRecibo(salvarEm, usuario) # envia o pdf
   
 
-def gerador(request, tamanho):
+def enviarRecibo(recibo, usuario):
+    
+    """
+    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario\
+    \n:param recibo:\
+    \n:param usuario:\
+    \n:return:\
+    """
+    
+    empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
+    
+    # configuraçoes do servidor -->
+    porta = empresa.porta
+    smtpServidor = empresa.servidor
+    login = empresa.usuarioServidor
+    pwd = empresa.senhaServidor
+    # configuraçoes do servidor <--
+
+    # especificoes do e-mail -->
+    assunto = 'pague.me | nova venda realizada !!'
+    de = empresa.email
+    para = empresa.email
+
+    mensagem = MIMEMultipart()
+
+    mensagem['From'] = de
+    mensagem['To'] = para
+    mensagem['Subject'] = assunto
+
+    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!\
+    \nhttp://pague-me.herokuapp.com/'
+    mensagem.attach(MIMEText(corpo, "plain"))
+
+    arquivo = recibo
+
+    with open(arquivo, 'rb') as attachment:
+
+        email = MIMEBase('application', 'octet-stream')
+        email.set_payload(attachment.read())
+
+    encoders.encode_base64(email) # codificao do anexo do e-mail
+
+    email.add_header(
+        'Content-Disposition',
+        f'attachment; filename={"recibo.pdf"}',
+    ) # anexo ao e-mail
+
+    mensagem.attach(email)
+    texto = mensagem.as_string()
+     # especificoes do e-mail <--
+    
+    with smtplib.SMTP(smtpServidor, porta) as server: # envio do e-mail pelo servidor
+
+        server.starttls()
+        server.login(login, pwd)
+        server.sendmail(de, para, texto)
+
+        server.quit()
+
+
+@login_required
+def records(request):
+
+    """
+    -> Renderiza a pagina 'records.html' e os objetos do model 'pessoas'\
+    \n:param request:\
+    \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado\
+    """
+    
+    listaRegistros = pessoas.objects.all().filter(usuario=request.user)
+
+    paginas = Paginator(listaRegistros, 8)
+    pagina = request.GET.get('page')
+
+    registros = paginas.get_page(pagina)
+
+    return render(request, 'app/records.html', {'registros': registros})
+
+
+@login_required
+def products(request):
+
+    """
+    -> Renderiza a pagina 'products.html' e os objetos do model 'estoque'\
+    \n:param request:\
+    \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa\
+    """
+
+    pesquisa = request.GET.get('procurar')
+
+    if pesquisa:
+        produtos = estoque.objects.filter(produto__icontains=pesquisa, usuario=request.user) # retorna o valor da pesquisa contido na requisicao
+
+    else:
+        listaProdutos = estoque.objects.all().filter(usuario=request.user)
+
+        paginas = Paginator(listaProdutos, 8)
+        pagina = request.GET.get('page')
+
+        produtos = paginas.get_page(pagina)
+
+    return render(request, 'app/products.html', {'produtos': produtos})  
+
+
+@login_required
+def stock(request, id):
+
+    """
+    -> Renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'\
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao\
+    """
+
+    estoques = get_object_or_404(estoque, pk=id)
+    estado = estoques.quantidade
+        
+    if estado == 0: # altera o 'status' do objeto do model 'estoque'
+        estoques.status = 'esgotado'
+        estoques.save()
+
+    elif estado > 0:
+        estoques.status = 'disponivel'
+        estoques.save()
+
+    else:
+        pass
+
+    return render(request, 'app/stock.html', {'estoques': estoques})
+
+
+@login_required
+def edit(request, id):
+
+    """
+    -> Renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'\
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao\
+    """
+    
+    estoques = get_object_or_404(estoque, pk=id)
+    form = estoqueForm(instance=estoques)
+    
+    if request.method == 'POST':
+        excluir = request.POST.get('excluir-produto')
+        
+        if (excluir == 'excluir'):
+            estoques.delete()
+
+            return redirect('/products')
+
+        form = estoqueForm(request.POST, instance=estoques)
+        
+        if form.is_valid:
+            form.save()
+
+            return redirect('/products')
+        
+        else:
+            return render(request, 'app/edit.html', {'form': form, 'estoques': estoques})
+        
+    else:
+        return render(request, 'app/edit.html', {'form': form, 'estoques': estoques}) 
+
+
+@login_required
+def newp(request):
+    
+    """
+    -> Renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'\
+    \n:param request:\
+    \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'\
+    """
+    
+    if request.method == 'POST':
+        form = estoqueForm(request.POST)
+        
+        if form.is_valid():
+            produto = form.save(commit=False)
+            produto.usuario = request.user
+
+            listaCodigos = estoque.objects.all().filter(usuario=request.user)
+
+            novoCodigo = gerador(8)
+
+            while True:
+
+                if novoCodigo in listaCodigos:
+                    novoCodigo = gerador(8)
+
+                else:
+                    novoCodigo = novoCodigo
+                    break
+
+            produto.codigo = gerador(8)
+            produto.save()
+            
+            return redirect('/products')
+            
+    else:
+        form = estoqueForm()
+
+    return render(request, 'app/newp.html', {'form': form})
+
+
+def gerador(tamanho):
     
     """
     -> Gerador de codigo simples\
-    \n:param request:\
     \n:param tamanho: Tamanho do codigo\
     \n:return: Codigo\
     """
@@ -725,4 +687,56 @@ def gerador(request, tamanho):
     return codigo
 
 
-### funçoes internas ### <--
+@login_required
+def people(request, id):
+
+    """
+    -> Rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'\
+    \n:param request:\
+    \n:param id:\
+    \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados\
+    """
+
+    pessoa = get_object_or_404(pessoas, pk=id)
+
+    return render(request, 'app/people.html', {'pessoa': pessoa})
+
+
+@login_required
+def newc(request):
+
+    """
+    -> Renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'\
+    \n:param request:\
+    \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'\
+    """
+    
+    if request.method == 'POST':
+        form = pessoasForm(request.POST)
+        
+        if form.is_valid():
+            pessoa = form.save(commit=False) # não salva o objeto direto, podendo adicionar mais dados
+            pessoa.usuario = request.user
+            pessoa.save()
+            
+            return redirect('/records')
+        
+    else:
+        form = pessoasForm()
+    
+    return render(request, 'app/newc.html', {'form': form})  
+
+
+"""
+
+class register(generic.CreateView):  
+
+    # view para registrar um novo usuario
+    
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/register.html'
+    
+"""
+        
+        

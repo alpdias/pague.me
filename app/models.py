@@ -7,7 +7,9 @@ Criado em 09/2020
 
 from django.db import models
 from django.contrib.auth import get_user_model
-from .views import gerador
+
+# bibliotecas externas
+import random
 
 # Create your models here.
 
@@ -76,21 +78,7 @@ class estoque(models.Model):
     aviso = models.IntegerField('Aviso', blank=True, default=0)
     descricao = models.CharField('Descrição', max_length=255, blank=True)
     fornecedor = models.CharField('Fornecedor', max_length=255, blank=True)
-    
-    codigos = estoque.objects.all()
-
-    novoCodigo = gerador(8)
-
-    while True:
-
-        if novoCodigo in codigos.codigo:
-            pass 
-
-        else:
-            novoCodigo = novoCodigo
-            break
-
-    codigo = models.CharField('Código', max_length=8, unique=True, default=novoCodigo)
+    codigo = models.CharField('Código', max_length=8, unique=True, blank=True)
     
     status = models.CharField(
         max_length = 10, 
@@ -133,7 +121,7 @@ class vendas(models.Model):
     )
     
     cliente = models.CharField('Cliente', max_length=255, default='Não Identificado')
-    cpf = models.CharField('CPF', max_length=14, blank=True)
+    cpf = models.CharField('CPF', max_length=14, blank=True, default='000.000.000-00')
     valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
     pagamento = models.CharField('Pagamento', max_length=8)
     comprovante = models.FileField('Comprovante')
