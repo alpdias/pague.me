@@ -121,7 +121,7 @@ class vendas(models.Model):
     )
     
     cliente = models.CharField('Cliente', max_length=255, default='Não Identificado')
-    cpf = models.CharField('CPF', max_length=14, blank=True, default='000.000.000-00')
+    cpf = models.CharField('CPF', max_length=14, default='000.000.000-00')
     valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
     pagamento = models.CharField('Pagamento', max_length=8)
     comprovante = models.FileField('Comprovante')

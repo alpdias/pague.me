@@ -97,7 +97,7 @@ def buy(request):
     
     listaVendas = vendas.objects.all().filter(usuario=request.user) # requisicao do objeto com filtro de usuario
 
-    paginas = Paginator(listaVendas, 8) # paginacao do conteudo exibido
+    paginas = Paginator(listaVendas, 7) # paginacao do conteudo exibido
     pagina = request.GET.get('page')
 
     venda = paginas.get_page(pagina)
@@ -221,9 +221,6 @@ def cart(request):
 
         if valorDesconto == '':
             valorDesconto = '0'
-        
-        if cpfCliente == '':
-            cpfCliente = 'Não Identificado'
         # tratamento de erro <--
         
         valorTotal = (float(valorTotal) - float(valorDesconto)) # calculo do valor total
@@ -273,6 +270,11 @@ def cart(request):
         
         extrato = vendas.objects.filter(recibo=nomeRecibo).get() # resgata o numero de ID da objeto criado anteriormente
         nExtrato = extrato.id
+
+        # tratamento de erro -->
+        if cpfCliente == '':
+            cpfCliente = 'Não Identificado'
+        # tratamento de erro <--
         
         pdf(
             nomeRecibo, 
@@ -292,6 +294,66 @@ def cart(request):
         pass
 
     return render(request, 'app/cart.html')  
+
+
+def enviarRecibo(recibo, usuario):
+    
+    """
+    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario\
+    \n:param recibo:\
+    \n:param usuario:\
+    \n:return:\
+    """
+    
+    empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
+    
+    # configuraçoes do servidor -->
+    porta = empresa.porta
+    smtpServidor = empresa.servidor
+    login = empresa.usuarioServidor
+    pwd = empresa.senhaServidor
+    # configuraçoes do servidor <--
+
+    # especificoes do e-mail -->
+    assunto = 'pague.me | nova venda realizada !!'
+    de = empresa.email
+    para = empresa.email
+
+    mensagem = MIMEMultipart()
+
+    mensagem['From'] = de
+    mensagem['To'] = para
+    mensagem['Subject'] = assunto
+
+    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!\
+    \nhttp://pague-me.herokuapp.com/'
+    mensagem.attach(MIMEText(corpo, "plain"))
+
+    arquivo = recibo
+
+    with open(arquivo, 'rb') as attachment:
+
+        email = MIMEBase('application', 'octet-stream')
+        email.set_payload(attachment.read())
+
+    encoders.encode_base64(email) # codificao do anexo do e-mail
+
+    email.add_header(
+        'Content-Disposition',
+        f'attachment; filename={"recibo.pdf"}',
+    ) # anexo ao e-mail
+
+    mensagem.attach(email)
+    texto = mensagem.as_string()
+     # especificoes do e-mail <--
+    
+    with smtplib.SMTP(smtpServidor, porta) as server: # envio do e-mail pelo servidor
+
+        server.starttls()
+        server.login(login, pwd)
+        server.sendmail(de, para, texto)
+
+        server.quit()
 
 
 def tratamento(numero=0):
@@ -454,66 +516,6 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     pdf.build(recibo) # salva o pdf
     
     enviarRecibo(salvarEm, usuario) # envia o pdf
-  
-
-def enviarRecibo(recibo, usuario):
-    
-    """
-    -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario\
-    \n:param recibo:\
-    \n:param usuario:\
-    \n:return:\
-    """
-    
-    empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
-    
-    # configuraçoes do servidor -->
-    porta = empresa.porta
-    smtpServidor = empresa.servidor
-    login = empresa.usuarioServidor
-    pwd = empresa.senhaServidor
-    # configuraçoes do servidor <--
-
-    # especificoes do e-mail -->
-    assunto = 'pague.me | nova venda realizada !!'
-    de = empresa.email
-    para = empresa.email
-
-    mensagem = MIMEMultipart()
-
-    mensagem['From'] = de
-    mensagem['To'] = para
-    mensagem['Subject'] = assunto
-
-    corpo = 'Olá, você acaba de realizar uma nova venda e aqui está o seu recibo de venda!\
-    \nhttp://pague-me.herokuapp.com/'
-    mensagem.attach(MIMEText(corpo, "plain"))
-
-    arquivo = recibo
-
-    with open(arquivo, 'rb') as attachment:
-
-        email = MIMEBase('application', 'octet-stream')
-        email.set_payload(attachment.read())
-
-    encoders.encode_base64(email) # codificao do anexo do e-mail
-
-    email.add_header(
-        'Content-Disposition',
-        f'attachment; filename={"recibo.pdf"}',
-    ) # anexo ao e-mail
-
-    mensagem.attach(email)
-    texto = mensagem.as_string()
-     # especificoes do e-mail <--
-    
-    with smtplib.SMTP(smtpServidor, porta) as server: # envio do e-mail pelo servidor
-
-        server.starttls()
-        server.login(login, pwd)
-        server.sendmail(de, para, texto)
-
-        server.quit()
 
 
 @login_required
@@ -622,6 +624,31 @@ def edit(request, id):
         return render(request, 'app/edit.html', {'form': form, 'estoques': estoques}) 
 
 
+def gerador(tamanho):
+    
+    """
+    -> Gerador de codigo simples\
+    \n:param tamanho: Tamanho do codigo\
+    \n:return: Codigo\
+    """
+
+    numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] # lista de numeros
+    letrasMin = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'w', 'y', 'z'] # lista de letras minusculas
+    letrasMax = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'W', 'Y', 'Z'] # lista de letras maiusculas
+    simbolos = ['!', '@', '#', '$', '%', '&', '*'] # lista de simbolos
+
+    lista = []
+
+    lista.append(numeros + letrasMin + letrasMax + simbolos) # lista unica para todos os caracteres
+
+    codigo = ''
+
+    for i in range(tamanho):
+        codigo += random.choice(lista[0]) # escolha dos caracters
+
+    return codigo
+
+
 @login_required
 def newp(request):
     
@@ -660,31 +687,6 @@ def newp(request):
         form = estoqueForm()
 
     return render(request, 'app/newp.html', {'form': form})
-
-
-def gerador(tamanho):
-    
-    """
-    -> Gerador de codigo simples\
-    \n:param tamanho: Tamanho do codigo\
-    \n:return: Codigo\
-    """
-
-    numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] # lista de numeros
-    letrasMin = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'w', 'y', 'z'] # lista de letras minusculas
-    letrasMax = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'W', 'Y', 'Z'] # lista de letras maiusculas
-    simbolos = ['!', '@', '#', '$', '%', '&', '*'] # lista de simbolos
-
-    lista = []
-
-    lista.append(numeros + letrasMin + letrasMax + simbolos) # lista unica para todos os caracteres
-
-    codigo = ''
-
-    for i in range(tamanho):
-        codigo += random.choice(lista[0]) # escolha dos caracters
-
-    return codigo
 
 
 @login_required

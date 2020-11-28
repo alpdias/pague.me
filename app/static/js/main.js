@@ -7,7 +7,7 @@ Criado em 09/2020
 function adicionar() { // adiciona o item ao carrinho
 
     let produto = document.querySelector('#produto').textContent;
-    let codigo = document.querySelector('#codigo');
+    let codigo = document.querySelector('#codigo').textContent;
     let preco = document.querySelector('#preco').textContent;
     let disponivel = document.querySelector('#dispo').textContent;
     let qtd = document.querySelector('#qtd').value;
