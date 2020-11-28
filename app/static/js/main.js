@@ -320,20 +320,6 @@ function troco() { // calcula o valor do troco
     document.querySelector('#valorTroco-form').value = `${troco.toLocaleString('pt-br',{minimumFractionDigits: 2})}`;
 
 };
-
-function mudarBusca() {
-
-    if (document.querySelector('#procurar').style.width == '100px') {
-        
-        document.querySelector('#procurar').style.width = '400px';
-        
-    } else {
-    
-        document.querySelector('#procurar').style.width = '100px';
-    
-    };
-
-};
 // JS
 
 // JQUERY
