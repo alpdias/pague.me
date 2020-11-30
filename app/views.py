@@ -45,7 +45,7 @@ def home(request):
 
     """
     -> Renderiza a pagina 'home.html'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'home.html'\
     """
     
@@ -56,7 +56,7 @@ def about(request):
 
     """
     -> Renderiza a pagina 'about.html'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagian 'about.html'\
     """
     
@@ -67,7 +67,7 @@ def contact(request):
 
     """
     -> Renderiza a pagina 'contact.html'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'contact.html'\
     """
     
@@ -79,7 +79,7 @@ def dashboard(request):
 
     """
     -> Renderiza a pagina 'dashboard.html'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'dashboard.html'\
     """
     
@@ -91,7 +91,7 @@ def buy(request):
 
     """
     -> Renderiza a pagina 'buy.html' e os objetos do model 'vendas'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'buy.html' com os objetos do model 'vendas' de cada usuario logado\
     """
     
@@ -110,8 +110,8 @@ def sales(request, id):
 
     """
     -> Renderiza a pagina 'sales.html' com as opçoes de ediçao do model 'vendas'\
-    \n:param request:\
-    \n:param id:\
+    \n:param request: Requisiçao do site\
+    \n:param id: 'ID' do objeto\
     \n:return: Retorna a pagina 'sales.html' de acordo com o  'id' especifico do objeto para ediçao\
     """
     
@@ -146,9 +146,9 @@ def opEstoque(itens, quantidades):
             
     """
     -> Realiza a operaçao de 'delete' e mudança de estado do objeto dentro do model 'estoque'
-    \n:param itens:\
-    \n:param quantidades:\
-    \n:return:\
+    \n:param itens: Lista de itens\
+    \n:param quantidades: Quantidade de cada item na lista\
+    \n:return: Retorna alteraçao no estoque\
     """
 
     i = len(itens)
@@ -181,7 +181,7 @@ def novoUsuario(nome):
 
     """
     -> Criar um novo diretorio para o usuario\
-    \n:param nome:\
+    \n:param nome: Nome do novo usuario\
     \n:return: Novo diretorio de arquivo em 'static'\
     """
 
@@ -194,8 +194,8 @@ def cart(request):
 
     """
     -> Renderiza a pagina 'cart.html' e realiza o processo de requisiçao no estoque\
-    \n:param request:\
-    \n:return: Retorna o registro de uma nova venda e envia o recibo\
+    \n:param request: Requisiçao do site\
+    \n:return: Registro de uma nova venda e envia o recibo\
     """
 
     if request.method == 'POST':
@@ -300,9 +300,9 @@ def enviarRecibo(recibo, usuario):
     
     """
     -> Enviar um e-mail a partir do servidor SMTP especifico de cada usuario\
-    \n:param recibo:\
-    \n:param usuario:\
-    \n:return:\
+    \n:param recibo: Recibo para envio\
+    \n:param usuario: Usuario ativo\
+    \n:return: Envia o recibo de venda para o e-mail do usuario\
     """
     
     empresa = empresas.objects.filter(usuario=usuario).get() # dados do servidor do usuario
@@ -373,15 +373,15 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     
     """
     -> Cria um arquivo de pdf\
-    \n:param nome:\
-    \n:param usuario:\
-    \n:param vendas:\
-    \n:param desconto:\
-    \n:param total:\
-    \n:param pagamento:\
-    \n:param troco:\
-    \n:param cpf:\
-    \n:param extrato:\
+    \n:param nome: Nome do recibo\
+    \n:param usuario: Usuario ativo\
+    \n:param vendas: Listas com itens e valores\
+    \n:param desconto: Valor do desconto\
+    \n:param total: Valor total da venda\
+    \n:param pagamento: Forma de pagamento\
+    \n:param troco: Valor do troco\
+    \n:param cpf: CPF do cliente\
+    \n:param extrato: Numero do extrato atual\
     \n:return: Retorna um arquivo de pdf para envio\
     """
     
@@ -523,7 +523,7 @@ def records(request):
 
     """
     -> Renderiza a pagina 'records.html' e os objetos do model 'pessoas'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'records.html' com os objetos do model 'pessoas' de cada usuario logado\
     """
     
@@ -542,7 +542,7 @@ def products(request):
 
     """
     -> Renderiza a pagina 'products.html' e os objetos do model 'estoque'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'products.html' com os objetos do model 'estoque' de cada usuario e a requisiçao de pesquisa\
     """
 
@@ -567,8 +567,8 @@ def stock(request, id):
 
     """
     -> Renderiza a pagina 'stock.html' e os objetos do model 'estoque' de acordo com o 'id'\
-    \n:param request:\
-    \n:param id:\
+    \n:param request: Requisiçao do site\
+    \n:param id: 'ID' do objeto\
     \n:return: Retorna a pagina 'stock.html' de acordo com o  'id' especifico do objeto para ediçao\
     """
 
@@ -594,8 +594,8 @@ def edit(request, id):
 
     """
     -> Renderiza a pagina 'edit.html' e os objetos do model 'estoque' de acordo com o 'id'\
-    \n:param request:\
-    \n:param id:\
+    \n:param request: Requisiçao do site\
+    \n:param id: 'ID' do objeto\
     \n:return: Retorna a pagina 'edit.html' de acordo com o 'id' especifico do objeto para ediçao\
     """
     
@@ -654,7 +654,7 @@ def newp(request):
     
     """
     -> Renderiza a pagina 'newp.html' para adiçao de um novo objeto no model 'estoque'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'newp.html' para a adiçao de novo objeto no model 'estoque'\
     """
     
@@ -694,8 +694,8 @@ def people(request, id):
 
     """
     -> Rederiza a pagina 'people.html' e os objetos do model 'pessoas' de acordo com o 'id'\
-    \n:param request:\
-    \n:param id:\
+    \n:param request: Requisiçao do site\
+    \n:param id: 'ID' do objeto\
     \n:return: Retorna a pagina 'people.html' de acordo com o 'id' especifico do objeto para vizualizar os dados\
     """
 
@@ -709,7 +709,7 @@ def newc(request):
 
     """
     -> Renderiza a pagina 'newc.html' para adiçao de um novo objeto no model 'pessoas'\
-    \n:param request:\
+    \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'newc.html' para a adiçao de novo objeto no model 'pessoas'\
     """
     
