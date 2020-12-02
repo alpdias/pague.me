@@ -529,7 +529,7 @@ def records(request):
     
     listaRegistros = pessoas.objects.all().filter(usuario=request.user)
 
-    paginas = Paginator(listaRegistros, 8)
+    paginas = Paginator(listaRegistros, 7)
     pagina = request.GET.get('page')
 
     registros = paginas.get_page(pagina)
@@ -554,7 +554,7 @@ def products(request):
     else:
         listaProdutos = estoque.objects.all().filter(usuario=request.user)
 
-        paginas = Paginator(listaProdutos, 8)
+        paginas = Paginator(listaProdutos, 7)
         pagina = request.GET.get('page')
 
         produtos = paginas.get_page(pagina)
