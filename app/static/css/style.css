@@ -372,6 +372,7 @@ th {
     display: block;
     text-align: center;
     padding-top: 16px;
+    padding-bottom: 16px;
 }
 
 .botoes-carrinho__dupla button {
@@ -392,7 +393,6 @@ th {
 }
 
 .confirmacao {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;

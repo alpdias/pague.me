@@ -7,6 +7,7 @@ Criado em 10/2020
 {% block title %}pague.me{% endblock %}
 {% block code %}
 {% if user.is_authenticated %}
+<span style="display: none;">{% block carregar %}onload="carregarSacola()"{% endblock %}</span>
 <main>
     <div class="nav-bar__principal">
         <nav>
@@ -52,7 +53,7 @@ Criado em 10/2020
                 <th>preço</th>
                 <th>quantidade</th>
                 <th>status</th>
-                <th>+1</th>
+                <th>+<span id="qtdSacola"></span></th>
                 <tbody>
                     {% for produto in produtos %}
                         <tr>

@@ -51,6 +51,14 @@ function adicionar() { // adiciona o item ao carrinho
 
 function adicionarRapido(produto, codigo, preco, status) { // faz uma adiçao rapida ao carrinho de um unico item
 
+    document.querySelector('.confirmacao-botoes__soma').style.color = '#40798C';
+
+    setTimeout(function() { 
+
+        document.querySelector('.confirmacao-botoes__soma').style.color = '#9A879D';  
+
+    }, 250);
+
     let disponivel = status;
     let qtd = 1;
 
@@ -76,7 +84,7 @@ function adicionarRapido(produto, codigo, preco, status) { // faz uma adiçao ra
 
         } else {
 
-            let itens = JSON.parse(localStorage.getItem('carrinho'));
+            var itens = JSON.parse(localStorage.getItem('carrinho'));
             itens.push(compra);
             
             localStorage.setItem('carrinho', JSON.stringify(itens));
@@ -84,6 +92,42 @@ function adicionarRapido(produto, codigo, preco, status) { // faz uma adiçao ra
         };
 
     };
+
+    if (document.querySelector('#qtdSacola').textContent == '') {
+
+        document.querySelector('#qtdSacola').innerHTML = `${qtd}`;
+
+    } else if (document.querySelector('#qtdSacola').textContent != '') {
+
+        let qtdSacola = document.querySelector('#qtdSacola').textContent;
+
+        qtd = parseInt(qtdSacola) + 1;
+
+        document.querySelector('#qtdSacola').innerHTML = `${qtd}`;
+
+    };
+
+};
+
+function carregarSacola() { // mostra a quantidade de itens no carrinho
+
+    let itens = JSON.parse(localStorage.getItem('carrinho'));
+
+    qtd = itens.length;
+
+    removerSacola = qtd - 1;
+
+    qtdSacola = 0;
+
+    for (qtd; qtd > 0; qtd -= 1) {
+
+        qtdSacola += parseInt(itens[removerSacola].quantidade);
+        removerSacola -= 1
+        
+    };
+
+    document.querySelector('#qtdSacola').innerHTML = `${qtdSacola}`;
+
 };
 
 function compras() { // adiciona os os produtos selecionados ao carrinho
