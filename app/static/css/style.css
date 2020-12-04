@@ -33,7 +33,10 @@ body {
 /* TOP MENU */
 .nav-bar__principal {
     padding: 6px;
+    width: 100%;
     box-shadow: 1px 1px 2px #0000001c;
+    position: fixed;
+    background-color: #CFCFCD;
 }
 
 .nav-bar__principal ul {
@@ -157,6 +160,7 @@ body {
     display: block;
     height: 100vh;
     padding-right: 6px;
+    padding-top: 60px;
 }
 
 .nav-bar__vertical a {
@@ -208,7 +212,7 @@ body {
     text-align: center;
     padding-left: 172px;
     padding-right: 26px;
-    padding-top: 12px;
+    padding-top: 80px;
 }
 
 .tabelas select {
@@ -287,20 +291,29 @@ th {
 /* DASHBOARD */
 .painel {
     display: block;
-    padding-left: 116px;
-    max-width: 1000px;
+    max-width: 100%;
     margin: 0 auto;
+    padding-top: 65px;
+    text-align: center;
 }
 
 .painel-mostrador li {
     display: inline-block;
     background-color: #ffffff;
-    padding: 60px;
+    padding: 10px 40px 40px 40px;
     margin-right: 10px;
     border-radius: 6px;
     box-shadow: 1px 1px 2px #0000001c;
 }
+.resultado-dash {
+    display: block;
+    text-align: center;
+    color: #40798C;
+    font-weight: bolder;
+    font-size: 26px;
+}
 
+/*
 .painel-grafico {
     background-color: #ffffff;
     border-radius: 6px;
@@ -308,6 +321,7 @@ th {
     display: block;
     padding-bottom: 360px;
 }
+*/
 
 /* PRODUTOS */
 .qtd-produtos {
@@ -346,6 +360,11 @@ th {
     font-weight: bolder;
     padding-left: 8px;
     cursor: pointer;
+}
+
+#produtos-layout__ajuste {
+    display: block;
+    padding: 4px;
 }
 
 /* CARRINHO */
@@ -504,6 +523,11 @@ th {
     cursor: pointer;
 }
 
+.confirmacao-botoes__soma:hover {
+    color: #40798C;
+    transition: 0.3s;
+}
+
 /* VENDAS */
 .vendas-titulo {
     color: #9A879D;
@@ -590,18 +614,21 @@ th {
 }
 
 /* NOVOS */
+.campo-novos__externo {
+    display: block;
+    padding-top: 60px;
+}
+
 .campo-novos {
     background-color: #ffffff;
     color: #40798C;
     font-weight: bolder;
     display: block;
     max-width: 460px;
-    margin: 0 auto;
     padding: 16px;
     margin: 26px auto 26px auto;
     border-radius: 6px;
     box-shadow: 1px 1px 2px #0000001c;
-
 }
 
 .campo-novos button {

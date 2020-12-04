@@ -26,8 +26,8 @@ import locale
 import random
 import smtplib
 from pathlib import Path
+import datetime
 from datetime import date
-from datetime import datetime
 
 # tratamento de e-mail
 from email import encoders
@@ -82,8 +82,14 @@ def dashboard(request):
     \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'dashboard.html'\
     """
+
+    vendasHoje = vendas.objects.all().filter(usuario=request.user, criado__gt=datetime.datetime.now()).count()
+    ultimasVendas = vendas.objects.all().filter(usuario=request.user, criado__gt=(datetime.datetime.now() - datetime.timedelta(days=30))).count()
+    totalClientes =  pessoas.objects.all().filter(usuario=request.user).count()
+    totalEstoque = estoque.objects.all().filter(usuario=request.user).count()
+    reposicao = 0
     
-    return render(request, 'app/dashboard.html')
+    return render(request, 'app/dashboard.html', {'vendasHoje': vendasHoje, 'ultimasVendas': ultimasVendas, 'totalEstoque': totalEstoque, 'totalClientes': totalClientes, 'reposicao': reposicao})
 
 
 @login_required
@@ -243,7 +249,7 @@ def cart(request):
         listaRecibo.append(listaQuantidades)
         # atribuicao das listas <--
 
-        agora = (str(datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
+        agora = (str(datetime.datetime.now())).replace(' ', '').replace(':','-').replace('.','-')
         nomeRecibo = f'recibo{agora}.pdf'
 
         usuario = request.user # obtem o usuario atual

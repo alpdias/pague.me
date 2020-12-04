@@ -33,18 +33,32 @@ Criado em 10/2020
             </ul>
         </nav>
     </div>
+    
     <div class="painel">
         <div class="painel-mostrador">
             <ul>
-                <li>vendas hoje</li>
-                <li>30 dias</li>
-                <li>clientes</li>
-                <li>estoque</li>
+                <li>
+                    <h4>vendas hoje</h4><span class="resultado-dash">{{ vendasHoje }}</span>
+                </li>
+                <li>
+                    <h4>30 dias</h4><span class="resultado-dash">{{ ultimasVendas }}</span>
+                </li>
+                <li>
+                    <h4>clientes</h4><span class="resultado-dash">{{ totalClientes }}</span>
+                </li>
+                <li>
+                    <h4>estoque</h4><span class="resultado-dash">{{ totalEstoque }}</span>
+                </li>
+                <li>
+                    <h4>reposição</h4><span class="resultado-dash">{{ reposicao }}</span>
+                </li>
             </ul>
         </div>
+        <!--
         <div class="painel-grafico">
             <div>desempenho</div>
         </div>
+        -->
     </div>
 </main>
 {% else %}

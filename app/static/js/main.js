@@ -51,13 +51,13 @@ function adicionar() { // adiciona o item ao carrinho
 
 function adicionarRapido(produto, codigo, preco, status) { // faz uma adiçao rapida ao carrinho de um unico item
 
-    document.querySelector('.confirmacao-botoes__soma').style.color = '#40798C';
+    document.querySelector('#qtdSacola').style.color = '#9A879D';
 
     setTimeout(function() { 
 
-        document.querySelector('.confirmacao-botoes__soma').style.color = '#9A879D';  
+        document.querySelector('#qtdSacola').style.color = '#40798C';  
 
-    }, 250);
+    }, 380);
 
     let disponivel = status;
     let qtd = 1;
