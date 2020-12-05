@@ -299,6 +299,7 @@ th {
 
 .painel-mostrador li {
     display: inline-block;
+    color: #9A879D;
     background-color: #ffffff;
     padding: 10px 40px 40px 40px;
     margin-right: 10px;

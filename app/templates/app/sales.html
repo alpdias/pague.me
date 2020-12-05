@@ -21,16 +21,21 @@ Criado em 10/2020
             </ul>
         </nav>
     </div>
-    <div class="campo-novos">
-        <div class="campo-novos__dentro">
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">salvar&nbsp;&nbsp;<i class="fas fa-save"></i></button>&nbsp;&nbsp;
-                <button type="submit" id="excluir-venda" name="excluir-venda" value="excluir">excluir&nbsp;&nbsp;<i class="far fa-trash-alt"></i></button>
-            </form>
-        </div>
-    </div>  
+    <div class="campo-novos__externo">
+        <div class="campo-novos">
+            <div class="campo-novos__dentro">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">salvar&nbsp;&nbsp;<i class="fas fa-save"></i></button>&nbsp;&nbsp;
+                    <button type="submit" id="excluir-venda" name="excluir-venda" value="excluir">excluir&nbsp;&nbsp;<i class="far fa-trash-alt"></i></button>
+                </form>
+                <div>
+                    <button id="cancelarVenda">modificar / cancelar&nbsp;&nbsp;<i class="fas fa-ban"></i></button>  
+                </div>
+            </div>
+        </div>  
+    </div>
 </main>
 {% else %}
 {% endif %}
