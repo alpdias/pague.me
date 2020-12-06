@@ -9,7 +9,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import pessoas, estoque, vendas, empresas
+from .models import pessoas, estoque, vendas, empresas, saidas
 
 class pessoasAdmin(admin.ModelAdmin):
 
@@ -58,4 +58,17 @@ class empresasAdmin(admin.ModelAdmin):
 
 
 admin.site.register(empresas, empresasAdmin)
+
+class saidasAdmin(admin.ModelAdmin):
+
+    """
+    -> Definiçao do 'display' das tabelas no admin do site\
+    """
+
+    list_display = ['item', 'quantidade', 'valor', 'criado']
+    search_fields = ['item', 'quantidade', 'relacao', 'criado']
+
+
+admin.site.register(saidas, saidasAdmin)
+
 

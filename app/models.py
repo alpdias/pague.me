@@ -8,9 +8,6 @@ Criado em 09/2020
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# bibliotecas externas
-import random
-
 # Create your models here.
 
 class pessoas(models.Model):
@@ -207,3 +204,50 @@ class empresas(models.Model):
         verbose_name = 'empresa'
         verbose_name_plural = 'empresas'
         ordering = ['empresa'] 
+
+
+class saidas(models.Model):
+
+    """
+    -> Modelo de objeto para registro de 'saidas'\
+    """
+
+    STATUS = (
+        ('aberta', 'aberta'), 
+        ('fechada', 'fechada'),
+        ('cancelada', 'cancelada'),
+    )
+
+    item = models.CharField('Item', max_length=255)
+    quantidade = models.IntegerField('Quantidade')
+    valor = models.DecimalField('Valor', max_digits=999, decimal_places=2)
+    relacao = models.CharField('Relação', max_length=255)
+    usuario = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    status = models.CharField(
+        max_length = 9, 
+        choices = STATUS,
+        default='aberta'
+    )
+
+    criado = models.DateTimeField('Criado em', auto_now_add=True)
+    atualizado = models.DateTimeField('Atualizado em', auto_now=True)
+
+    def __str__(self):
+
+        """
+        -> Especifica qual campo sera mostrado\
+        """
+
+        return self.item
+
+
+    class Meta:
+
+        """
+        -> Define os nomes e a ordem\
+        """
+
+        verbose_name = 'saida'
+        verbose_name_plural = 'saidas'
+        ordering = ['-criado'] 

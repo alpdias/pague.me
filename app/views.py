@@ -87,7 +87,7 @@ def dashboard(request):
     ultimasVendas = vendas.objects.all().filter(usuario=request.user, criado__gt=(datetime.datetime.now() - datetime.timedelta(days=30))).count()
     totalClientes =  pessoas.objects.all().filter(usuario=request.user).count()
     totalEstoque = estoque.objects.all().filter(usuario=request.user).count()
-    reposicao = 0
+    reposicao = estoque.objects.all().filter(usuario=request.user, status='esgotado').count()
     
     return render(request, 'app/dashboard.html', {'vendasHoje': vendasHoje, 'ultimasVendas': ultimasVendas, 'totalEstoque': totalEstoque, 'totalClientes': totalClientes, 'reposicao': reposicao})
 
