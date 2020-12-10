@@ -1,0 +1,42 @@
+<!--
+Criado em 12/2020
+@Autor: Paulo https://github.com/alpdias
+-->
+
+{% extends 'base.html' %}
+{% block title %}pague.me{% endblock %}
+{% block code %}
+{% if user.is_authenticated %}
+<main>
+    <div class="nav-bar__principal">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">pague.me</a><span class="nav-bar__separador">&nbsp;|&nbsp;&nbsp;&nbsp;</span><a href=""><i class="fas fa-undo"></i></a>
+                </li>
+                <li class="nav-bar__usuario">{{ user }}</li>
+                <li>
+                    <a href="/accounts/logout">sair</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="nav-bar__vertical">
+        <nav>
+            <ul class="nav-bar__vertical-item">
+                <li><a href="{% url 'dashboard' %}"><span class="nav-bar__vertical-ajuste">painel&nbsp;&nbsp;&nbsp;<i class="far fa-clipboard"></i></span></a></li>
+                <li><a href="{% url 'buy' %}"><span class="nav-bar__vertical-ajuste">vendas&nbsp;&nbsp;&nbsp;<i class="fas fa-coins"></i></span></a></li>
+                <li><a href="{% url 'cart' %}"><span class="nav-bar__vertical-ajuste">carrinho&nbsp;&nbsp;&nbsp;<i class="fas fa-cart-arrow-down"></i></span></a></li>
+                <li><a href="{% url 'products' %}"><span class="nav-bar__vertical-ajuste">estoque&nbsp;&nbsp;&nbsp;<i class="fas fa-layer-group"></i></span></a></li>
+                <li><a href="{% url 'newp' %}"><span class="nav-bar__vertical-ajuste-2">produto&nbsp;&nbsp;&nbsp;<i class="fas fa-plus-circle"></i></span></a></li>
+                <li><a href=""><span class="nav-bar__vertical-ajuste-2">reposição&nbsp;&nbsp;&nbsp;<i class="fas fa-store-slash"></i></a></li>
+                <li><a href="{% url 'records' %}"><span class="nav-bar__vertical-ajuste">clientes&nbsp;&nbsp;&nbsp;<i class="fas fa-user-friends"></i></span></a></li>
+                <li><a href=""><span class="nav-bar__vertical-ajuste"></span>config&nbsp;&nbsp;&nbsp;<i class="fas fa-tools"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</main>
+{% else %}
+{% endif %}
+{% endblock %}
+{% block footer %}{% endblock %}

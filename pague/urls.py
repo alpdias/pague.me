@@ -27,7 +27,7 @@ from django.urls import path, include
 
 # minhas views do aplicativo
 from app import views
-from app.views import home, about, contact, dashboard, cart, buy, sales, products, newp, stock, edit, records, people, newc #register
+from app.views import home, about, contact, dashboard, cart, buy, sales, products, newp, stock, edit, replacement, records, people, newc, editpeople #register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,9 +42,11 @@ urlpatterns = [
     path('newp/', newp, name='newp'),
     path('stock/<int:id>', stock, name='stock'),
     path('edit/<int:id>', edit, name='edit'),
+    path('replacement/', replacement, name='replacement'),
     path('records/', records, name='records'),
     path('people/<int:id>', people, name='people'),
     path('newc/', newc, name='newc'),
+    path('editpeople/', editpeople, name='editpeople'),
     #path('register/', views.register.as_view(), name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

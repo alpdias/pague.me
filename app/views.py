@@ -694,6 +694,17 @@ def newp(request):
 
     return render(request, 'app/newp.html', {'form': form})
 
+@login_required
+def replacement(request):
+
+    """
+    -> Renderiza a pagina 'replacement.html'\
+    \n:param request: Requisiçao do site\
+    \n:return: Retorna a pagina 'replacement.html'\
+    """
+
+    return render(request, 'app/replacement.html')
+
 
 @login_required
 def people(request, id):
@@ -733,6 +744,18 @@ def newc(request):
         form = pessoasForm()
     
     return render(request, 'app/newc.html', {'form': form})  
+
+
+@login_required
+def editpeople(request):
+
+    """
+    -> Renderiza a pagina 'editpeople.html'\
+    \n:param request: Requisiçao do site\
+    \n:return: Retorna a pagina 'editpeople.html'\
+    """
+    
+    return render(request, 'app/editpeople.html')
 
 
 """
