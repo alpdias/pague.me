@@ -68,7 +68,7 @@ class estoque(models.Model):
         ('esgotado', 'esgotado'),
     )
     
-    produto = models.CharField('Produto', max_length=255, unique=True)
+    produto = models.CharField('Produto', max_length=255)
     preco = models.DecimalField('Preço', max_digits=999, decimal_places=2)
     custo = models.DecimalField('Custo', max_digits=999, decimal_places=2)
     quantidade = models.IntegerField('Quantidade', blank=True, default=0)

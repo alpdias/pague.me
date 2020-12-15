@@ -46,7 +46,7 @@ urlpatterns = [
     path('records/', records, name='records'),
     path('people/<int:id>', people, name='people'),
     path('newc/', newc, name='newc'),
-    path('editpeople/', editpeople, name='editpeople'),
+    path('editpeople/<int:id>', editpeople, name='editpeople'),
     #path('register/', views.register.as_view(), name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

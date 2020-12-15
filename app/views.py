@@ -262,7 +262,7 @@ def cart(request):
         
         caminho = Path(f'static/archive/{usuario}') # caminho do diretorio
         salvoEm = f'{caminho}/' + f'{nomeRecibo}'  # caminho do arquivo salvo
-
+        
         f = vendas(
             cpf=cpfCliente, 
             valor=valorTotal, 
@@ -703,7 +703,14 @@ def replacement(request):
     \n:return: Retorna a pagina 'replacement.html'\
     """
 
-    return render(request, 'app/replacement.html')
+    estoques = estoque.objects.filter(status='esgotado', usuario=request.user)
+
+    paginas = Paginator(estoques, 7)
+    pagina = request.GET.get('page')
+
+    produtos = paginas.get_page(pagina)
+
+    return render(request, 'app/replacement.html', {'produtos': produtos})
 
 
 @login_required
@@ -747,15 +754,17 @@ def newc(request):
 
 
 @login_required
-def editpeople(request):
+def editpeople(request, id):
 
     """
     -> Renderiza a pagina 'editpeople.html'\
     \n:param request: Requisiçao do site\
     \n:return: Retorna a pagina 'editpeople.html'\
     """
+
+    pessoa = get_object_or_404(pessoas, pk=id)
     
-    return render(request, 'app/editpeople.html')
+    return render(request, 'app/editpeople.html', {'pessoa': pessoa})
 
 
 """
