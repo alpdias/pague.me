@@ -8,14 +8,6 @@ Web application for online control of sales and product inventory, with features
 Coding: -&lowast;- coding: utf-8 -&lowast;-</br>
 pt-BR</br>
 
-
-* In order to test the interface between the user and the password below, it is not yet possible to register.
-
-User: <strong>usuario.teste</strong></br>
-Password: <strong>Tuser@123</strong>
-
-<strong>Attention:</strong> Due to the user being for testing, some errors related to SMTP server may occur !!
-
 --------------------------------
 
 # pague.me
@@ -27,13 +19,5 @@ Aplicativo web para o controle online de vendas e estoque de produtos, com funci
 <strong>DataBase:</strong> PostgreSQL 12</br>
 Codificação: -&lowast;- coding: utf-8 -&lowast;-</br>
 pt-BR</br>
-
-
-* Para poder testar a interface entre com o usuário e a senha abaixo, devido ainda estar em desenvolvimento ainda não é possivel fazer registro.
-
-Usuário: <strong>usuario.teste</strong></br>
-Senha: <strong>Tuser@123</strong>
-
-<strong>Atenção:</strong> Devido o usuário ser para testes podem acorrer alguns erros ligados a servidor SMTP !!
 
 ---------------------------------
