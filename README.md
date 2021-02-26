@@ -20,4 +20,6 @@ Aplicativo web para o controle online de vendas e estoque de produtos, com funci
 Codificação: -&lowast;- coding: utf-8 -&lowast;-</br>
 pt-BR</br>
 
+* Para poder testar a interface entre com o usuário: <strong>usuario.teste</strong> e senha: <strong>Tuser@123</strong>
+
 ---------------------------------
