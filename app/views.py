@@ -405,7 +405,7 @@ def pdf(nome, usuario, vendas, desconto, total, pagamento, troco, cpf, extrato):
     itens = vendas[0]
     qtd = vendas[2]
     valor = vendas[1]
-    # listas -->
+    # listas <--
     
     totalItens = 0
     
@@ -768,7 +768,6 @@ def editpeople(request, id):
 
 
 """
-
 class register(generic.CreateView):  
 
     # view para registrar um novo usuario
@@ -776,7 +775,6 @@ class register(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
-    
 """
         
         
